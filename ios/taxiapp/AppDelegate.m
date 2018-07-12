@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+@import GoogleMaps; //add this line if you want to use Google Maps
+
 #import "AppDelegate.h"
 
 #import <React/RCTBundleURLProvider.h>
@@ -14,6 +16,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  [GMSServices provideAPIKey:@"AIzaSyCc1VdHEAkYyTeRiUjTxJJAYECgfm5JOrw"]; // add this line using the api key obtained from Google Console
   NSURL *jsCodeLocation;
 
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
