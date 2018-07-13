@@ -5,7 +5,7 @@ import { Container, Header, Content, Form, Item, Input, Button, Text, Label, Ico
 const styles = StyleSheet.create({
   container:{
     flex: 1,
- },
+  },
   form: {
     flex: 1,
   },
