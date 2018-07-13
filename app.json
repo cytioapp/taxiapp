@@ -1,5 +1,15 @@
 {
   "expo": {
     "sdkVersion": "27.0.0"
+  },
+  "android": {
+    "config": {
+      "googleSignIn": {
+        "apiKey": "AIzaSyCc1VdHEAkYyTeRiUjTxJJAYECgfm5JOrw"
+      },
+      "googleMaps": {
+        "apiKey": "AIzaSyCc1VdHEAkYyTeRiUjTxJJAYECgfm5JOrw"
+      }
+    }
   }
 }
