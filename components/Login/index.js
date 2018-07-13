@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
+import {StyleSheet, View} from 'react-native';
 import { Container, Header, Content, Form, Item, Input, Button, Text } from 'native-base';
+
+const styles = StyleSheet.create({
+  buttonWrapper: {
+    padding: 10
+  }
+})
 
 export default class Login extends Component{
   render(){
@@ -14,9 +21,11 @@ export default class Login extends Component{
             <Item last>
               <Input placeholder="Password" />
             </Item>
-            <Button block rounded success onPress={() => this.props.navigation.navigate('Home')}>
-              <Text>Iniciar Sesión</Text>
-            </Button>
+            <View style={styles.buttonWrapper} >
+              <Button block rounded success onPress={() => this.props.navigation.navigate('Home')}>
+                <Text>Iniciar Sesión</Text>
+              </Button>
+            </View>
           </Form>
         </Content>
       </Container>
