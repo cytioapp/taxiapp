@@ -48,11 +48,11 @@ export default class AddressInfo extends Component{
           <Header />
           <Content contentContainerStyle={{justifyContent: 'space-between', flex: 1}}>
             <Form style={styles.form}>
-              <Item>
+              <Item style={{ paddingTop: 10, paddingBottom: 10 }}>
                 <Icon active name='home' />
-                <Label>Dirección</Label>
+                <Label>Origen</Label>
               </Item>
-              <Textarea style={{flex: 1}} onChangeText={this.changeAddress} value={address} rowSpan={3} placeholder='Av. de los Maestros #500'/>
+              <Textarea style={{flex: 1}} onChangeText={this.changeAddress} value={address} rowSpan={3} placeholder='¿A donde pasamos por ti?'/>
             </Form>
             <View style={styles.buttonWrapper}>
               <Button onPress={() => {}} block rounded style={styles.button}>
