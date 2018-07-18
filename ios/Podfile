@@ -30,7 +30,6 @@ target 'taxiapp' do
   # "The name of the given podspec `GLog` doesn't match the expected one `glog`"
   # Use the following line instead:
   #pod 'GLog', :podspec => "#{rn_path}/third-party-podspecs/GLog.podspec"
-  pod 'boost-for-react-native'
   pod 'Folly', :podspec => "#{rn_path}/third-party-podspecs/Folly.podspec"
 
   # react-native-maps dependencies
