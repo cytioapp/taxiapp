@@ -45,7 +45,6 @@
 		7CA4DDEFAFB84C578597C965 /* rubicon-icon-font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CF72ECE4E6AD4713A0FEDC24 /* rubicon-icon-font.ttf */; };
 		81A3D5E58D984AB2B4187288 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F06FC563D63A42BA859E5250 /* Ionicons.ttf */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
-		8646D36A20F965510038FA5B /* libRNGeocoder.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8646D36920F965440038FA5B /* libRNGeocoder.a */; };
 		9054F220A2F240CAB0059366 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8234D2DD2E87432EA19E4DED /* Zocial.ttf */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		BAA7E9A4C40F4B97ACD0302B /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8353E4DAA0834F969E45E5B6 /* Foundation.ttf */; };
@@ -399,7 +398,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8646D36A20F965510038FA5B /* libRNGeocoder.a in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
