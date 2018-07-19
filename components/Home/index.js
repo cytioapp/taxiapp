@@ -1,7 +1,16 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Icon, Item, Input, Container, Header, Content, Footer,
-         FooterTab, Button, Text } from 'native-base';
+import {
+  Icon,
+  Item,
+  Input,
+  Container,
+  Footer,
+  FooterTab,
+  Button,
+  Text,
+  Form
+} from 'native-base';
 import MapView from 'react-native-maps';
 import Geocoder from 'react-native-geocoder';
 
@@ -12,17 +21,26 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'space-between'
-
   },
   searchContainer: {
-    backgroundColor: '#FFFFFF'
+    backgroundColor: '#FFFFFF',
   },
   buttonContainer: {
-    alignSelf: 'center'
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row'
+  },
+  searchWrapper: {
+    position: 'absolute',
+    top: 0,
+    width: '100%',
+    paddingTop: 18
   }
 });
-
-
 
 class Home extends Component {
 
@@ -61,32 +79,34 @@ class Home extends Component {
 
     return (
       <Container contentContainerStyle= {{flex: 1}}>
-        <Header />
-        <Content contentContainerStyle= {{flex: 1}}>
+        <View style={{flex: 1}}>
           {latitude &&
-          <MapView style={styles.map}
-                   initialRegion={{latitude: latitude,
-                                   longitude: longitude,
-                                   latitudeDelta: 0.0922,
-                                   longitudeDelta: 0.0421,
-            }}>
-            <View style={styles.container}>
-              <View>
+          <View style={{flex: 1}}>
+            <MapView
+              style={styles.map}
+              initialRegion={{
+                latitude: latitude,
+                longitude: longitude,
+                latitudeDelta: 0.0922,
+                longitudeDelta: 0.0421,
+              }}
+            />
+            <View style={styles.searchWrapper}>
+              <Form>
                 <Item rounded style={styles.searchContainer}>
                   <Icon name="ios-search" />
                   <Input placeholder='Tape your location...' value = {this.state.address} />
                 </Item>
-              </View>
-
-              <View style={styles.buttonContainer}>
-                <Button primary>
-                  <Text> Solicitar servicio </Text>
-                </Button>
-              </View>
+              </Form>
             </View>
-          </MapView>
+            <View style={styles.buttonContainer}>
+              <Button primary>
+                <Text> Solicitar servicio </Text>
+              </Button>
+            </View>
+          </View>
           }
-        </Content>
+        </View>
 
         <Footer>
           <FooterTab>
