@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Image } from 'react-native';
 import MapView from 'react-native-maps';
+import marker from '../../assets/map-marker.png';
 
 const styles = StyleSheet.create({
   container: {
@@ -25,24 +26,41 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
   },
+  marker: {
+    height: 48,
+    width: 48
+  },
+  markerFixed: {
+    left: '50%',
+    marginLeft: -24,
+    marginTop: -48,
+    position: 'absolute',
+    top: '50%'
+  }
 });
 
-
-
 class Home extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      region: {
+        latitude: null,
+        longitude: null,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421,
+      },
+      error: null
+    }
 
-  state = {
-    latitude: null,
-    longitude: null,
-    error: null
-  }
-
-  componentDidMount() {
+    let { region } = this.state;
     navigator.geolocation.getCurrentPosition(
       (position) => {
         this.setState({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
+          region: {
+            ...region,
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+          }
         });
       },
       (error) => this.setState({ error: error.message }),
@@ -50,20 +68,27 @@ class Home extends Component {
     );
   }
 
+  onRegionChange = region => {
+    console.log(region);
+    this.setState({
+      region
+    });
+  }
+
   render() {
-    let {latitude, longitude} = this.state
+    let { region } = this.state;
     return (
       <View style={styles.container}>
         <View style={styles.mapContainer}>
-          {latitude && <MapView
+          {region.latitude && <MapView
             style={styles.map}
-            initialRegion={{
-              latitude: latitude,
-              longitude: longitude,
-              latitudeDelta: 0.0922,
-              longitudeDelta: 0.0421,
-            }}
+            region={region}
+            initialRegion={region}
+            onRegionChangeComplete={this.onRegionChange}
           />}
+          <View pointerEvents="none" style={styles.markerFixed}>
+            <Image style={styles.marker} source={marker} />
+          </View>
         </View>
       </View>
     );
