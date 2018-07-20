@@ -13,6 +13,7 @@ import {
 } from 'native-base';
 import MapView from 'react-native-maps';
 import Geocoder from 'react-native-geocoder';
+import Geolocation from 'react-native-geolocation-service';
 
 const styles = StyleSheet.create({
   map: {
@@ -52,7 +53,7 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    navigator.geolocation.getCurrentPosition(
+    Geolocation.getCurrentPosition(
       (position) => {
         this.formattedAddress(position.coords.latitude,
                               position.coords.longitude)
