@@ -5,7 +5,7 @@ import Login from '../components/Login';
 
 export default createDrawerNavigator({
   Login: {
-    screen: Login
+    screen: Home
   },
   Home: {
     screen: Home
