@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, TextInput } from 'react-native';
+import { View, StyleSheet, Image, TextInput, PermissionsAndroid, Platform } from 'react-native';
 import {
   Icon,
   Item,
@@ -74,6 +74,23 @@ class Home extends Component {
       error: null
     }
 
+    Platform.select({
+      ios: () => this.getCurrentPosition(),
+      android: () => {
+        PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION)
+          .then(granted => {
+            if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+              this.getCurrentPosition()
+            } else {
+              this.setState({ error: 'Se requieren permisos de ubicación' })
+            }
+          });
+      }
+    })();
+    
+  }
+  
+  getCurrentPosition = () => {
     let { region } = this.state;
     Geolocation.getCurrentPosition(
       (position) => {
