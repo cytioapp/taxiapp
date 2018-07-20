@@ -148,6 +148,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-sensitive-info')
     compile project(':react-native-geolocation-service')
     compile project(':react-native-geocoder')
     compile project(':react-native-maps')
