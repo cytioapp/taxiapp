@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Image, TextInput } from 'react-native';
 import {
   Icon,
   Item,
@@ -9,15 +9,20 @@ import {
   FooterTab,
   Button,
   Text,
-  Form
+  Form,
 } from 'native-base';
 import MapView from 'react-native-maps';
 import Geocoder from 'react-native-geocoder';
 import Geolocation from 'react-native-geolocation-service';
+import marker from '../../assets/map-marker.png';
 
 const styles = StyleSheet.create({
   map: {
-    flex: 1,
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
   },
   container: {
     flex: 1,
@@ -25,6 +30,7 @@ const styles = StyleSheet.create({
   },
   searchContainer: {
     backgroundColor: '#FFFFFF',
+    paddingRight: 10
   },
   buttonContainer: {
     position: 'absolute',
@@ -40,26 +46,45 @@ const styles = StyleSheet.create({
     top: 0,
     width: '100%',
     paddingTop: 18
+  },
+  marker: {
+    height: 48,
+    width: 48
+  },
+  markerFixed: {
+    left: '50%',
+    marginLeft: -24,
+    marginTop: -48,
+    position: 'absolute',
+    top: '50%'
   }
 });
 
 class Home extends Component {
 
-  state = {
-    latitude: null,
-    longitude: null,
-    address: null,
-    error: null
-  }
+  constructor(props) {
+    super(props);
+    this.state = {
+      region: {
+        latitude: null,
+        longitude: null,
+        latitudeDelta: 0.003,
+        longitudeDelta: 0.003,
+      },
+      error: null
+    }
 
-  componentDidMount() {
+    let { region } = this.state;
     Geolocation.getCurrentPosition(
       (position) => {
-        this.formattedAddress(position.coords.latitude,
-                              position.coords.longitude)
+        let { latitude, longitude } = position.coords;
+        this.formattedAddress(latitude, longitude)
         this.setState({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
+          region: {
+            ...region,
+            latitude,
+            longitude,
+          }
         });
       },
       (error) => this.setState({ error: error.message }),
@@ -68,44 +93,52 @@ class Home extends Component {
   }
 
   formattedAddress = async (lat, lng) => {
-    const res = await Geocoder.geocodePosition({lat, lng})
-    const { formattedAddress } = res[0]
+    const res = await Geocoder.geocodePosition({lat, lng});
+    const { streetName, streetNumber, subLocality, locality } = res[0];
     this.setState({
-      address: formattedAddress
+      address: `${streetName} ${streetNumber}, ${subLocality}, ${locality}`
     });
   };
 
+  onRegionChange = region => {
+    this.formattedAddress(region.latitude, region.longitude)
+    this.setState({
+      region
+    });
+  }
+
   render() {
-    let {latitude, longitude, address, error} = this.state
+    let { region, longitude, error} = this.state;
+    console.log(region.latitude);
 
     return (
-      <Container contentContainerStyle= {{flex: 1}}>
-        <View style={{flex: 1}}>
-          {latitude &&
-          <View style={{flex: 1}}>
-            <MapView
-              style={styles.map}
-              initialRegion={{
-                latitude: latitude,
-                longitude: longitude,
-                latitudeDelta: 0.003,
-                longitudeDelta: 0.003,
-              }}
-            />
-            <View style={styles.searchWrapper}>
-              <Form>
-                <Item rounded style={styles.searchContainer}>
-                  <Icon name="ios-search" />
-                  <Input placeholder='Tape your location...' value = {this.state.address} />
-                </Item>
-              </Form>
+      <Container contentContainerStyle={{flex: 1, width: '100%'}}>
+        <View style={{flex: 1, width: '100%'}}>
+          {region.latitude &&
+            <View style={{flex: 1}}>
+              <MapView
+                style={styles.map}
+                region={region}
+                initialRegion={region}
+                onRegionChangeComplete={this.onRegionChange}
+              />
+              <View pointerEvents="none" style={styles.markerFixed}>
+                <Image style={styles.marker} source={marker} />
+              </View>
+              <View style={styles.searchWrapper}>
+                <Form>
+                  <Item rounded style={styles.searchContainer}>
+                    <Icon name="ios-search" />
+                    <TextInput placeholder="Selecciona tu ubicación..." value={this.state.address} style={{ textAlign: 'left', flex: 1 }}/>
+                  </Item>
+                </Form>
+              </View>
+              <View style={styles.buttonContainer}>
+                <Button primary>
+                  <Text> Solicitar servicio </Text>
+                </Button>
+              </View>
             </View>
-            <View style={styles.buttonContainer}>
-              <Button primary>
-                <Text> Solicitar servicio </Text>
-              </Button>
-            </View>
-          </View>
           }
           {error && <Text>{error}</Text>}
         </View>
