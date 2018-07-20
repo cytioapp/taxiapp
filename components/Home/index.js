@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Image, TextInput, PermissionsAndroid, Platform } from 'react-native';
 import {
-  Icon,
-  Item,
-  Input,
+  Button,
   Container,
   Footer,
   FooterTab,
-  Button,
-  Text,
   Form,
+  Icon,
+  Input,
+  Item,
+  Text
 } from 'native-base';
 import MapView from 'react-native-maps';
 import Geocoder from 'react-native-geocoder';
@@ -31,23 +31,34 @@ const styles = StyleSheet.create({
   },
   searchContainer: {
     backgroundColor: '#FFFFFF',
+    height: 40,
     paddingRight: 10
   },
   buttonContainer: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    justifyContent: 'center',
     alignItems: 'center',
-    flexDirection: 'row'
+    bottom: 10,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    left: 0,
+    position: 'absolute',
+    right: 0
   },
   searchWrapper: {
+    alignSelf: 'center',
+    paddingTop: 20,
     position: 'absolute',
     top: 0,
-    width: '100%',
-    paddingTop: 18
+    width: '90%'
   },
+  button: {
+    borderRadius: 30,
+    elevation: 1,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2
+  },
+
   marker: {
     height: 48,
     width: 48
@@ -88,9 +99,9 @@ class Home extends Component {
           });
       }
     })();
-    
+
   }
-  
+
   getCurrentPosition = () => {
     let { region } = this.state;
     Geolocation.getCurrentPosition(
@@ -158,7 +169,7 @@ class Home extends Component {
                 </Form>
               </View>
               <View style={styles.buttonContainer}>
-                <Button primary>
+                <Button dark style={styles.button}>
                   <Text> Solicitar servicio </Text>
                 </Button>
               </View>
@@ -173,11 +184,11 @@ class Home extends Component {
               <Icon name="person" />
               <Text>Perfil</Text>
             </Button>
-            <Button vertical>
-              <Icon name="navigate" />
+            <Button vertical onPress={() => this.props.navigation.navigate('AddressInfo')}>
+              <Icon name="paper" />
               <Text>Info</Text>
             </Button>
-            <Button vertical active>
+            <Button vertical active onPress={() => this.props.navigation.navigate('Home')}>
               <Icon active name="navigate" />
               <Text>Viaje</Text>
             </Button>

@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.facebook.react.ReactApplication;
 import br.com.classapp.RNSensitiveInfo.RNSensitiveInfoPackage;
+import com.oblador.vectoricons.VectorIconsPackage;
 import com.agontuk.RNFusedLocation.RNFusedLocationPackage;
 import com.devfd.RNGeocoder.RNGeocoderPackage;
 import com.airbnb.android.react.maps.MapsPackage;
@@ -28,6 +29,7 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
             new RNSensitiveInfoPackage(),
+            new VectorIconsPackage(),
             new RNFusedLocationPackage(),
             new RNGeocoderPackage(),
             new MapsPackage()
