@@ -125,8 +125,7 @@ class Home extends Component {
   }
 
   render() {
-    let { region, longitude, error} = this.state;
-    console.log(region.latitude);
+    let { region, error} = this.state;
 
     return (
       <Container contentContainerStyle={{flex: 1, width: '100%'}}>
