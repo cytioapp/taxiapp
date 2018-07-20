@@ -122,11 +122,15 @@ class Home extends Component {
   }
 
   formattedAddress = async (lat, lng) => {
-    const res = await Geocoder.geocodePosition({lat, lng});
-    const { streetName, streetNumber, subLocality, locality } = res[0];
-    this.setState({
-      address: `${streetName} ${streetNumber}, ${subLocality}, ${locality}`
-    });
+    try {
+      const res = await Geocoder.geocodePosition({lat, lng});
+      const { streetName, streetNumber, subLocality, locality } = res[0];
+      this.setState({
+        address: `${streetName} ${streetNumber}, ${subLocality}, ${locality}`
+      });
+    } catch(err) {
+      console.log("Error fetching geodata:", err);
+    }
   };
 
   onRegionChange = region => {
