@@ -75,7 +75,7 @@ class Home extends Component {
   };
 
   render() {
-    let {latitude, longitude, address} = this.state
+    let {latitude, longitude, address, error} = this.state
 
     return (
       <Container contentContainerStyle= {{flex: 1}}>
@@ -87,8 +87,8 @@ class Home extends Component {
               initialRegion={{
                 latitude: latitude,
                 longitude: longitude,
-                latitudeDelta: 0.0922,
-                longitudeDelta: 0.0421,
+                latitudeDelta: 0.003,
+                longitudeDelta: 0.003,
               }}
             />
             <View style={styles.searchWrapper}>
@@ -106,6 +106,7 @@ class Home extends Component {
             </View>
           </View>
           }
+          {error && <Text>{error}</Text>}
         </View>
 
         <Footer>
