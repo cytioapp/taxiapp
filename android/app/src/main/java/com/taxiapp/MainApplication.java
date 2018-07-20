@@ -3,6 +3,7 @@ package com.taxiapp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import br.com.classapp.RNSensitiveInfo.RNSensitiveInfoPackage;
 import com.agontuk.RNFusedLocation.RNFusedLocationPackage;
 import com.devfd.RNGeocoder.RNGeocoderPackage;
 import com.airbnb.android.react.maps.MapsPackage;
@@ -26,6 +27,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNSensitiveInfoPackage(),
             new RNFusedLocationPackage(),
             new RNGeocoderPackage(),
             new MapsPackage()

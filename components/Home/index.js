@@ -15,6 +15,7 @@ import MapView from 'react-native-maps';
 import Geocoder from 'react-native-geocoder';
 import Geolocation from 'react-native-geolocation-service';
 import marker from '../../assets/map-marker.png';
+import Api from '../../utils/api';
 
 const styles = StyleSheet.create({
   map: {
@@ -122,6 +123,13 @@ class Home extends Component {
     this.setState({
       region
     });
+  }
+
+  makeRequest = () => {
+    Api.get('/service_types')
+      .then(res => {
+        console.log(res.data);
+      });
   }
 
   render() {
