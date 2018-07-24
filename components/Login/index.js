@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import {StyleSheet, View, KeyboardAvoidingView, Image} from 'react-native';
 import { Container, Content, Form, Item, Input, Button, Text } from 'native-base';
 import logoImage from '../../assets/taxi1.png';
+import Api from '../../utils/api';
+
 const styles = StyleSheet.create({
   container:{
     flex: 1,
@@ -21,6 +23,14 @@ const styles = StyleSheet.create({
 });
 
 export default class Login extends Component{
+
+  login = () => {
+    Api.post('/login', {email: 'user1@user.com', password: '123456'})
+      .then(res => {
+        console.log(res.data);
+      })
+  }
+
   render(){
     return(
       <KeyboardAvoidingView style={{flex: 1}} behavior="padding">
@@ -38,7 +48,7 @@ export default class Login extends Component{
               </Item>
             </Form>
             <View style={styles.buttonWrapper} >
-              <Button block rounded success onPress={() => this.props.navigation.navigate('Home')}>
+              <Button block rounded success onPress={ this.login }>
                 <Text>Iniciar Sesión</Text>
               </Button>
             </View>

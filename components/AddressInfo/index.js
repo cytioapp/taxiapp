@@ -24,9 +24,20 @@ const styles = StyleSheet.create({
   },
   form: {
     flex: 1,
+    marginTop: 10,
+    marginRight: 15
   },
   buttonWrapper: {
     padding: 10
+  },
+  text: {
+    fontFamily: 'Nunito-Regular',
+    margin: 15,
+    paddingLeft: 10
+  },
+  label: {
+    color: '#000000',
+    fontFamily: 'Nunito-Bold',
   }
 });
 
@@ -35,28 +46,11 @@ export default class AddressInfo extends Component{
     super()
 
     this.state = {
-      // latitude: 19.266836,
-      // longitude: -103.717531,
-      // error: null,
-      // address: ''
-    }
 
-  //   if (!this.state.address) {
-  //     Geocoder.geocodePosition({lat: this.state.latitude, lng: this.state.longitude}).then(res => {
-  //       let { formattedAddress } = res[0]
-  //       this.setState({
-  //         address: formattedAddress
-  //       }, () => console.log(this.state.address));
-  //     }).catch(err => console.log(err))
-  //   }
+    }
   }
 
-  // changeAddress = (address) => {
-  //   this.setState({address})
-  // }
-
   render(){
-    // let {address} = this.state;
     return(
       <KeyboardAvoidingView style={{flex: 1}} behavior="padding">
         <Container style={styles.container}>
@@ -68,14 +62,35 @@ export default class AddressInfo extends Component{
 
           <Content contentContainerStyle={{flex: 1}}>
             <Form style={styles.form}>
-              <Item style={{ paddingTop: 10, paddingBottom: 10 }}>
-                <Icon active name='home' />
-                <Label>Dirección</Label>
-              </Item>
-              <Textarea style={{flex: 1}}
-                        onChangeText={this.changeAddress}
-                        value={'Aquí va la dirección'}
-                        rowSpan={3}/>
+              <View>
+                <Item>
+                  <Icon name="map" />
+                  <Label style={styles.label}>Origen</Label>
+                </Item>
+                <View>
+                  <Text style={styles.text}>Aquí se va a poner la dirección que se jale de la BD</Text>
+                </View>
+              </View>
+
+              <View>
+                <Item>
+                  <Icon name="pulse" />
+                  <Label style={styles.label}>Estatus del viaje</Label>
+                </Item>
+                <View>
+                  <Text style={styles.text}>En espera</Text>
+                </View>
+              </View>
+
+              <View>
+                <Item>
+                  <Icon name="clock" />
+                  <Label style={styles.label}>Tiempo de espera</Label>
+                </Item>
+                <View>
+                  <Text style={styles.text}>00:00 min</Text>
+                </View>
+              </View>
             </Form>
           </Content>
 
