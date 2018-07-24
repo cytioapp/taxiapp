@@ -34,6 +34,11 @@ const styles = StyleSheet.create({
     height: 40,
     paddingRight: 10
   },
+  searchText: {
+    flex: 1,
+    fontFamily: 'Nunito-Regular',
+    textAlign: 'left',
+  },
   buttonContainer: {
     alignItems: 'center',
     bottom: 10,
@@ -52,13 +57,15 @@ const styles = StyleSheet.create({
   },
   button: {
     borderRadius: 30,
-    elevation: 1,
+    elevation: 2,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.8,
     shadowRadius: 2
   },
-
+  buttonText: {
+    fontFamily: 'Nunito-Bold',
+  },
   marker: {
     height: 48,
     width: 48
@@ -143,6 +150,11 @@ class Home extends Component {
       });
   }
 
+  handleOrder = () => {
+    alert("Se ha solicitado tu taxi con éxito");
+    this.props.navigation.navigate('AddressInfo')
+  }
+
   render() {
     let { region, error} = this.state;
 
@@ -164,13 +176,15 @@ class Home extends Component {
                 <Form>
                   <Item rounded style={styles.searchContainer}>
                     <Icon name="ios-search" />
-                    <TextInput placeholder="Selecciona tu ubicación..." value={this.state.address} style={{ textAlign: 'left', flex: 1 }}/>
+                    <TextInput placeholder="Selecciona tu ubicación..."
+                               value={this.state.address}
+                               style={styles.searchText}/>
                   </Item>
                 </Form>
               </View>
               <View style={styles.buttonContainer}>
-                <Button dark style={styles.button}>
-                  <Text> Solicitar servicio </Text>
+                <Button dark style={styles.button} onPress={ this.handleOrder }>
+                  <Text style={styles.buttonText}> Solicitar servicio </Text>
                 </Button>
               </View>
             </View>
