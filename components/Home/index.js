@@ -92,7 +92,9 @@ class Home extends Component {
       },
       error: null
     }
-
+  }
+  
+  componentDidMount() {
     Platform.select({
       ios: () => this.getCurrentPosition(),
       android: () => {
@@ -106,7 +108,6 @@ class Home extends Component {
           });
       }
     })();
-
   }
 
   getCurrentPosition = () => {
@@ -166,6 +167,8 @@ class Home extends Component {
               <MapView
                 style={styles.map}
                 region={region}
+                showsUserLocation={true}
+                showsMyLocationButton={true}
                 initialRegion={region}
                 onRegionChangeComplete={this.onRegionChange}
               />
@@ -176,9 +179,11 @@ class Home extends Component {
                 <Form>
                   <Item rounded style={styles.searchContainer}>
                     <Icon name="ios-search" />
-                    <TextInput placeholder="Selecciona tu ubicación..."
-                               value={this.state.address}
-                               style={styles.searchText}/>
+                    <TextInput
+                      placeholder="Selecciona tu ubicación..."
+                      value={this.state.address}
+                      style={styles.searchText}
+                    />
                   </Item>
                 </Form>
               </View>
