@@ -25,7 +25,7 @@ class Api {
       url: url,
       method: verb,
       headers: headers,
-      body: params ? JSON.stringify(params) : null
+      data: params
     };
     return axios(options);
   };
