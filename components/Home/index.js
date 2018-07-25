@@ -84,6 +84,7 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      address: '',
       region: {
         latitude: null,
         longitude: null,
@@ -93,7 +94,7 @@ class Home extends Component {
       error: null
     }
   }
-  
+
   componentDidMount() {
     Platform.select({
       ios: () => this.getCurrentPosition(),
@@ -152,8 +153,21 @@ class Home extends Component {
   }
 
   handleOrder = () => {
-    alert("Se ha solicitado tu taxi con éxito");
-    this.props.navigation.navigate('AddressInfo')
+    let {address, region: {latitude, longitude}} = this.state;
+    Api.post('/trips', {
+      address_origin: address,
+      lat_origin: latitude,
+      lng_origin: longitude,
+      user_id: 1
+    }).then(res => {
+      if (res.status == 200){
+        alert("Se ha solicitado tu taxi con éxito");
+        this.props.navigation.navigate('AddressInfo');
+      }else{
+        alert("Ha ocurrido un error, vuelve a intentarlo.");
+      }
+    })
+
   }
 
   render() {

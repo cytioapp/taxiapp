@@ -11,16 +11,15 @@ class SessionState extends Container {
     Api.post('/users/login', {email: 'user1@user.com', password: '123456'})
       .then(res => {
         if (res.data.jwt) {
-          console.log('Loged');
           this.setState({
             isLogued: true,
             token: res.data.jwt
-          }, () => {
-            console.log(this.state);
           });
         } else {
-          console.log('Not loged');
-          this.setState({ isLogued: false });
+          this.setState({
+            isLogued: false,
+            token: ''
+          });
         }
       })
   }
