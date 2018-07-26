@@ -51,6 +51,29 @@ const styles = StyleSheet.create({
     fontFamily: 'Nunito-Regular',
     paddingLeft: 15,
     paddingRight: 20
+  },
+  messageWrapper: {
+    alignItems: 'flex-end',
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    paddingBottom: 15
+  },
+  message: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center'
+  },
+  messageText: {
+    flex: 1,
+    fontFamily: 'Nunito-Regular',
+    fontSize: 14,
+    paddingRight: 10,
+    paddingLeft: 15,
+    textAlign: 'right'
+  },
+  spinner: {
+    marginRight: 15
   }
 });
 
@@ -60,6 +83,20 @@ const colors = {
   'active': '#9BC53D',
   'finished': '#211A1E',
   'canceled': '#C3423F'
+}
+
+const spinnerColor = {
+  'holding': '#FFF5AF',
+  'taken': '#AFDAEC',
+  'active': '#D2E3AD'
+}
+
+const spinnerMessage = {
+  'holding': 'Esperando que algún taxista acepte el viaje 👀',
+  'taken': 'Tú viaje ha sido tomado, el taxista va en camino 🚖',
+  'active': 'Estás llendo a tu destino, disfruta el viaje ☺️',
+  'finished': 'Ha terminado tu viaje, gracias por usar NOMBRE 🤗',
+  'canceled': 'Se ha cancelado tú viaje 😢'
 }
 
 export default class AddressInfo extends Component{
@@ -74,8 +111,7 @@ export default class AddressInfo extends Component{
       organization: '',
       license_plate: '',
       model: '',
-      year: '',
-      color: ''
+      year: ''
     }
   }
 
@@ -87,8 +123,7 @@ export default class AddressInfo extends Component{
         this.setState({
           origin: address_origin,
           status,
-          created_at,
-          color: colors[status]
+          created_at
         })
       }else{
       }
@@ -104,8 +139,7 @@ export default class AddressInfo extends Component{
       organization,
       license_plate,
       model,
-      year,
-      color
+      year
     } = this.state;
 
     return(
@@ -119,7 +153,7 @@ export default class AddressInfo extends Component{
 
           <Content contentContainerStyle={{flex: 1}}>
             <View style={styles.status}>
-              <View style={[styles.circleStatus, {backgroundColor: color}]}>
+              <View style={[styles.circleStatus, {backgroundColor: colors[status]}]}>
               </View>
               <Text style={styles.statusText}>{status}</Text>
             </View>
@@ -130,10 +164,11 @@ export default class AddressInfo extends Component{
                 <Text style={styles.originText}>{origin}</Text>
               </View>
             </View>
-
-            <View style={styles.message}>
-              <Text style={styles.messageText}>Mensaje de ejemplo</Text>
-              <Spinner isVisible={true} size={50} type='ChasingDots' color={color}/>
+            <View style={styles.messageWrapper}>
+              <View style={styles.message}>
+                <Text style={styles.messageText}>{spinnerMessage[status]}</Text>
+                <Spinner style={styles.spinner} isVisible={true} size={50} type='Pulse' color={spinnerColor[status]}/>
+              </View>
             </View>
 
           </Content>
