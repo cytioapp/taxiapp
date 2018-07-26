@@ -19,7 +19,7 @@ import {
   Title
 } from 'native-base';
 import Api from '../../utils/api';
-// import Spinner from 'react-native-spinkit';
+import Spinner from 'react-native-spinkit';
 
 const styles = StyleSheet.create({
   container:{
@@ -133,7 +133,7 @@ export default class AddressInfo extends Component{
 
             <View style={styles.message}>
               <Text style={styles.messageText}>Mensaje de ejemplo</Text>
-              {/* <Spinner isVisible={true} size={50} type='ChasingDots' color={color}/> */}
+              <Spinner isVisible={true} size={50} type='ChasingDots' color={color}/>
             </View>
 
           </Content>
