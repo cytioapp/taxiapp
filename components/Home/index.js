@@ -109,6 +109,13 @@ class Home extends Component {
           });
       }
     })();
+
+    Api.get('/users/active_trip')
+      .then(res => {
+        if (res.data && res.data.active) {
+          this.props.navigation.navigate('AddressInfo');
+        }
+      });
   }
 
   getCurrentPosition = () => {
@@ -158,14 +165,18 @@ class Home extends Component {
       address_origin: address,
       lat_origin: latitude,
       lng_origin: longitude,
-      user_id: 1
     }).then(res => {
+      console.log(res);
       if (res.status == 201){
         alert("Se ha solicitado tu taxi con éxito");
         this.props.navigation.navigate('AddressInfo');
-      }else{
+      } else if (res.status == 422) {
+        alert('Ya tiene un viaje activo');
+      } else {
         alert("Ha ocurrido un error, vuelve a intentarlo.");
       }
+    }).catch(err => {
+      console.log(err);
     })
 
   }
@@ -202,7 +213,7 @@ class Home extends Component {
                 </Form>
               </View>
               <View style={styles.buttonContainer}>
-                <Button dark style={styles.button} onPress={ this.handleOrder }>
+                <Button dark style={styles.button} onPress={this.handleOrder}>
                   <Text style={styles.buttonText}> Solicitar servicio </Text>
                 </Button>
               </View>

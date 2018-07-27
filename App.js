@@ -3,6 +3,7 @@ import ExternalRoutes from './routes/ExternalRoutes';
 import InternalRoutes from './routes/InternalRoutes';
 import { Provider, Subscribe } from 'unstated';
 import sessionState from './states/session';
+import Loading from './components/Loading';
 
 class App extends Component {
   render() {
@@ -10,12 +11,15 @@ class App extends Component {
       <Provider>
         <Subscribe to={[sessionState]}>
           {(session) => {
-            if (session.state.isLogued)
+            session.verify();
+            if (session.state.isLogued == null) {
+              return <Loading />;
+            } else if (session.state.isLogued) {
               return <InternalRoutes />
-            else
+            } else {
               return <ExternalRoutes />
             }
-          }
+          }}
         </Subscribe>
       </Provider>
     );
