@@ -4814,6 +4814,10 @@ rimraf@~2.2.6:
   version "2.2.8"
   resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.2.8.tgz#e439be2aaee327321952730f99a8929e4fc50582"
 
+rn-sliding-button@^1.1.5:
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/rn-sliding-button/-/rn-sliding-button-1.1.5.tgz#4cf6764bbbfc5aae46e04fe9cd3f021f6b25250b"
+
 rsvp@^3.3.3:
   version "3.6.2"
   resolved "https://registry.yarnpkg.com/rsvp/-/rsvp-3.6.2.tgz#2e96491599a96cde1b515d5674a8f7a91452926a"
