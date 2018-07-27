@@ -24,6 +24,7 @@ import Api from '../../utils/api';
 import Spinner from 'react-native-spinkit';
 import driversFace from '../../assets/face1.jpg';
 import taxiIcon1 from '../../assets/taxiIcon.png';
+import {RNSlidingButton, SlideDirection} from 'rn-sliding-button';
 
 const primaryColor = '#F8E026';
 const secondaryColor = '#413500';
@@ -35,37 +36,30 @@ const styles = StyleSheet.create({
     backgroundColor: fourthColor,
     flex: 1,
   },
-  left: {
-    flex: 1
-  },
-  body: {
-    flex: 3
-  },
-  right: {
-    flex: 1
-  },
-  menu: {
-    backgroundColor: terniaryColor,
-    borderRadius: 30,
-    position: 'absolute',
-    right: 5,
-    top: 55,
-    width: '45%',
-    zIndex: 1
+  cancelButtonWrapper: {
+    paddingHorizontal: 20,
   },
   cancelButton:{
-    alignItems: 'center',
+    backgroundColor: terniaryColor,
+    borderRadius: 30,
     flexDirection: 'row',
-    justifyContent: 'center',
-    padding: 10
+    paddingHorizontal: 15
+  },
+  cancelIconWrapper: {
+
   },
   cancelIcon: {
     color: '#FFFFFF',
-    marginRight: 10
+    marginRight: 10,
+    marginTop: 2,
+    width: 25,
   },
   cancelText: {
     color: '#FFFFFF',
-    fontFamily: 'Nunito-Bold'
+    fontFamily: 'Nunito-Bold',
+    left: 73,
+    top: 12,
+    position: 'absolute'
   },
   statusWrapper: {
     borderColor: terniaryColor,
@@ -232,7 +226,7 @@ export default class AddressInfo extends Component{
         let {address_origin, status, created_at} = res.data;
         this.setState({
           origin: address_origin,
-          status: 'finished',
+          status,
           created_at,
           driver_name: 'Juan Escutia',
           organization: 'Libertad',
@@ -244,6 +238,13 @@ export default class AddressInfo extends Component{
       }
     })
   }
+
+  onSlideRight = () => {
+    alert("Se ha cancelado tu taxi con éxito");
+    this.setState({
+      status: 'caceled'
+    })
+  };
 
   render(){
     const {
@@ -258,27 +259,23 @@ export default class AddressInfo extends Component{
       show_menu
     } = this.state;
 
+    // const origin = 'Venustiano Carranza 1248-A';
+    // const status = 'active';
+    // const driver_name = 'Juan Escutia';
+    // const organization = 'Libertad';
+    // const license_plate = '123-sdf-32';
+    // const model = 'Tsuru';
+    // const year = '2015';
+
+
     return(
       <KeyboardAvoidingView style={{flex: 1}} behavior="padding">
         <Container style={styles.container}>
           <Header>
-            <Left style={styles.left}></Left>
             <Body style={styles.body}>
                <Title>Información del viaje</Title>
             </Body>
-            <Right style={styles.right}>
-              <Button transparent>
-                <Icon name='more' />
-              </Button>
-            </Right>
           </Header>
-
-          <View style={styles.menu}>
-            <View style={styles.cancelButton}>
-              <Icon style={styles.cancelIcon} name="ios-close-circle-outline" />
-              <Text style={styles.cancelText}>Cancelar viaje</Text>
-            </View>
-          </View>
 
           <Content contentContainerStyle={{flex: 1}}>
             <View style={styles.statusWrapper}>
@@ -337,6 +334,21 @@ export default class AddressInfo extends Component{
                 <Text style={styles.messageText}>{spinnerMessage[status]}</Text>
                 {spinnerColor[status] && <Spinner style={styles.spinner} isVisible={true} size={50} type='Pulse' color={spinnerColor[status]}/>}
               </View>
+            </View>
+
+            <View style={styles.cancelButtonWrapper} >
+              <RNSlidingButton
+                style={styles.cancelButton}
+                height={50}
+                onSlidingSuccess={this.onSlideRight}
+                slideDirection={SlideDirection.RIGHT}>
+                <View style={styles.cancelIconWrapper}>
+                  <Icon style={styles.cancelIcon} name="ios-close-circle"/>
+                </View>
+              </RNSlidingButton>
+              <Text numberOfLines={1} style={styles.cancelText}>
+                >> Desliza para cancelar el viaje >>
+              </Text>
             </View>
 
           </Content>

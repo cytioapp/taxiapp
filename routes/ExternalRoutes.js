@@ -4,6 +4,6 @@ import AddressInfo from '../components/AddressInfo';
 
 export default createStackNavigator({
   Login: {
-    screen: AddressInfo
+    screen: Login
   }
 },{ headerMode: 'none'});

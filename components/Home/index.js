@@ -160,7 +160,7 @@ class Home extends Component {
       lng_origin: longitude,
       user_id: 1
     }).then(res => {
-      if (res.status == 200){
+      if (res.status == 201){
         alert("Se ha solicitado tu taxi con éxito");
         this.props.navigation.navigate('AddressInfo');
       }else{
