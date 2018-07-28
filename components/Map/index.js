@@ -158,6 +158,7 @@ class Home extends Component {
 
   handleOrder = () => {
     let { address, region: { latitude, longitude } } = this.state;
+    console.log(address);
     Api.post('/trips', {
       address_origin: address,
       lat_origin: latitude,
@@ -169,6 +170,7 @@ class Home extends Component {
         this.props.navigation.navigate('AddressInfo');
       }
     }).catch(err => {
+      console.log(err.response);
       if (err.response.status == 422) {
         alert('Ya tiene un viaje activo');
       } else {
