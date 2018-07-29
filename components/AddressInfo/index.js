@@ -207,6 +207,7 @@ export default class AddressInfo extends Component{
     super()
 
     this.state = {
+      trip_id: null,
       origin: '',
       status: '',
       created_at: null,
@@ -221,33 +222,37 @@ export default class AddressInfo extends Component{
   }
 
   componentDidMount() {
-    Api.get('/users/active_trip').then(res =>{
-      if (res.data.active) {
-        Api.get(`/trips/${res.data.trip.id}`)
-        .then(res => {
-          if (res.data.address_origin) {
-            let { address_origin, status, created_at } = res.data;
-            this.setState({
-              origin: address_origin,
-              status,
-              created_at
-            });
-          }
-          if (res.data.driver) {
-            const { id, driver_name } = res.data.driver;
-            const { license_plate, model, year, organization } = res.data.vehicle;
-            this.setState({
-              driver_name,
-              driver_id: id,
-              organization,
-              license_plate,
-              model,
-              year,
-            })
-          }
+    this.getActiveTrip();
+  }
+
+  getActiveTrip = async () => {
+    let active_trip = await Api.get('/users/active_trip');
+    
+    if (active_trip.data && active_trip.data.active) {
+      let { id } = active_trip.data.trip;
+      let trip = await Api.get(`/trips/${id}`);
+      let { address_origin, status, created_at } = trip.data;
+      if (address_origin) {
+        this.setState({
+          trip_id: id,
+          origin: address_origin,
+          status,
+          created_at
         });
       }
-    })
+      if (trip.data.driver) {
+        const { id, driver_name } = trip.data.driver;
+        const { license_plate, model, year, organization } = trip.data.vehicle;
+        this.setState({
+          driver_name,
+          driver_id: id,
+          organization,
+          license_plate,
+          model,
+          year,
+        })
+      }
+    }
   }
 
   onSlideRight = () => {
