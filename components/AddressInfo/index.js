@@ -203,7 +203,7 @@ const spinnerMessage = {
 }
 
 export default class AddressInfo extends Component{
-  constructor(){
+  constructor() {
     super()
 
     this.state = {
@@ -256,10 +256,13 @@ export default class AddressInfo extends Component{
   }
 
   onSlideRight = () => {
-    alert("Se ha cancelado tu taxi con éxito");
-    this.setState({
-      status: 'caceled'
-    })
+    Api.put(`/trips/${this.state.trip_id}/cancel_trip`)
+      .then(res => {
+        alert("Se ha cancelado tu taxi con éxito");
+        this.props.navigation.navigate('Map');
+      }).catch(err => {
+        console.log(err.response);
+      });
   };
 
   render(){
