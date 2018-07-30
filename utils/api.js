@@ -18,7 +18,7 @@ class Api {
 
   // Todas las llamadas pasan por aquí
   static xhr = async function(route, params, verb) {
-    const host = 'https://f55b6545.ngrok.io';
+    const host = 'https://murmuring-thicket-35416.herokuapp.com';
     const url = `${host}${route}`;
     const headers = await this.headers();
     const options = {
