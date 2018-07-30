@@ -22,8 +22,9 @@ const spinnerMessage = {
   'canceled': 'Se ha cancelado tú viaje'
 }
 
-export default {
+export {
   colors,
   spinnerColor,
   spinnerMessage
-};
+}
+
