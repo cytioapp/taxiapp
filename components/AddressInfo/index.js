@@ -20,7 +20,6 @@ import {
   Textarea,
   Title
 } from 'native-base';
-import Api from '../../utils/api';
 import Spinner from 'react-native-spinkit';
 import driversFace from '../../assets/face1.jpg';
 import taxiIcon1 from '../../assets/taxiIcon.png';
@@ -29,6 +28,7 @@ window.navigator.userAgent = "react-native";
 import io from 'socket.io-client/dist/socket.io';
 import styles from './styles';
 import { colors, spinnerColor, spinnerMessage } from './variables';
+import { getActiveTrip } from '../../services/information';
 
 export default class AddressInfo extends Component{
 
@@ -54,48 +54,28 @@ export default class AddressInfo extends Component{
 
   }
 
-  componentDidMount() {
-    this.getActiveTrip();
-  }
-
-  getActiveTrip = async () => {
-    let active_trip = await Api.get('/users/active_trip');
-
-    if (active_trip.data && active_trip.data.active) {
-      let { id } = active_trip.data.trip;
-      let trip = await Api.get(`/trips/${id}`);
-      let { address_origin, status, created_at } = trip.data;
-      if (address_origin) {
-        this.setState({
-          trip_id: id,
-          origin: address_origin,
-          status,
-          created_at
-        });
+  componentDidMount(){
+    getActiveTrip().then(res => {
+      if(res.user){
+        this.setState(res.user);
       }
-      if (trip.data.driver) {
-        const { id } = trip.data.driver;
-        const { license_plate, model, year, organization } = trip.data.vehicle;
-        this.setState({
-          user_id: trip.data.user_id,
-          driver_name: trip.data.driver.user.full_name,
-          driver_id: id,
-          organization,
-          license_plate,
-          model,
-          year,
-        })
-        //Se une al room cuando se aceptó el trip por un driver
-        this.socket.emit('joinToUsers', trip.data.user_id);
-        this.socket.on('tripCanceled', () => {
-          this.setState({
-            status: 'holding',
-            driver_id: false
-          });
-          //Hacer lo de la push notification para avisar al usuario
-        });
+      if(res.driver){
+        this.setState(res.driver);
       }
-    }
+
+      //Se une al room cuando se aceptó el trip por un driver
+      this.socket.emit('joinToUsers', res.user.user_id);
+      this.socket.on('tripCanceled', () => {
+        this.setState({
+          status: 'holding',
+          driver_id: false
+        });
+        //Hacer lo de la push notification para avisar al usuario
+        /* PUSH NOTIFICATION CODE */
+      });
+    });
+
+
   }
 
   onSlideRight = () => {
