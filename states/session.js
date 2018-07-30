@@ -15,7 +15,7 @@ class SessionState extends Container {
   };
 
   login = () => {
-    Api.post('/users/login', {email: 'user1@user.com', password: '123456'})
+    Api.post('/users/login', {email: 'user8@user.com', password: '123456'})
       .then(res => {
         if (res.data.jwt) {
           SInfo.setItem('jwt', res.data.jwt, options)

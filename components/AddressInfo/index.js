@@ -25,6 +25,8 @@ import Spinner from 'react-native-spinkit';
 import driversFace from '../../assets/face1.jpg';
 import taxiIcon1 from '../../assets/taxiIcon.png';
 import {RNSlidingButton, SlideDirection} from 'rn-sliding-button';
+window.navigator.userAgent = "react-native";
+import io from 'socket.io-client/dist/socket.io';
 
 const primaryColor = '#F8E026';
 const secondaryColor = '#413500';
@@ -207,6 +209,7 @@ export default class AddressInfo extends Component{
     super()
 
     this.state = {
+      user_id: '',
       trip_id: null,
       origin: '',
       status: '',
@@ -219,6 +222,9 @@ export default class AddressInfo extends Component{
       year: '',
       show_menu: true
     }
+
+    this.socket = io('https://f55b6545.ngrok.io');
+
   }
 
   componentDidMount() {
@@ -241,16 +247,26 @@ export default class AddressInfo extends Component{
         });
       }
       if (trip.data.driver) {
-        const { id, driver_name } = trip.data.driver;
+        const { id } = trip.data.driver;
         const { license_plate, model, year, organization } = trip.data.vehicle;
         this.setState({
-          driver_name,
+          user_id: trip.data.user_id,
+          driver_name: trip.data.driver.user.full_name,
           driver_id: id,
           organization,
           license_plate,
           model,
           year,
         })
+        //Se une al room cuando se aceptó el trip por un driver
+        this.socket.emit('joinToUsers', trip.data.user_id);
+        this.socket.on('tripCanceled', () => {
+          this.setState({
+            status: 'holding',
+            driver_id: false
+          });
+          //Hacer lo de la push notification para avisar al usuario
+        });
       }
     }
   }
@@ -351,20 +367,22 @@ export default class AddressInfo extends Component{
               </View>
             </View>
 
-            <View style={styles.cancelButtonWrapper} >
-              <RNSlidingButton
-                style={styles.cancelButton}
-                height={50}
-                onSlidingSuccess={this.onSlideRight}
-                slideDirection={SlideDirection.RIGHT}>
-                <View style={styles.cancelIconWrapper}>
-                  <Icon style={styles.cancelIcon} name="ios-close-circle"/>
-                </View>
-              </RNSlidingButton>
-              <Text numberOfLines={1} style={styles.cancelText}>
-                >> Desliza para cancelar el viaje >>
-              </Text>
-            </View>
+            {driver_id &&
+              <View style={styles.cancelButtonWrapper} >
+                <RNSlidingButton
+                  style={styles.cancelButton}
+                  height={50}
+                  onSlidingSuccess={this.onSlideRight}
+                  slideDirection={SlideDirection.RIGHT}>
+                  <View style={styles.cancelIconWrapper}>
+                    <Icon style={styles.cancelIcon} name="ios-close-circle"/>
+                  </View>
+                </RNSlidingButton>
+                <Text numberOfLines={1} style={styles.cancelText}>
+                  >> Desliza para cancelar el viaje >>
+                </Text>
+              </View>
+            }
 
           </Content>
 
