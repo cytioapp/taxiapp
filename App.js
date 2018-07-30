@@ -6,13 +6,16 @@ import sessionState from './states/session';
 import Loading from './components/Loading';
 
 class App extends Component {
+  componentDidMount() {
+    
+  }
   render() {
     return (
       <Provider>
         <Subscribe to={[sessionState]}>
           {(session) => {
-            session.verify();
             if (session.state.isLogued == null) {
+              session.verify();
               return <Loading />;
             } else if (session.state.isLogued) {
               return <InternalRoutes />
