@@ -131,11 +131,15 @@ class Home extends Component {
   }
 
   formattedAddress = async (lat, lng) => {
-    const res = await Geocoder.geocodePosition({lat, lng});
-    const { streetName, streetNumber, subLocality, locality } = res[0];
-    this.setState({
-      address: `${streetName} ${streetNumber}, ${subLocality}, ${locality}`
-    });
+    try {
+      const res = await Geocoder.geocodePosition({lat, lng});
+      const { streetName, streetNumber, subLocality, locality } = res[0];
+      this.setState({
+        address: `${streetName} ${streetNumber}, ${subLocality}, ${locality}`
+      });
+    } catch(err) {
+      console.log(err);
+    }
   };
 
   onRegionChange = region => {
@@ -153,7 +157,8 @@ class Home extends Component {
   }
 
   handleOrder = () => {
-    let {address, region: {latitude, longitude}} = this.state;
+    let { address, region: { latitude, longitude } } = this.state;
+    console.log(address);
     Api.post('/trips', {
       address_origin: address,
       lat_origin: latitude,
@@ -163,13 +168,14 @@ class Home extends Component {
       if (res.status == 201){
         alert("Se ha solicitado tu taxi con éxito");
         this.props.navigation.navigate('AddressInfo');
-      } else if (res.status == 422) {
+      }
+    }).catch(err => {
+      console.log(err.response);
+      if (err.response.status == 422) {
         alert('Ya tiene un viaje activo');
       } else {
         alert("Ha ocurrido un error, vuelve a intentarlo.");
       }
-    }).catch(err => {
-      console.log(err);
     })
 
   }

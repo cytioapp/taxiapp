@@ -11,6 +11,8 @@ class Home extends Component {
         } else {
           this.props.navigation.navigate('Map');
         }
+      }).catch(err => {
+        console.log(err.response);
       });
   }
   

@@ -203,14 +203,16 @@ const spinnerMessage = {
 }
 
 export default class AddressInfo extends Component{
-  constructor(){
+  constructor() {
     super()
 
     this.state = {
+      trip_id: null,
       origin: '',
       status: '',
       created_at: null,
       driver_name: '',
+      driver_id: null,
       organization: '',
       license_plate: '',
       model: '',
@@ -219,31 +221,48 @@ export default class AddressInfo extends Component{
     }
   }
 
-  componentDidMount(){
-    Api.get('/trips/1').then(res =>{
-      console.log(res.data);
-      if(res.data.address_origin){
-        let {address_origin, status, created_at} = res.data;
+  componentDidMount() {
+    this.getActiveTrip();
+  }
+
+  getActiveTrip = async () => {
+    let active_trip = await Api.get('/users/active_trip');
+    
+    if (active_trip.data && active_trip.data.active) {
+      let { id } = active_trip.data.trip;
+      let trip = await Api.get(`/trips/${id}`);
+      let { address_origin, status, created_at } = trip.data;
+      if (address_origin) {
         this.setState({
+          trip_id: id,
           origin: address_origin,
           status,
-          created_at,
-          driver_name: 'Juan Escutia',
-          organization: 'Libertad',
-          license_plate: '123-sdf-32',
-          model: 'Tsuru',
-          year: '2015'
-        })
-      }else{
+          created_at
+        });
       }
-    })
+      if (trip.data.driver) {
+        const { id, driver_name } = trip.data.driver;
+        const { license_plate, model, year, organization } = trip.data.vehicle;
+        this.setState({
+          driver_name,
+          driver_id: id,
+          organization,
+          license_plate,
+          model,
+          year,
+        })
+      }
+    }
   }
 
   onSlideRight = () => {
-    alert("Se ha cancelado tu taxi con éxito");
-    this.setState({
-      status: 'caceled'
-    })
+    Api.put(`/trips/${this.state.trip_id}/cancel_trip`)
+      .then(res => {
+        alert("Se ha cancelado tu taxi con éxito");
+        this.props.navigation.navigate('Map');
+      }).catch(err => {
+        console.log(err.response);
+      });
   };
 
   render(){
@@ -256,17 +275,8 @@ export default class AddressInfo extends Component{
       license_plate,
       model,
       year,
-      show_menu
+      driver_id
     } = this.state;
-
-    // const origin = 'Venustiano Carranza 1248-A';
-    // const status = 'active';
-    // const driver_name = 'Juan Escutia';
-    // const organization = 'Libertad';
-    // const license_plate = '123-sdf-32';
-    // const model = 'Tsuru';
-    // const year = '2015';
-
 
     return(
       <KeyboardAvoidingView style={{flex: 1}} behavior="padding">
@@ -293,41 +303,43 @@ export default class AddressInfo extends Component{
               </View>
             </View>
 
-            <View style={styles.driverCardWrapper}>
-              <Card style={styles.driverCard}>
-                <CardItem styles={styles.driverCardHeader} header bordered>
-                  <Text style={styles.driverName}>{driver_name}</Text>
-                  <View style={styles.driverImageWrapper}>
-                    <Image style={styles.driverImage} source={driversFace}/>
-                  </View>
-                </CardItem>
-                <CardItem bordered>
-                  <Body style={styles.driverInfoBody}>
-                    <View style={styles.driverInfoWrapper}>
-                      <Text style={styles.label}>Sitio </Text>
-                      <Text style={styles.driverInfo}>"{organization}"</Text>
+            {driver_id && 
+              <View style={styles.driverCardWrapper}>
+                <Card style={styles.driverCard}>
+                  <CardItem styles={styles.driverCardHeader} header bordered>
+                    <Text style={styles.driverName}>{driver_name}</Text>
+                    <View style={styles.driverImageWrapper}>
+                      <Image style={styles.driverImage} source={driversFace}/>
                     </View>
-                    <View style={styles.driverInfoWrapper}>
-                      <Text style={styles.label}>Placas: </Text>
-                      <Text style={styles.driverInfo}>{license_plate}</Text>
+                  </CardItem>
+                  <CardItem bordered>
+                    <Body style={styles.driverInfoBody}>
+                      <View style={styles.driverInfoWrapper}>
+                        <Text style={styles.label}>Sitio </Text>
+                        <Text style={styles.driverInfo}>"{organization}"</Text>
+                      </View>
+                      <View style={styles.driverInfoWrapper}>
+                        <Text style={styles.label}>Placas: </Text>
+                        <Text style={styles.driverInfo}>{license_plate}</Text>
+                      </View>
+                      <View style={styles.driverInfoWrapper}>
+                        <Text style={styles.label}>Taxi: </Text>
+                        <Text style={styles.driverInfo}>{model} {year}</Text>
+                      </View>
+                      <View style={styles.driverInfoWrapper}>
+                        <Image style={styles.taxiIcon} source={taxiIcon1}/>
+                      </View>
+                    </Body>
+                  </CardItem>
+                  <CardItem footer bordered style={styles.actionButtonsWrapper}>
+                    <View style={styles.button}>
+                      <Icon name="ios-call-outline" />
+                      <Text style={styles.buttonText}>Llamar al conductor</Text>
                     </View>
-                    <View style={styles.driverInfoWrapper}>
-                      <Text style={styles.label}>Taxi: </Text>
-                      <Text style={styles.driverInfo}>{model} {year}</Text>
-                    </View>
-                    <View style={styles.driverInfoWrapper}>
-                      <Image style={styles.taxiIcon} source={taxiIcon1}/>
-                    </View>
-                  </Body>
-                </CardItem>
-                <CardItem footer bordered style={styles.actionButtonsWrapper}>
-                  <View style={styles.button}>
-                    <Icon name="ios-call-outline" />
-                    <Text style={styles.buttonText}>Llamar al conductor</Text>
-                  </View>
-                </CardItem>
-              </Card>
-            </View>
+                  </CardItem>
+                </Card>
+              </View>
+            }
 
             <View style={styles.messageWrapper}>
               <View style={styles.message}>

@@ -38,6 +38,7 @@ class SessionState extends Container {
     return new Promise((resolve, reject) => {
       return SInfo.getItem('jwt', options)
         .then(value => {
+          console.log(value)
           if (value)
             this.setState({ isLogued: true }, ()=> {
               return resolve();
@@ -46,6 +47,8 @@ class SessionState extends Container {
             this.setState({ isLogued: false }, ()=> {
               return resolve();
             });
+        }).catch(err => {
+          return reject(err);
         });
     })
   }
