@@ -242,7 +242,7 @@ export default class AddressInfo extends Component{
   onSlideRight = () => {
     alert("Se ha cancelado tu taxi con éxito");
     this.setState({
-      status: 'caceled'
+      status: 'canceled'
     })
   };
 
@@ -258,15 +258,6 @@ export default class AddressInfo extends Component{
       year,
       show_menu
     } = this.state;
-
-    // const origin = 'Venustiano Carranza 1248-A';
-    // const status = 'active';
-    // const driver_name = 'Juan Escutia';
-    // const organization = 'Libertad';
-    // const license_plate = '123-sdf-32';
-    // const model = 'Tsuru';
-    // const year = '2015';
-
 
     return(
       <KeyboardAvoidingView style={{flex: 1}} behavior="padding">
