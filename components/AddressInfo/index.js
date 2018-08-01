@@ -70,12 +70,19 @@ export default class AddressInfo extends Component{
           status: 'holding',
           driver_id: false
         });
-        //Hacer lo de la push notification para avisar al usuario
         /* PUSH NOTIFICATION CODE */
       });
+      this.socket.on('tripAccepted', () => {
+        getActiveTrip().then(res => {
+          if(res.user){
+            this.setState(res.user);
+          }
+          if(res.driver){
+            this.setState(res.driver);
+          }
+        });
+      });
     });
-
-
   }
 
   onSlideRight = () => {
@@ -174,22 +181,22 @@ export default class AddressInfo extends Component{
               </View>
             </View>
 
-            {driver_id &&
-              <View style={styles.cancelButtonWrapper} >
-                <RNSlidingButton
-                  style={styles.cancelButton}
-                  height={50}
-                  onSlidingSuccess={this.onSlideRight}
-                  slideDirection={SlideDirection.RIGHT}>
-                  <View style={styles.cancelIconWrapper}>
-                    <Icon style={styles.cancelIcon} name="ios-close-circle"/>
-                  </View>
-                </RNSlidingButton>
-                <Text numberOfLines={1} style={styles.cancelText}>
-                  >> Desliza para cancelar el viaje >>
-                </Text>
-              </View>
-            }
+
+            <View style={styles.cancelButtonWrapper} >
+              <RNSlidingButton
+                style={styles.cancelButton}
+                height={50}
+                onSlidingSuccess={this.onSlideRight}
+                slideDirection={SlideDirection.RIGHT}>
+                <View style={styles.cancelIconWrapper}>
+                  <Icon style={styles.cancelIcon} name="ios-close-circle"/>
+                </View>
+              </RNSlidingButton>
+              <Text numberOfLines={1} style={styles.cancelText}>
+                >> Desliza para cancelar el viaje >>
+              </Text>
+            </View>
+
 
           </Content>
 
