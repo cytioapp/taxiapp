@@ -23,7 +23,12 @@ const styles = StyleSheet.create({
   }
 });
 
-export default class Login extends Component{
+export default class Login extends Component {
+  state = {
+    email: '',
+    password: ''
+  }
+
   render(){
     return(
       <Subscribe to={[sessionState]}>
@@ -36,14 +41,25 @@ export default class Login extends Component{
                 </View>
                 <Form styles={styles.form}>
                   <Item>
-                    <Input placeholder="Usuario" />
+                    <Input
+                      placeholder="Usuario"
+                      autoCapitalize="none"
+                      keyboardType="email-address"
+                      onChangeText={email => this.setState({ email })}
+                      value={this.state.email}
+                    />
                   </Item>
                   <Item last>
-                    <Input placeholder="Contraseña" />
+                    <Input
+                      placeholder="Contraseña"
+                      secureTextEntry={true}
+                      onChangeText={password => this.setState({ password })}
+                      value={this.state.password}
+                    />
                   </Item>
                 </Form>
                 <View style={styles.buttonWrapper} >
-                  <Button block rounded success onPress={session.login}>
+                  <Button block rounded success onPress={() => session.login(this.state.email, this.state.password)}>
                     <Text>Iniciar Sesión</Text>
                   </Button>
                 </View>
