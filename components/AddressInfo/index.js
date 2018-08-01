@@ -282,9 +282,15 @@ export default class AddressInfo extends Component{
       <KeyboardAvoidingView style={{flex: 1}} behavior="padding">
         <Container style={styles.container}>
           <Header>
+            <Button transparent onPress={this.props.navigation.openDrawer}>
+              <Icon name='menu' />
+            </Button>
             <Body style={styles.body}>
                <Title>Información del viaje</Title>
             </Body>
+            <Button transparent>
+              <Icon name='person' />
+            </Button>
           </Header>
 
           <Content contentContainerStyle={{flex: 1}}>
@@ -367,7 +373,7 @@ export default class AddressInfo extends Component{
 
           <Footer>
             <FooterTab>
-              <Button vertical>
+              <Button vertical onPress={this.props.navigation.openDrawer}>
                 <Icon name="person" />
                 <Text>Perfil</Text>
               </Button>
