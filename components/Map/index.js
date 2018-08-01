@@ -158,19 +158,16 @@ class Home extends Component {
 
   handleOrder = () => {
     let { address, region: { latitude, longitude } } = this.state;
-    console.log(address);
     Api.post('/trips', {
       address_origin: address,
       lat_origin: latitude,
       lng_origin: longitude,
     }).then(res => {
-      console.log(res);
       if (res.status == 201){
         alert("Se ha solicitado tu taxi con éxito");
         this.props.navigation.navigate('AddressInfo');
       }
     }).catch(err => {
-      console.log(err.response);
       if (err.response.status == 422) {
         alert('Ya tiene un viaje activo');
       } else {
@@ -206,6 +203,7 @@ class Home extends Component {
                     <TextInput
                       placeholder="Selecciona tu ubicación..."
                       value={this.state.address}
+                      onChangeText={address => this.setState({ address })}
                       style={styles.searchText}
                     />
                   </Item>
