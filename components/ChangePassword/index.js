@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   }
 });
 
-export default class Login extends Component {
+export default class ChangePassword extends Component {
   state = {
     email: ''
   }
