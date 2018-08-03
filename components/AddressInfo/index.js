@@ -21,6 +21,7 @@ import {
   Title
 } from 'native-base';
 import Spinner from 'react-native-spinkit';
+import Api from '../../utils/api';
 import driversFace from '../../assets/face1.jpg';
 import taxiIcon1 from '../../assets/taxiIcon.png';
 import {RNSlidingButton, SlideDirection} from 'rn-sliding-button';
