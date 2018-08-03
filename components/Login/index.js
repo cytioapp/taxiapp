@@ -68,6 +68,11 @@ export default class Login extends Component {
                     <Text>Crear cuenta</Text>
                   </TouchableOpacity>
                 </View>
+                <View>
+                  <TouchableOpacity onPress={() => this.props.navigation.navigate('ChangePassword')}>
+                    <Text>Olvidaste tu contraseña?</Text>
+                  </TouchableOpacity>
+                </View>
               </Content>
             </Container>
           </KeyboardAvoidingView>
