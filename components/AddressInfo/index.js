@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Image, KeyboardAvoidingView, View} from 'react-native';
+import {Image, View} from 'react-native';
 import {
   Body,
   Button,
@@ -30,6 +30,7 @@ import io from 'socket.io-client/dist/socket.io';
 import styles from './styles';
 import { colors, spinnerColor, spinnerMessage } from './variables';
 import { getActiveTrip } from '../../services/information';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 export default class AddressInfo extends Component{
 
@@ -113,7 +114,7 @@ export default class AddressInfo extends Component{
     } = this.state;
 
     return(
-      <KeyboardAvoidingView style={{flex: 1}} behavior="padding">
+      <KeyboardAwareScrollView style={{flex: 1}}>
         <Container style={styles.container}>
           <Header>
             <Button transparent onPress={this.props.navigation.openDrawer}>
@@ -220,7 +221,7 @@ export default class AddressInfo extends Component{
             </FooterTab>
           </Footer>
         </Container>
-      </KeyboardAvoidingView>
+      </KeyboardAwareScrollView>
     )
   }
 }

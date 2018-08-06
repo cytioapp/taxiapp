@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import {StyleSheet, View, KeyboardAvoidingView, Image, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, Image, TouchableOpacity} from 'react-native';
 import { Container, Content, Form, Item, Input, Button, Text } from 'native-base';
 import { Subscribe } from 'unstated';
 import sessionState from '../../states/session';
 import logoImage from '../../assets/taxi1.png';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 const styles = StyleSheet.create({
   container:{
@@ -33,7 +34,7 @@ export default class Login extends Component {
     return(
       <Subscribe to={[sessionState]}>
         {(session) => (
-          <KeyboardAvoidingView style={{flex: 1}} behavior="padding">
+          <KeyboardAwareScrollView style={{flex: 1}}>
             <Container style={styles.container}>
               <Content contentContainerStyle={{ flex: 1 }}>
                 <View style={styles.imageWrapper}>
@@ -51,6 +52,7 @@ export default class Login extends Component {
                   </Item>
                   <Item last>
                     <Input
+                      autoCapitalize="none"
                       placeholder="Contraseña"
                       secureTextEntry={true}
                       onChangeText={password => this.setState({ password })}
@@ -75,7 +77,7 @@ export default class Login extends Component {
                 </View>
               </Content>
             </Container>
-          </KeyboardAvoidingView>
+          </KeyboardAwareScrollView>
         )}
       </Subscribe>
     )

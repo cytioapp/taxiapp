@@ -91,7 +91,8 @@ class Home extends Component {
         latitudeDelta: 0.003,
         longitudeDelta: 0.003,
       },
-      error: null
+      error: null,
+      isServiceButtonDisabled: false
     }
   }
 
@@ -157,23 +158,30 @@ class Home extends Component {
   }
 
   handleOrder = () => {
-    let { address, region: { latitude, longitude } } = this.state;
-    Api.post('/trips', {
-      address_origin: address,
-      lat_origin: latitude,
-      lng_origin: longitude,
-    }).then(res => {
-      if (res.status == 201){
-        alert("Se ha solicitado tu taxi con éxito");
-        this.props.navigation.navigate('AddressInfo');
-      }
-    }).catch(err => {
-      if (err.response.status == 422) {
-        alert('Ya tiene un viaje activo');
-      } else {
-        alert("Ha ocurrido un error, vuelve a intentarlo.");
-      }
-    })
+    this.setState({
+      isServiceButtonDisabled: true
+    }, () => {
+      let { address, region: { latitude, longitude } } = this.state;
+      Api.post('/trips', {
+        address_origin: address,
+        lat_origin: latitude,
+        lng_origin: longitude,
+      }).then(res => {
+        if (res.status == 201){
+          alert("Se ha solicitado tu taxi con éxito");
+          this.props.navigation.navigate('AddressInfo');
+        }
+      }).catch(err => {
+        if (err.response.status == 422) {
+          alert('Ya tiene un viaje activo');
+        } else {
+          alert("Ha ocurrido un error, vuelve a intentarlo.");
+          this.setState({
+            isServiceButtonDisabled: false
+          });
+        }
+      })
+    });
 
   }
 
@@ -210,7 +218,12 @@ class Home extends Component {
                 </Form>
               </View>
               <View style={styles.buttonContainer}>
-                <Button dark style={styles.button} onPress={this.handleOrder}>
+                <Button
+                  dark
+                  style={styles.button}
+                  onPress={this.handleOrder}
+                  disabled={this.state.isServiceButtonDisabled}
+                >
                   <Text style={styles.buttonText}> Solicitar servicio </Text>
                 </Button>
               </View>
