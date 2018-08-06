@@ -87,7 +87,7 @@ export default class AddressInfo extends Component{
   }
 
   onSlideRight = () => {
-    Api.put(`/trips/${this.state.trip_id}/cancel_trip`)
+    Api.put(`/users/cancel_trip/${this.state.trip_id}`)
       .then(res => {
         alert("Se ha cancelado tu taxi con éxito");
         this.setState({
@@ -145,12 +145,12 @@ export default class AddressInfo extends Component{
 
             {driver_id &&
               <View style={styles.driverCardWrapper}>
+                <View style={styles.driverImageWrapper}>
+                  <Image style={styles.driverImage} source={driversFace}/>
+                </View>
                 <Card style={styles.driverCard}>
                   <CardItem styles={styles.driverCardHeader} header bordered>
                     <Text style={styles.driverName}>{driver_name}</Text>
-                    <View style={styles.driverImageWrapper}>
-                      <Image style={styles.driverImage} source={driversFace}/>
-                    </View>
                   </CardItem>
                   <CardItem bordered>
                     <Body style={styles.driverInfoBody}>
@@ -200,7 +200,7 @@ export default class AddressInfo extends Component{
                 </View>
               </RNSlidingButton>
               <Text numberOfLines={1} style={styles.cancelText}>
-                >> Desliza para cancelar el viaje >>
+                Desliza para cancelar el viaje
               </Text>
             </View>
 
@@ -212,10 +212,6 @@ export default class AddressInfo extends Component{
               <Button vertical onPress={this.props.navigation.openDrawer}>
                 <Icon name="person" />
                 <Text>Perfil</Text>
-              </Button>
-              <Button vertical active onPress={() => this.props.navigation.navigate('AddressInfo')}>
-                <Icon active name="paper" />
-                <Text>Info</Text>
               </Button>
               <Button vertical>
                 <Icon name="navigate" onPress={() => this.props.navigation.navigate('Home')}/>

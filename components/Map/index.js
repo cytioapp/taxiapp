@@ -225,10 +225,6 @@ class Home extends Component {
               <Icon name="person" />
               <Text>Perfil</Text>
             </Button>
-            <Button vertical onPress={() => this.props.navigation.navigate('AddressInfo')}>
-              <Icon name="paper" />
-              <Text>Info</Text>
-            </Button>
             <Button vertical active onPress={() => this.props.navigation.navigate('Home')}>
               <Icon active name="navigate" />
               <Text>Viaje</Text>
