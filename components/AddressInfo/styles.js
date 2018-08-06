@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 const primaryColor = '#F8E026';
 const secondaryColor = '#413500';
 const terniaryColor = '#006B5E';
-const fourthColor = '#FDF9EE';
+const fourthColor = '#FAFAFA';
 
 const styles = StyleSheet.create({
   container:{
@@ -85,20 +85,12 @@ const styles = StyleSheet.create({
     fontFamily: 'Nunito-Bold'
   },
   driverImageWrapper: {
-    backgroundColor: terniaryColor,
-    borderRadius: 50,
-    top: -24,
-    height: 70,
-    position: 'absolute',
-    right: 20,
-    width: 70
+    alignItems: 'center',
+    padding: 10
   },
   driverImage: {
-    borderRadius: 30,
+    borderRadius: 10,
     height: 60,
-    position: 'absolute',
-    right: 5,
-    top: 5,
     width: 60
   },
   driverInfoBody: {
