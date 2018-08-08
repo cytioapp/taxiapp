@@ -18,7 +18,7 @@ class Api {
 
   // Todas las llamadas pasan por aquí
   static xhr = async function(route, params, verb) {
-    const host = 'https://murmuring-thicket-35416.herokuapp.com';
+    const host = 'https://cytio.com.mx/api';
     const url = `${host}${route}`;
     const headers = await this.headers();
     const options = {

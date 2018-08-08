@@ -52,7 +52,7 @@ export default class AddressInfo extends Component{
       show_menu: true
     }
 
-    this.socket = io('https://murmuring-thicket-35416.herokuapp.com');
+    this.socket = io('https://cytio.com.mx');
 
   }
 
