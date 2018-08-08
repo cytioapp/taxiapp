@@ -1,41 +1,49 @@
 import React, { Component } from 'react';
-import {StyleSheet, View} from 'react-native';
-import {
-  Body,
-  Container,
-  Content,
-  Form,
-  Header,
-  Item,
-  Input,
-  Button,
-  Text,
-  Title
-} from 'native-base';
+import { StyleSheet, View, TouchableOpacity } from 'react-native';
+import { Item, Input, Button, Text, Icon } from 'native-base';
 import { Subscribe } from 'unstated';
 import sessionState from '../../states/session';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import AuthLayout from '../Layouts/AuthLayout';
 
 const styles = StyleSheet.create({
   container:{
     flex: 1,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor: '#1C1C1C'
   },
   form: {
+    marginBottom: 20,
+    marginTop: 40,
+    paddingHorizontal: 30,
+  },
+  item: {
+    borderBottomWidth: 0.5,
+    borderColor: 'gray'
+  },
+  input: {
+    textAlign: 'center',
+    color: 'white'
+  },
+  forgotPasswordButtonWrapper: {
+    alignItems: 'center',
+  },
+  signupButtonWrapper: {
+    margin: 40
+  },
+  signupButton: {
+    backgroundColor: '#ECC766',
+    borderRadius: 0
+  },
+  signupButtonText: {
+    color: 'black',
+    fontWeight: '500'
+  },
+  createAccountWrapper: {
+    alignItems: 'flex-end',
     flex: 1,
-  },
-  label: {
-    fontSize: 10,
-    marginLeft: 10,
-    marginTop: 15
-  },
-  buttonWrapper: {
-    padding: 10,
-  },
-  imageWrapper: {
-    paddingTop: 50,
+    flexDirection: 'row',
     justifyContent: 'center',
-    alignItems: 'center'
+    marginBottom: 10
   }
 });
 
@@ -43,68 +51,100 @@ export default class Signup extends Component {
   state = {
     full_name: '',
     email: '',
-    password: ''
+    password: '',
+    repeated_password: '',
+    hidePassword: true
   }
 
   render(){
     return(
       <Subscribe to={[sessionState]}>
         {(session) => (
-          <KeyboardAwareScrollView style={{flex: 1}}>
-            <Container style={styles.container}>
-              <Header>
-                <Body><Title>Signup</Title></Body>
-              </Header>
+          <AuthLayout>
+            <View style={styles.form}>
+              <Item style={styles.item}>
+                <Icon active name="person" style={{ color: 'white' }} />
+                <Input
+                  placeholder="Nombre completo"
+                  autoCapitalize="none"
+                  onChangeText={full_name => this.setState({ full_name })}
+                  value={this.state.full_name}
+                  placeholderTextColor="white"
+                  style={styles.input}
+                />
+                <View style={{paddingHorizontal: 15}}></View>
+              </Item>
+              <Item style={styles.item}>
+                <Icon active name="mail" style={{ color: 'white' }} />
+                <Input
+                  placeholder="Correo electrónico"
+                  autoCapitalize="none"
+                  keyboardType="email-address"
+                  onChangeText={email => this.setState({ email })}
+                  value={this.state.email}
+                  placeholderTextColor="white"
+                  style={styles.input}
+                />
+                <View style={{paddingHorizontal: 15}}></View>
+              </Item>
+              <Item style={styles.item}>
+                <Icon active name="lock" style={{ color: 'white' }} />
+                <Input
+                  placeholder="Contraseña"
+                  secureTextEntry={this.state.hidePassword}
+                  onChangeText={password => this.setState({ password })}
+                  value={this.state.password}
+                  placeholderTextColor="white"
+                  style={styles.input}
+                />
+                <TouchableOpacity onPress={() => this.setState({ hidePassword: !this.state.hidePassword })}>
+                  <Icon active name="eye" style={{ color: 'white' }} />
+                </TouchableOpacity>
+              </Item>
 
-              <Content contentContainerStyle={{ flex: 1 }}>
-                <Form styles={styles.form}>
-                  <View style={styles.label}>
-                    <Text> Nombre completo </Text>
-                  </View>
-                  <Item>
-                    <Input
-                      placeholder="Nombre completo"
-                      autoCapitalize="none"
-                      onChangeText={full_name => this.setState({ full_name })}
-                      value={this.state.full_name}
-                    />
-                  </Item>
+              <Item style={styles.item}>
+                <Icon active name="lock" style={{ color: 'white' }} />
+                <Input
+                  placeholder="Repite la contraseña"
+                  secureTextEntry={this.state.hidePassword}
+                  onChangeText={repeated_password => this.setState({ repeated_password })}
+                  value={this.state.repeated_password}
+                  placeholderTextColor="white"
+                  style={styles.input}
+                />
+                <TouchableOpacity onPress={() => this.setState({ hidePassword: !this.state.hidePassword })}>
+                  <Icon active name="eye" style={{ color: 'white' }} />
+                </TouchableOpacity>
+              </Item>
+            </View>
 
-                  <View style={styles.label}>
-                    <Text> Email </Text>
-                  </View>
-                  <Item>
-                    <Input
-                      autoCapitalize="none"
-                      keyboardType="email-address"
-                      onChangeText={email => this.setState({ email })}
-                      placeholder="example@something.com"
-                      value={this.state.email}
-                    />
-                  </Item>
+            <View style={styles.forgotPasswordButtonWrapper}>
+              <TouchableOpacity onPress={() => this.props.navigation.navigate('ChangePassword')}>
+                <Text style={{ color: '#ECC766', textDecorationLine: 'underline' }}>
+                  ¿Olvidaste tu contraseña?
+                </Text>
+              </TouchableOpacity>
+            </View>
 
-                  <View style={styles.label}>
-                    <Text> Contraseña </Text>
-                  </View>
-                  <Item>
-                    <Input
-                      placeholder="Contraseña"
-                      autoCapitalize="none"
-                      onChangeText={password => this.setState({ password })}
-                      secureTextEntry={true}
-                      value={this.state.password}
-                    />
-                  </Item>
+            <View style={styles.signupButtonWrapper} >
+              <Button
+                block
+                style={styles.signupButton}
+                onPress={() => session.signup(this.state)}
+              >
+                <Text style={styles.signupButtonText}>Regístrate</Text>
+              </Button>
+            </View>
 
-                </Form>
-                <View style={styles.buttonWrapper} >
-                  <Button block rounded success onPress={() => session.signup(this.state)}>
-                    <Text>Registrarse</Text>
-                  </Button>
-                </View>
-              </Content>
-            </Container>
-          </KeyboardAwareScrollView>
+            <View style={styles.createAccountWrapper}>
+              <Text style={{ color: '#ECC766'}}>¿Ya tienes cuenta? </Text>
+              <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
+                <Text style={{ color: '#ECC766', textDecorationLine: 'underline' }}>
+                  Inicia sesión
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </AuthLayout>
         )}
       </Subscribe>
     )

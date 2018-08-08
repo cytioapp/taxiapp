@@ -30,7 +30,6 @@ import io from 'socket.io-client/dist/socket.io';
 import styles from './styles';
 import { colors, spinnerColor, spinnerMessage } from './variables';
 import { getActiveTrip } from '../../services/information';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 export default class AddressInfo extends Component{
 

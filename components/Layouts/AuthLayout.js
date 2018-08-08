@@ -5,7 +5,8 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View
+  View,
+  ScrollView
 } from 'react-native';
 import {Container, Content, Footer} from 'native-base';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
@@ -23,7 +24,7 @@ const styles = StyleSheet.create({
   },
   logoContainer: {
     alignItems: 'center',
-    flex: 1,
+    height: 200,
     justifyContent: 'flex-end'
   },
   logoImage: {
@@ -57,12 +58,14 @@ export default class LandingPage extends Component {
         <Container contentContainerStyle={styles.container}>
           <ImageBackground source={fondo2} style={styles.backgroundImage}>
             <Content contentContainerStyle={styles.container}>
-              <View style={styles.logoContainer}>
-                <Image source={logo2} style={styles.logoImage}/>
-              </View>
-              <View style={styles.contentContainer}>
-                {children}
-              </View>
+              <ScrollView>
+                <View style={styles.logoContainer}>
+                  <Image source={logo2} style={styles.logoImage}/>
+                </View>
+                <View style={styles.contentContainer}>
+                  {children}
+                </View>
+              </ScrollView>
             </Content>
             <Footer style={styles.footer}>
               <TouchableOpacity>
