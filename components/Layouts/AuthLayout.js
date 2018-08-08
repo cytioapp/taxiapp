@@ -3,6 +3,8 @@ import {
   Image,
   ImageBackground,
   StyleSheet,
+  Text,
+  TouchableOpacity,
   View
 } from 'react-native';
 import {Container} from 'native-base';
@@ -22,7 +24,7 @@ const styles = StyleSheet.create({
   logoContainer: {
     alignItems: 'center',
     flex: 1,
-    justifyContent: 'center'
+    justifyContent: 'flex-end'
   },
   logoImage: {
     height: 135,
@@ -30,6 +32,14 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     flex: 2
+  },
+  termsButtonsWrapper: {
+    paddingVertical: 10
+  },
+  termsTextButton: {
+    color: '#D5D5D5',
+    fontFamily: 'Nunito-Regular',
+    textAlign: 'center'
   }
 });
 
@@ -38,7 +48,7 @@ export default class LandingPage extends Component {
     const {children} = this.props;
 
     return(
-      <KeyboardAwareScrollView style={{flex: 1, backgroundColor: '#000000'}}>
+      <KeyboardAwareScrollView>
         <Container style={styles.container}>
           <ImageBackground source={fondo2} style={styles.backgroundImage}>
             <View style={styles.logoContainer}>
@@ -46,6 +56,14 @@ export default class LandingPage extends Component {
             </View>
             <View style={styles.contentContainer}>
               {children}
+            </View>
+            <View style={styles.termsButtonsWrapper}>
+              <TouchableOpacity onPress={() => {}}>
+                <Text style={styles.termsTextButton} >Términos y condiciones</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => {}}>
+                <Text style={styles.termsTextButton} >Aviso de privacidad</Text>
+              </TouchableOpacity>
             </View>
           </ImageBackground>
         </Container>

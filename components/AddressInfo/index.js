@@ -114,114 +114,112 @@ export default class AddressInfo extends Component{
     } = this.state;
 
     return(
-      <KeyboardAwareScrollView style={{flex: 1}}>
-        <Container style={styles.container}>
-          <Header>
-            <Button transparent onPress={this.props.navigation.openDrawer}>
-              <Icon name='menu' />
-            </Button>
-            <Body style={styles.body}>
-               <Title>Información del viaje</Title>
-            </Body>
-            <Button transparent>
-              <Icon name='person' />
-            </Button>
-          </Header>
+      <Container style={styles.container}>
+        <Header>
+          <Button transparent onPress={this.props.navigation.openDrawer}>
+            <Icon name='menu' />
+          </Button>
+          <Body style={styles.body}>
+              <Title>Información del viaje</Title>
+          </Body>
+          <Button transparent>
+            <Icon name='person' />
+          </Button>
+        </Header>
 
-          <Content contentContainerStyle={{flex: 1}}>
-            <View style={styles.statusWrapper}>
-              <View style={styles.status}>
-                <View style={[styles.circleStatus, {backgroundColor: colors[status]}]}>
-                </View>
-                <Text style={styles.statusText}>{status}</Text>
+        <Content contentContainerStyle={{flex: 1}}>
+          <View style={styles.statusWrapper}>
+            <View style={styles.status}>
+              <View style={[styles.circleStatus, {backgroundColor: colors[status]}]}>
               </View>
+              <Text style={styles.statusText}>{status}</Text>
             </View>
+          </View>
 
-            <View style={styles.origin}>
-              <Icon style={styles.pinIcon} name="ios-pin" />
-              <View>
-                <Text style={styles.originText}>{origin}</Text>
+          <View style={styles.origin}>
+            <Icon style={styles.pinIcon} name="ios-pin" />
+            <View>
+              <Text style={styles.originText}>{origin}</Text>
+            </View>
+          </View>
+
+          {driver_id &&
+            <View style={styles.driverCardWrapper}>
+              <View style={styles.driverImageWrapper}>
+                <Image style={styles.driverImage} source={driversFace}/>
               </View>
-            </View>
-
-            {driver_id &&
-              <View style={styles.driverCardWrapper}>
-                <View style={styles.driverImageWrapper}>
-                  <Image style={styles.driverImage} source={driversFace}/>
-                </View>
-                <Card style={styles.driverCard}>
-                  <CardItem styles={styles.driverCardHeader} header bordered>
-                    <Text style={styles.driverName}>{driver_name}</Text>
-                  </CardItem>
-                  <CardItem bordered>
-                    <Body style={styles.driverInfoBody}>
-                      <View style={styles.driverInfoWrapper}>
-                        <Text style={styles.label}>Sitio </Text>
-                        <Text style={styles.driverInfo}>"{organization}"</Text>
-                      </View>
-                      <View style={styles.driverInfoWrapper}>
-                        <Text style={styles.label}>Placas: </Text>
-                        <Text style={styles.driverInfo}>{license_plate}</Text>
-                      </View>
-                      <View style={styles.driverInfoWrapper}>
-                        <Text style={styles.label}>Taxi: </Text>
-                        <Text style={styles.driverInfo}>{model} {year}</Text>
-                      </View>
-                      <View style={styles.driverInfoWrapper}>
-                        <Image style={styles.taxiIcon} source={taxiIcon1}/>
-                      </View>
-                    </Body>
-                  </CardItem>
-                  <CardItem footer bordered style={styles.actionButtonsWrapper}>
-                    <View style={styles.button}>
-                      <Icon name="ios-call-outline" />
-                      <Text style={styles.buttonText}>Llamar al conductor</Text>
+              <Card style={styles.driverCard}>
+                <CardItem styles={styles.driverCardHeader} header bordered>
+                  <Text style={styles.driverName}>{driver_name}</Text>
+                </CardItem>
+                <CardItem bordered>
+                  <Body style={styles.driverInfoBody}>
+                    <View style={styles.driverInfoWrapper}>
+                      <Text style={styles.label}>Sitio </Text>
+                      <Text style={styles.driverInfo}>"{organization}"</Text>
                     </View>
-                  </CardItem>
-                </Card>
-              </View>
-            }
-
-            <View style={styles.messageWrapper}>
-              <View style={styles.message}>
-                <Text style={styles.messageText}>{spinnerMessage[status]}</Text>
-                {spinnerColor[status] && <Spinner style={styles.spinner} isVisible={true} size={50} type='Pulse' color={spinnerColor[status]}/>}
-              </View>
+                    <View style={styles.driverInfoWrapper}>
+                      <Text style={styles.label}>Placas: </Text>
+                      <Text style={styles.driverInfo}>{license_plate}</Text>
+                    </View>
+                    <View style={styles.driverInfoWrapper}>
+                      <Text style={styles.label}>Taxi: </Text>
+                      <Text style={styles.driverInfo}>{model} {year}</Text>
+                    </View>
+                    <View style={styles.driverInfoWrapper}>
+                      <Image style={styles.taxiIcon} source={taxiIcon1}/>
+                    </View>
+                  </Body>
+                </CardItem>
+                <CardItem footer bordered style={styles.actionButtonsWrapper}>
+                  <View style={styles.button}>
+                    <Icon name="ios-call-outline" />
+                    <Text style={styles.buttonText}>Llamar al conductor</Text>
+                  </View>
+                </CardItem>
+              </Card>
             </View>
+          }
 
-
-            <View style={styles.cancelButtonWrapper} >
-              <RNSlidingButton
-                style={styles.cancelButton}
-                height={50}
-                onSlidingSuccess={this.onSlideRight}
-                slideDirection={SlideDirection.RIGHT}>
-                <View style={styles.cancelIconWrapper}>
-                  <Icon style={styles.cancelIcon} name="ios-close-circle"/>
-                </View>
-              </RNSlidingButton>
-              <Text numberOfLines={1} style={styles.cancelText}>
-                Desliza para cancelar el viaje
-              </Text>
+          <View style={styles.messageWrapper}>
+            <View style={styles.message}>
+              <Text style={styles.messageText}>{spinnerMessage[status]}</Text>
+              {spinnerColor[status] && <Spinner style={styles.spinner} isVisible={true} size={50} type='Pulse' color={spinnerColor[status]}/>}
             </View>
+          </View>
 
 
-          </Content>
+          <View style={styles.cancelButtonWrapper} >
+            <RNSlidingButton
+              style={styles.cancelButton}
+              height={50}
+              onSlidingSuccess={this.onSlideRight}
+              slideDirection={SlideDirection.RIGHT}>
+              <View style={styles.cancelIconWrapper}>
+                <Icon style={styles.cancelIcon} name="ios-close-circle"/>
+              </View>
+            </RNSlidingButton>
+            <Text numberOfLines={1} style={styles.cancelText}>
+              Desliza para cancelar el viaje
+            </Text>
+          </View>
 
-          <Footer>
-            <FooterTab>
-              <Button vertical onPress={this.props.navigation.openDrawer}>
-                <Icon name="person" />
-                <Text>Perfil</Text>
-              </Button>
-              <Button vertical>
-                <Icon name="navigate" onPress={() => this.props.navigation.navigate('Home')}/>
-                <Text>Viaje</Text>
-              </Button>
-            </FooterTab>
-          </Footer>
-        </Container>
-      </KeyboardAwareScrollView>
+
+        </Content>
+
+        <Footer>
+          <FooterTab>
+            <Button vertical onPress={this.props.navigation.openDrawer}>
+              <Icon name="person" />
+              <Text>Perfil</Text>
+            </Button>
+            <Button vertical>
+              <Icon name="navigate" onPress={() => this.props.navigation.navigate('Home')}/>
+              <Text>Viaje</Text>
+            </Button>
+          </FooterTab>
+        </Footer>
+      </Container>
     )
   }
 }

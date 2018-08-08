@@ -1,14 +1,25 @@
 import React, { Component } from 'react';
-import {StyleSheet, View, Image, TouchableOpacity} from 'react-native';
-import { Form, Item, Input, Button, Text } from 'native-base';
+import {
+  StyleSheet,
+  TouchableOpacity,
+  View
+} from 'react-native';
+import {
+  Button,
+  Form,
+  Input,
+  Item,
+  Label,
+  Text
+} from 'native-base';
 import { Subscribe } from 'unstated';
 import sessionState from '../../states/session';
-import logoImage from '../../assets/taxi1.png';
 import AuthLayout from '../Layouts/AuthLayout';
 
 const styles = StyleSheet.create({
   form: {
     flex: 1,
+    paddingTop: 50
   },
   buttonWrapper: {
     padding: 10,
@@ -17,6 +28,9 @@ const styles = StyleSheet.create({
     paddingTop: 50,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  inputTextItem: {
+    paddingRight: 50
   }
 });
 
@@ -30,23 +44,23 @@ export default class Login extends Component {
     return(
       <Subscribe to={[sessionState]}>
         {(session) => (
-          <AuthLayout style={{flex: 1}}>
+          <AuthLayout>
             <Form style={styles.form}>
-              <Item>
+              <Item style={styles.inputTextItem} floatingLabel>
+                <Label>Usuario</Label>
                 <Input
-                  placeholder="Usuario"
                   autoCapitalize="none"
                   keyboardType="email-address"
                   onChangeText={email => this.setState({ email })}
                   value={this.state.email}
                 />
               </Item>
-              <Item last>
+              <Item style={styles.inputTextItem} floatingLabel>
+                <Label>Contraseña</Label>
                 <Input
                   autoCapitalize="none"
-                  placeholder="Contraseña"
-                  secureTextEntry={true}
                   onChangeText={password => this.setState({ password })}
+                  secureTextEntry={true}
                   value={this.state.password}
                 />
               </Item>
