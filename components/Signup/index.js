@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {StyleSheet, View, KeyboardAvoidingView} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {
   Body,
   Container,
@@ -14,12 +14,13 @@ import {
 } from 'native-base';
 import { Subscribe } from 'unstated';
 import sessionState from '../../states/session';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 const styles = StyleSheet.create({
   container:{
     flex: 1,
     justifyContent: 'center'
- },
+  },
   form: {
     flex: 1,
   },
@@ -49,7 +50,7 @@ export default class Signup extends Component {
     return(
       <Subscribe to={[sessionState]}>
         {(session) => (
-          <KeyboardAvoidingView style={{flex: 1}} behavior="padding">
+          <KeyboardAwareScrollView style={{flex: 1}}>
             <Container style={styles.container}>
               <Header>
                 <Body><Title>Signup</Title></Body>
@@ -103,7 +104,7 @@ export default class Signup extends Component {
                 </View>
               </Content>
             </Container>
-          </KeyboardAvoidingView>
+          </KeyboardAwareScrollView>
         )}
       </Subscribe>
     )

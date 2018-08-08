@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {StyleSheet, View, KeyboardAvoidingView} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {
   Body,
   Button,
@@ -12,6 +12,7 @@ import {
   Text,
   Title
 } from 'native-base';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 const styles = StyleSheet.create({
   container:{
@@ -33,7 +34,7 @@ export default class ChangePassword extends Component {
 
   render(){
     return(
-      <KeyboardAvoidingView style={{flex: 1}} behavior="padding">
+      <KeyboardAwareScrollView style={{flex: 1}}>
         <Container style={styles.container}>
           <Header>
             <Body><Title>Cambiar contraseña</Title></Body>
@@ -58,7 +59,7 @@ export default class ChangePassword extends Component {
             </View>
           </Content>
         </Container>
-      </KeyboardAvoidingView>
+      </KeyboardAwareScrollView>
     )
   }
 }
