@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end'
   },
   logoImage: {
-    height: 158,
+    height: 159,
     width: 190
   },
   container: {
