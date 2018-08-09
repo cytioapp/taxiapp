@@ -3,18 +3,14 @@ import { View, StyleSheet, Image, TextInput, PermissionsAndroid, Platform } from
 import {
   Button,
   Container,
-  Footer,
-  FooterTab,
   Form,
   Icon,
-  Input,
   Item,
   Text
 } from 'native-base';
 import MapView from 'react-native-maps';
 import Geocoder from 'react-native-geocoder';
 import Geolocation from 'react-native-geolocation-service';
-import marker from '../../assets/map-marker.png';
 import Api from '../../utils/api';
 
 const styles = StyleSheet.create({
@@ -28,6 +24,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'space-between'
+  },
+  searchWrapper: {
+    alignSelf: 'center',
+    paddingTop: 20,
+    position: 'absolute',
+    top: 0,
+    width: '90%'
   },
   searchContainer: {
     backgroundColor: '#FFFFFF',
@@ -45,30 +48,26 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     left: 0,
+    marginBottom: 20,
     position: 'absolute',
     right: 0
   },
-  searchWrapper: {
-    alignSelf: 'center',
-    paddingTop: 20,
-    position: 'absolute',
-    top: 0,
-    width: '90%'
-  },
   button: {
+    backgroundColor: '#F3C467',
     borderRadius: 30,
     elevation: 2,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
+    shadowColor: '#1F120D',
+    shadowOffset: { width: -1, height: 3 },
     shadowOpacity: 0.8,
     shadowRadius: 2
   },
   buttonText: {
+    color: '#1F120D',
     fontFamily: 'Nunito-Bold',
   },
   marker: {
-    height: 48,
-    width: 48
+    color: '#1F120D',
+    fontSize: 50
   },
   markerFixed: {
     left: '50%',
@@ -202,7 +201,7 @@ class Home extends Component {
                 onRegionChangeComplete={this.onRegionChange}
               />
               <View pointerEvents="none" style={styles.markerFixed}>
-                <Image style={styles.marker} source={marker} />
+                <Icon style={styles.marker} name='ios-pin' />
               </View>
               <View style={styles.searchWrapper}>
                 <Form>
@@ -232,18 +231,6 @@ class Home extends Component {
           {error && <Text>{error}</Text>}
         </View>
 
-        <Footer>
-          <FooterTab>
-            <Button vertical>
-              <Icon name="person" />
-              <Text>Perfil</Text>
-            </Button>
-            <Button vertical active onPress={() => this.props.navigation.navigate('Home')}>
-              <Icon active name="navigate" />
-              <Text>Viaje</Text>
-            </Button>
-          </FooterTab>
-        </Footer>
       </Container>
     );
   }
