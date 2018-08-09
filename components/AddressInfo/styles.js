@@ -1,42 +1,45 @@
 import {StyleSheet} from 'react-native';
 
-const primaryColor = '#F8E026';
-const secondaryColor = '#413500';
-const terniaryColor = '#006B5E';
-const fourthColor = '#FAFAFA';
+const primaryColor = '#F3C467';
+const secondaryColor = '#1F120D';
+const terniaryColor = '#F6F6F6';
 
 const styles = StyleSheet.create({
   container:{
-    backgroundColor: fourthColor,
+    backgroundColor: terniaryColor,
     flex: 1,
+  },
+  body: {
+    flex: 2
+  },
+  title: {
+    paddingLeft: 0
   },
   cancelButtonWrapper: {
     paddingHorizontal: 20,
   },
   cancelButton:{
-    backgroundColor: terniaryColor,
+    backgroundColor: secondaryColor,
     borderRadius: 30,
     flexDirection: 'row',
     paddingHorizontal: 15
   },
-  cancelIconWrapper: {
-
-  },
   cancelIcon: {
-    color: '#FFFFFF',
+    color: terniaryColor,
     marginRight: 10,
     marginTop: 2,
     width: 25,
   },
   cancelText: {
-    color: '#FFFFFF',
+    color: terniaryColor,
     fontFamily: 'Nunito-Bold',
-    left: 73,
+    left: 90,
     top: 12,
-    position: 'absolute'
+    position: 'absolute',
+    zIndex: 1
   },
   statusWrapper: {
-    borderColor: terniaryColor,
+    borderColor: secondaryColor,
     borderRadius: 30,
     borderWidth: 0.5,
     marginHorizontal: 110,
