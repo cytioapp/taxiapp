@@ -11,9 +11,22 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#1C1C1C'
   },
+  errorsContainer:{
+    alignItems: 'center',
+    flexDirection: 'row',
+    paddingHorizontal: 30
+  },
+  errorsIcon: {
+    color: '#B72A2A',
+    marginRight: 15
+  },
+  errors: {
+    color: '#B72A2A',
+    fontSize: 15
+  },
   form: {
     marginBottom: 20,
-    marginTop: 40,
+    marginTop: 10,
     paddingHorizontal: 30,
   },
   item: {
@@ -56,11 +69,25 @@ export default class Signup extends Component {
     hidePassword: true
   }
 
+  renderErrors = (obj) => {
+    console.log(obj)
+    for(var key in obj){
+      return <Text style={styles.errors}>{obj[key].message}</Text>
+    }
+  }
+
+
   render(){
     return(
       <Subscribe to={[sessionState]}>
         {(session) => (
           <AuthLayout>
+            {session.state.errors &&
+              <View style={styles.errorsContainer}>
+                <Icon active name="md-alert" style={styles.errorsIcon} />
+                {this.renderErrors(session.state.errors)}
+              </View>
+            }
             <View style={styles.form}>
               <Item style={styles.item}>
                 <Icon active name="person" style={{ color: 'white' }} />

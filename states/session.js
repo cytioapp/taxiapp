@@ -10,10 +10,13 @@ const options = {
 
 class SessionState extends Container {
   state = {
-    isLogued: null
+    isLogued: null,
+    errors: false
   };
 
+
   login = (email, password) => {
+    this.setState({errors: false});
     Api.post('/users/login', { email, password })
       .then(res => {
         if (res.data.jwt) {
@@ -30,7 +33,8 @@ class SessionState extends Container {
         }
       })
       .catch(err => {
-        console.log('Login error', err.response);
+        console.log('Login error', err.response.data.errors);
+        this.setState({errors: err.response.data.errors});
       })
   }
 
@@ -59,13 +63,24 @@ class SessionState extends Container {
     });
   }
 
+
+  validatesEmail = (email) => {
+    const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z0-9]+\.)+[a-zA-Z]{2,}))$/
+    return email.match(regex)
+  }
+
   signup = (data) => {
-    Api.post('/users/signup', data)
-    .then(res => {
-      this.login(data.email, data.password);
-    }).catch(err => {
-      console.log('Signup error', err.response)
-    });
+    this.setState({errors: false});
+    if(this.validatesEmail(data.email)){
+      Api.post('/users/signup', data)
+      .then(res => {
+        this.login(data.email, data.password);
+      }).catch(err => {
+        console.log('Signup error', err.response)
+      });
+    }else{
+      this.setState({errors: {"0": { message: "Email inválido" }}});
+    }
   }
 
 }

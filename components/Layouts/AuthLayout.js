@@ -25,7 +25,8 @@ const styles = StyleSheet.create({
   logoContainer: {
     alignItems: 'center',
     height: 200,
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
+    marginBottom: 40
   },
   logoImage: {
     height: 125,
