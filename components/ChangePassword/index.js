@@ -1,30 +1,40 @@
 import React, { Component } from 'react';
 import {StyleSheet, View} from 'react-native';
 import {
-  Body,
   Button,
-  Container,
-  Content,
-  Form,
-  Header,
+  Icon,
   Input,
   Item,
-  Text,
-  Title
+  Text
 } from 'native-base';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import AuthLayout from '../Layouts/AuthLayout';
+
 
 const styles = StyleSheet.create({
-  container:{
-    flex: 1,
-    justifyContent: 'center'
- },
   form: {
-    flex: 1,
+    marginBottom: 20,
+    marginTop: 40,
+    paddingHorizontal: 30,
   },
-  buttonWrapper: {
-    padding: 10,
-  }
+  item: {
+    borderBottomWidth: 0.5,
+    borderColor: 'gray'
+  },
+  input: {
+    textAlign: 'center',
+    color: 'white'
+  },
+  sendEmailButtonWrapper: {
+    margin: 40
+  },
+  sendEmailButton: {
+    backgroundColor: '#ECC766',
+    borderRadius: 0
+  },
+  sendEmailButtonText: {
+    color: 'black',
+    fontWeight: '500'
+  },
 });
 
 export default class ChangePassword extends Component {
@@ -34,33 +44,32 @@ export default class ChangePassword extends Component {
 
   render(){
     return(
-      <KeyboardAwareScrollView style={{flex: 1}}>
-        <Container style={styles.container}>
-          <Header>
-            <Body><Title>Cambiar contraseña</Title></Body>
-          </Header>
-          <Content contentContainerStyle={{ flex: 1 }}>
-            <Form styles={styles.form}>
-              <Text>Ingresa tu correo: </Text>
-              <Item>
-                <Input
-                  placeholder="Correo electrónico"
-                  autoCapitalize="none"
-                  keyboardType="email-address"
-                  onChangeText={email => this.setState({ email })}
-                  value={this.state.email}
-                />
-              </Item>
-            </Form>
-            <View style={styles.buttonWrapper} >
-              <Button block rounded success>{/*Do something onPress*/}
-                <Text>Enviar correo</Text>
-              </Button>
-            </View>
-          </Content>
-        </Container>
-      </KeyboardAwareScrollView>
-    )
+      <AuthLayout>
+        <View style={styles.form}>
+          <Item style={styles.item}>
+            <Icon active name="mail" style={{ color: 'white' }} />
+            <Input
+              placeholder="Correo electrónico"
+              autoCapitalize="none"
+              keyboardType="email-address"
+              onChangeText={email => this.setState({ email })}
+              value={this.state.email}
+              placeholderTextColor="white"
+              style={styles.input}
+            />
+            <View style={{paddingHorizontal: 15}}></View>
+          </Item>
+        </View>
+        <View style={styles.sendEmailButtonWrapper} >
+          <Button
+            block
+            style={styles.sendEmailButton}
+          >
+            <Text style={styles.sendEmailButtonText}>Enviar correo</Text>
+          </Button>
+        </View>
+      </AuthLayout>
+  )
   }
 }
 
