@@ -89,7 +89,7 @@ export default class AddressInfo extends Component{
         });
         this.props.navigation.navigate('Map');
       }).catch(err => {
-        console.log(err.response);
+        alert("Ha ocurrido un error al cancelar tu viaje, vuelve a intentarlo.");
       });
   };
 

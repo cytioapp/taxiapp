@@ -138,7 +138,7 @@ class Home extends Component {
         address: `${streetName} ${streetNumber}, ${subLocality}, ${locality}`
       });
     } catch(err) {
-      console.log(err);
+      console.log(`Formatted address error: ${err}`);
     }
   };
 
@@ -185,11 +185,11 @@ class Home extends Component {
   }
 
   render() {
-    let { region, error} = this.state;
+    let { region, error } = this.state;
 
     return (
-      <Container contentContainerStyle={{flex: 1, width: '100%'}}>
-        <View style={{flex: 1, width: '100%'}}>
+      <Container contentContainerStyle={{ flex: 1, width: '100%' }}>
+        <View style={{ flex: 1, width: '100%' }}>
           {region.latitude &&
             <View style={{flex: 1}}>
               <MapView
