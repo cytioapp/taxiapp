@@ -11,7 +11,7 @@ const options = {
 class SessionState extends Container {
   state = {
     isLogued: null,
-    errors: false
+    errors: null
   };
 
 
