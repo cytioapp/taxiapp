@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Dimensions,
   Image,
   ImageBackground,
   StyleSheet,
@@ -10,11 +11,11 @@ import {
 import { Spinner } from 'native-base';
 import logo1 from '../../assets/logo1.png';
 import fondo1 from '../../assets/fondo1.jpg';
+const window = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   backgroundImage: {
-    flex: 1,
-    height: '100%',
+    height: window.height,
     width: '100%'
   },
   logoContainer: {

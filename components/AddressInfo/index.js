@@ -24,8 +24,10 @@ import io from 'socket.io-client/dist/socket.io';
 import styles from './styles';
 import { colors, spinnerColor, spinnerMessage } from './variables';
 import { getActiveTrip } from '../../services/information';
+import Loading from '../Loading';
+import Modal from '../Modal';
 
-export default class AddressInfo extends Component{
+export default class AddressInfo extends Component {
 
   constructor() {
     super()
@@ -42,7 +44,10 @@ export default class AddressInfo extends Component{
       license_plate: '',
       model: '',
       year: '',
-      show_menu: true
+      show_menu: true,
+      isWaiting: false,
+      errors: [],
+      modalVisible: false
     }
 
     this.socket = io('https://cytio.com.mx');
@@ -81,17 +86,32 @@ export default class AddressInfo extends Component{
   }
 
   onSlideRight = () => {
-    Api.put(`/users/cancel_trip/${this.state.trip_id}`)
-      .then(res => {
-        alert("Se ha cancelado tu taxi con éxito");
-        this.setState({
-          status: 'canceled'
+    this.setState({
+      isWaiting: true
+    }, () => {
+      Api.put(`/users/cancel_trip/${this.state.trip_id}`)
+        .then(res => {
+          this.setState({
+            status: 'canceled',
+            isWaiting: false
+          });
+          this.props.navigation.navigate('Map');
+        }).catch(err => {
+          this.setState({
+            isWaiting: false,
+            errors: err.response.data.errors,
+            modalVisible: true
+          });
         });
-        this.props.navigation.navigate('Map');
-      }).catch(err => {
-        alert("Ha ocurrido un error al cancelar tu viaje, vuelve a intentarlo.");
-      });
+    });
   };
+
+  setModalVisible = (visible) => {
+    this.setState({
+      modalVisible: visible,
+      errors: visible ? this.state.errors : []
+    });
+  }
 
   render(){
     const {
@@ -108,6 +128,7 @@ export default class AddressInfo extends Component{
 
     return(
       <Container style={styles.container}>
+        {this.state.isWaiting && <Loading />}
         <Header>
           <Left>
             <Button transparent onPress={this.props.navigation.openDrawer}>
@@ -121,6 +142,11 @@ export default class AddressInfo extends Component{
         </Header>
 
         <Content contentContainerStyle={{flex: 1}}>
+          <Modal
+            errors={this.state.errors}
+            modalVisible={this.state.modalVisible}
+            setModalVisible={this.setModalVisible}
+          />
           <ScrollView>
             <View style={styles.statusWrapper}>
               <View style={styles.status}>
@@ -202,5 +228,6 @@ export default class AddressInfo extends Component{
         </Content>
       </Container>
     )
+
   }
 }

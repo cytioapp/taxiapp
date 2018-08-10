@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 
-const primaryColor = '#F3C467';
+const primaryColor = '#E3C463';
 const secondaryColor = '#1F120D';
 const terniaryColor = '#F6F6F6';
 

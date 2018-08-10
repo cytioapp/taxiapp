@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     margin: 40
   },
   loginButton: {
-    backgroundColor: '#ECC766',
+    backgroundColor: '#E3C463',
     borderRadius: 0
   },
   loginButtonText: {
@@ -65,10 +65,11 @@ export default class Login extends Component {
     hidePassword: true
   }
 
-  renderErrors = (obj) => {
-    for(var key in obj){
-      return <Text style={styles.errors}>{obj[key].message}</Text>
-    }
+  renderErrors = (errors) => {
+    console.log(errors)
+    return errors.map((error, i) => {
+      return <Text key={i} style={styles.errors}>{error.message}</Text>
+    });
   }
 
   render(){
@@ -76,10 +77,10 @@ export default class Login extends Component {
       <Subscribe to={[sessionState]}>
         {(session) => (
           <AuthLayout>
-            {session.state.errors &&
+            {session.state.loginErrors &&
               <View style={styles.errorsContainer}>
                 <Icon active name="md-alert" style={styles.errorsIcon} />
-                {this.renderErrors(session.state.errors)}
+                {this.renderErrors(session.state.loginErrors)}
               </View>
             }
             <View style={styles.form}>
@@ -114,7 +115,7 @@ export default class Login extends Component {
 
             <View style={styles.forgotPasswordButtonWrapper}>
               <TouchableOpacity onPress={() => this.props.navigation.navigate('ChangePassword')}>
-                <Text style={{ color: '#ECC766', textDecorationLine: 'underline' }}>
+                <Text style={{ color: '#E3C463', textDecorationLine: 'underline' }}>
                   ¿Olvidaste tu contraseña?
                 </Text>
               </TouchableOpacity>
@@ -131,9 +132,9 @@ export default class Login extends Component {
             </View>
 
             <View style={styles.createAccountWrapper}>
-              <Text style={{ color: '#ECC766'}}>¿No tienes cuenta? </Text>
+              <Text style={{ color: '#E3C463'}}>¿No tienes cuenta? </Text>
               <TouchableOpacity onPress={() => this.props.navigation.navigate('Signup')}>
-                <Text style={{ color: '#ECC766', textDecorationLine: 'underline' }}>
+                <Text style={{ color: '#E3C463', textDecorationLine: 'underline' }}>
                   Regístrate
                 </Text>
               </TouchableOpacity>
