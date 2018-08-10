@@ -12,6 +12,8 @@ import MapView from 'react-native-maps';
 import Geocoder from 'react-native-geocoder';
 import Geolocation from 'react-native-geolocation-service';
 import Api from '../../utils/api';
+import Loading from '../Loading';
+import Modal from '../Modal';
 
 const styles = StyleSheet.create({
   map: {
@@ -53,7 +55,7 @@ const styles = StyleSheet.create({
     right: 0
   },
   button: {
-    backgroundColor: '#F3C467',
+    backgroundColor: '#E3C463',
     borderRadius: 30,
     elevation: 2,
     shadowColor: '#1F120D',
@@ -91,7 +93,10 @@ class Home extends Component {
         longitudeDelta: 0.003,
       },
       error: null,
-      isServiceButtonDisabled: false
+      errors: [],
+      isServiceButtonDisabled: false,
+      isWaiting: false,
+      modalVisible: false
     }
   }
 
@@ -158,6 +163,7 @@ class Home extends Component {
 
   handleOrder = () => {
     this.setState({
+      isWaiting: true,
       isServiceButtonDisabled: true
     }, () => {
       let { address, region: { latitude, longitude } } = this.state;
@@ -166,30 +172,42 @@ class Home extends Component {
         lat_origin: latitude,
         lng_origin: longitude,
       }).then(res => {
-        if (res.status == 201){
-          alert("Se ha solicitado tu taxi con éxito");
-          this.props.navigation.navigate('AddressInfo');
-        }
+        this.setState({
+          isWaiting: false
+        }, () => {
+          if (res.status == 201){
+            this.props.navigation.navigate('AddressInfo');
+          }
+        });
       }).catch(err => {
-        if (err.response.status == 422) {
-          alert('Ya tiene un viaje activo');
-        } else {
-          alert("Ha ocurrido un error, vuelve a intentarlo.");
-          this.setState({
-            isServiceButtonDisabled: false
-          });
-        }
+        this.setState({
+          isWaiting: false,
+          errors: err.response.data.errors,
+          modalVisible: true,
+          isServiceButtonDisabled: false
+        })
       })
     });
+  }
 
+  setModalVisible = (visible) => {
+    this.setState({
+      modalVisible: visible,
+      errors: visible ? this.state.errors : []
+    });
   }
 
   render() {
     let { region, error } = this.state;
-
     return (
       <Container contentContainerStyle={{ flex: 1, width: '100%' }}>
         <View style={{ flex: 1, width: '100%' }}>
+          <Modal
+            errors={this.state.errors}
+            modalVisible={this.state.modalVisible}
+            setModalVisible={this.setModalVisible}
+          />
+          {this.state.isWaiting && <Loading />}
           {region.latitude &&
             <View style={{flex: 1}}>
               <MapView
@@ -230,9 +248,9 @@ class Home extends Component {
           }
           {error && <Text>{error}</Text>}
         </View>
-
       </Container>
     );
+
   }
 }
 
