@@ -11,7 +11,8 @@ const options = {
 class SessionState extends Container {
   state = {
     isLogued: null,
-    errors: null
+    loginErrors: null,
+    signupErrors: null
   };
 
 
@@ -34,7 +35,7 @@ class SessionState extends Container {
       })
       .catch(err => {
         console.log('Login error', err.response.data.errors);
-        this.setState({errors: err.response.data.errors});
+        this.setState({loginErrors: err.response.data.errors});
       })
   }
 
@@ -79,7 +80,7 @@ class SessionState extends Container {
         console.log('Signup error', err.response)
       });
     }else{
-      this.setState({errors: {"0": { message: "Email inválido" }}});
+      this.setState({signupErrors: [{ message: "Email inválido" }]});
     }
   }
 

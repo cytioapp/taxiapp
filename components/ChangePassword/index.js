@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     margin: 40
   },
   sendEmailButton: {
-    backgroundColor: '#ECC766',
+    backgroundColor: '#E3C463',
     borderRadius: 0
   },
   sendEmailButtonText: {
