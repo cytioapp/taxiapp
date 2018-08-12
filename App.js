@@ -6,9 +6,6 @@ import sessionState from './states/session';
 import Loading from './components/Loading';
 
 class App extends Component {
-  componentDidMount() {
-    
-  }
   render() {
     return (
       <Provider>
@@ -18,7 +15,7 @@ class App extends Component {
               session.verify();
               return <Loading />;
             } else if (session.state.isLogued) {
-              return <InternalRoutes />
+              return <InternalRoutes screenProps={{ session }}  />
             } else {
               return <ExternalRoutes />
             }
