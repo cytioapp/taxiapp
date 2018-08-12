@@ -82,6 +82,8 @@ export default class AddressInfo extends Component {
           }
         });
       });
+    }).catch(err => {
+      this.props.navigation.navigate('Login');
     });
   }
 
@@ -89,7 +91,7 @@ export default class AddressInfo extends Component {
     this.setState({
       isWaiting: true
     }, () => {
-      Api.put(`/users/cancel_trip/${this.state.trip_id}`)
+      Api.put(`/users/cancel_trip`)
         .then(res => {
           this.setState({
             status: 'canceled',
