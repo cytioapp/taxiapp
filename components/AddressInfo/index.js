@@ -97,9 +97,12 @@ export default class AddressInfo extends Component {
           });
           this.props.navigation.navigate('Map');
         }).catch(err => {
+          err.response.data.errors ?
+          err = err.response.data.errors :
+          err = [{message: "No fue posible cancelar el viaje, porfavor inténtalo de nuevo"}]
           this.setState({
             isWaiting: false,
-            errors: err.response.data.errors,
+            errors: err,
             modalVisible: true
           });
         });

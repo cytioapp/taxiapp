@@ -57,7 +57,6 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: '#E3C463',
     borderRadius: 30,
-    elevation: 2,
     shadowColor: '#1F120D',
     shadowOffset: { width: -1, height: 3 },
     shadowOpacity: 0.8,

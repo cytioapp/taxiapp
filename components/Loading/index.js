@@ -30,13 +30,6 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'space-between',
     flex: 1
-  },
-  buttonsWrapper: {
-    marginBottom: 15
-  },
-  textButton: {
-    fontFamily: 'Nunito-Regular',
-    textAlign: 'center'
   }
 });
 
@@ -49,14 +42,7 @@ const Loading = () => {
       <View style={styles.container}>
         <View></View>
         <Spinner color="#000000"/>
-        <View style={styles.buttonsWrapper}>
-          <TouchableOpacity onPress={() => {}}>
-            <Text style={styles.textButton} >Términos y condiciones</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => {}}>
-            <Text style={styles.textButton} >Aviso de privacidad</Text>
-          </TouchableOpacity>
-        </View>
+        <View></View>
       </View>
     </ImageBackground>
   );
