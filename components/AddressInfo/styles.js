@@ -16,27 +16,14 @@ const styles = StyleSheet.create({
     paddingLeft: 0
   },
   cancelButtonWrapper: {
-    paddingHorizontal: 20,
+    flex: 1
   },
-  cancelButton:{
-    backgroundColor: secondaryColor,
-    borderRadius: 30,
-    flexDirection: 'row',
-    paddingHorizontal: 15
-  },
-  cancelIcon: {
-    color: terniaryColor,
-    marginRight: 10,
-    marginTop: 2,
-    width: 25,
+  cancelButton: {
+    alignSelf: 'center'
   },
   cancelText: {
     color: terniaryColor,
-    fontFamily: 'Nunito-Bold',
-    left: 90,
-    top: 12,
-    position: 'absolute',
-    zIndex: 1
+    fontFamily: 'Nunito-Bold'
   },
   statusWrapper: {
     borderColor: secondaryColor,
