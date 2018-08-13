@@ -3,6 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import {
   Body,
   Button,
+  Header,
   Icon,
   Left,
   Right,
@@ -20,6 +21,17 @@ export default class Profile extends Component {
   render(){
     return(
       <View>
+        <Header>
+          <Left>
+            <Button transparent onPress={this.props.navigation.openDrawer}>
+              <Icon name='menu' />
+            </Button>
+          </Left>
+          <Body>
+              <Title>Perfil</Title>
+          </Body>
+          <Right></Right>
+        </Header>
         <Text>Profile</Text>
       </View>
     )
