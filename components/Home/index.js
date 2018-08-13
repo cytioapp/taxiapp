@@ -12,6 +12,9 @@ class Home extends Component {
           this.props.navigation.navigate('Map');
         }
       }).catch(err => {
+        if (err.response.status == 401) {
+          this.props.screenProps.session.logout();
+        }
         console.log(err.response);
       });
   }
