@@ -26,6 +26,11 @@ export default class DrawerMenu extends React.Component {
                   <Text>Inicio</Text>
                 </View>
               </TouchableOpacity>
+              <TouchableOpacity onPress={() => this.props.navigation.navigate('Profile')}>
+                <View style={styles.item}>
+                  <Text>Perfil</Text>
+                </View>
+              </TouchableOpacity>
               <TouchableOpacity onPress={session.logout}>
                 <View style={styles.item}>
                   <Text>Cerrar sessión</Text>

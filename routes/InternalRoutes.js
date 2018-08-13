@@ -3,6 +3,7 @@ import Home from '../components/Home';
 import MapComponent from '../components/Map';
 import AddressInfo from '../components/AddressInfo';
 import DrawerMenu from '../components/DrawerMenu';
+import Profile from '../components/Profile';
 
 export default createDrawerNavigator({
   Home: {
@@ -13,6 +14,9 @@ export default createDrawerNavigator({
   },
   AddressInfo: {
     screen: AddressInfo
+  },
+  Profile: {
+    screen: Profile
   }
 },{
   headerMode: 'none',
