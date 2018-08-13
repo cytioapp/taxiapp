@@ -1,25 +1,31 @@
 import React, { Component } from 'react';
 import {
+  Dimensions,
   Image,
   ImageBackground,
   StyleSheet,
   Text,
   TouchableOpacity,
-  View,
-  ScrollView
+  View
 } from 'react-native';
-import {Container, Content, Footer} from 'native-base';
+import {Content, Footer} from 'native-base';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import logo2 from '../../assets/logo2.png';
 import fondo2 from '../../assets/fondo2.jpg';
+const window = Dimensions.get('window');
 
 const styles = StyleSheet.create({
+  container: {
+    height: '100%'
+  },
   backgroundImage: {
-    flex: 1,
-    height: '100%',
+    minHeight: window.height,
     width: '100%'
   },
-  container: {
+  completeContainer: {
+    flex: 1
+  },
+  content: {
     flex: 1
   },
   logoContainer: {
@@ -46,37 +52,36 @@ const styles = StyleSheet.create({
   },
   footer: {
     backgroundColor: 'transparent',
-    borderColor: 'transparent'
+    borderColor: 'transparent',
+    marginVertical: 15
   }
 });
 
-export default class LandingPage extends Component {
+export default class AuthLayout extends Component {
   render(){
     const {children} = this.props;
 
     return(
-      <KeyboardAwareScrollView>
-        <Container contentContainerStyle={styles.container}>
-          <ImageBackground source={fondo2} style={styles.backgroundImage}>
-            <Content contentContainerStyle={styles.container}>
-              <ScrollView>
-                <View style={styles.logoContainer}>
-                  <Image source={logo2} style={styles.logoImage}/>
-                </View>
-                <View style={styles.contentContainer}>
-                  {children}
-                </View>
-              </ScrollView>
-            </Content>
-            <Footer style={styles.footer}>
+      <KeyboardAwareScrollView style={styles.container}>
+        <ImageBackground source={fondo2} style={styles.backgroundImage}>
+          <View style={styles.completeContainer}>
+            <View style={styles.content}>
+              <View style={styles.logoContainer}>
+                <Image source={logo2} style={styles.logoImage}/>
+              </View>
+              <View style={styles.contentContainer}>
+                {children}
+              </View>
+            </View>
+            <View style={styles.footer}>
               <TouchableOpacity>
                 <Text style={styles.termsTextButton}>
-                  Terminos y condiciones y aviso de privacidad
+                  Términos, condiciones y aviso de privacidad
                 </Text>
               </TouchableOpacity>
-            </Footer>
-          </ImageBackground>
-        </Container>
+            </View>
+          </View>
+        </ImageBackground>
       </KeyboardAwareScrollView>
     )
   }
