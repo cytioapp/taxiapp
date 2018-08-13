@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, TextInput, PermissionsAndroid, Platform } from 'react-native';
+import { View, StyleSheet, TextInput, PermissionsAndroid, Platform } from 'react-native';
 import {
+  Body,
   Button,
   Container,
   Form,
+  Header,
   Icon,
   Item,
-  Text
+  Left,
+  Right,
+  Text,
+  Title
 } from 'native-base';
 import MapView from 'react-native-maps';
 import Geocoder from 'react-native-geocoder';
@@ -200,6 +205,17 @@ class Home extends Component {
     let { region, error } = this.state;
     return (
       <Container contentContainerStyle={{ flex: 1, width: '100%' }}>
+        <Header>
+          <Left>
+            <Button transparent onPress={this.props.navigation.openDrawer}>
+              <Icon name='menu' />
+            </Button>
+          </Left>
+          <Body>
+            <Title>Mapa</Title>
+          </Body>
+          <Right />
+        </Header>
         <View style={{ flex: 1, width: '100%' }}>
           <Modal
             errors={this.state.errors}
