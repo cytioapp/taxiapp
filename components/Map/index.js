@@ -1,17 +1,12 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, TextInput, PermissionsAndroid, Platform } from 'react-native';
+import { View, StyleSheet, TextInput, PermissionsAndroid, Platform, TouchableOpacity} from 'react-native';
 import {
-  Body,
   Button,
   Container,
   Form,
-  Header,
   Icon,
   Item,
-  Left,
-  Right,
-  Text,
-  Title
+  Text
 } from 'native-base';
 import MapView from 'react-native-maps';
 import Geocoder from 'react-native-geocoder';
@@ -48,6 +43,20 @@ const styles = StyleSheet.create({
     flex: 1,
     fontFamily: 'Nunito-Regular',
     textAlign: 'left',
+  },
+  buttonMenuWrapper: {
+    backgroundColor: '#1F120D',
+    borderRadius: 50,
+    height: 50,
+    position: 'absolute',
+    top: '35%',
+    width: 50,
+    zIndex: 1
+  },
+  buttonMenuIcon: {
+    alignSelf: 'center',
+    color: '#E3C463',
+    marginTop: 10
   },
   buttonContainer: {
     alignItems: 'center',
@@ -100,7 +109,8 @@ class Home extends Component {
       errors: [],
       isServiceButtonDisabled: false,
       isWaiting: false,
-      modalVisible: false
+      modalVisible: false,
+      drawerVisible: false
     }
   }
 
@@ -205,18 +215,11 @@ class Home extends Component {
     let { region, error } = this.state;
     return (
       <Container contentContainerStyle={{ flex: 1, width: '100%' }}>
-        <Header>
-          <Left>
-            <Button transparent onPress={this.props.navigation.openDrawer}>
-              <Icon name='menu' />
-            </Button>
-          </Left>
-          <Body>
-            <Title>Mapa</Title>
-          </Body>
-          <Right />
-        </Header>
+
         <View style={{ flex: 1, width: '100%' }}>
+          <TouchableOpacity style={styles.buttonMenuWrapper} onPress={this.props.navigation.openDrawer}>
+            <Icon style={styles.buttonMenuIcon} name='ios-arrow-forward' />
+          </TouchableOpacity>
           <Modal
             errors={this.state.errors}
             modalVisible={this.state.modalVisible}
