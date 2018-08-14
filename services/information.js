@@ -44,4 +44,32 @@ const getActiveTrip = () => {
   }) 
 }
 
-export { getActiveTrip };
+const parseTrip = (tripInfo) => {
+  let trip = {
+    driver_name: '',
+    driver_id: null,
+    organization: '',
+    license_plate: '',
+    model: '',
+    year: ''
+  };
+
+  if (tripInfo.driver) {
+    let { driver, vehicle } = tripInfo;
+    let { user, id } = driver;
+    let { organization, model, year, license_plate } = vehicle;
+    trip = {
+      driver_name: user.full_name,
+      driver_id: id,
+      organization,
+      license_plate,
+      model,
+      year,
+    };
+  }
+  let { status } = tripInfo;
+  
+  return { status, ...trip };
+}
+
+export { getActiveTrip, parseTrip };

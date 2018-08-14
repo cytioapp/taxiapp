@@ -18,13 +18,17 @@ import Spinner from 'react-native-spinkit';
 import Api from '../../utils/api';
 import driversFace from '../../assets/face1.jpg';
 import taxiIcon1 from '../../assets/taxiIcon.png';
-window.navigator.userAgent = "react-native";
-import io from 'socket.io-client/dist/socket.io';
 import styles from './styles';
 import { colors, spinnerColor, spinnerMessage } from './variables';
-import { getActiveTrip } from '../../services/information';
+import { getActiveTrip, parseTrip } from '../../services/information';
 import Loading from '../Loading';
 import Modal from '../Modal';
+import firebase from 'firebase';
+import firebaseConfig from '../../firebaseconfig.json';
+
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
 
 export default class AddressInfo extends Component {
 
@@ -49,8 +53,6 @@ export default class AddressInfo extends Component {
       modalVisible: false
     }
 
-    this.socket = io('https://cytio.com.mx');
-
   }
 
   componentDidMount(){
@@ -61,28 +63,36 @@ export default class AddressInfo extends Component {
       if(res.driver){
         this.setState(res.driver);
       }
-
-      //Se une al room cuando se aceptó el trip por un driver
-      this.socket.emit('joinToUsers', res.user.user_id);
-      this.socket.on('tripCanceled', () => {
-        this.setState({
-          status: 'holding',
-          driver_id: false
-        });
-        /* PUSH NOTIFICATION CODE */
-      });
-      this.socket.on('tripAccepted', () => {
-        getActiveTrip().then(res => {
-          if(res.user){
-            this.setState(res.user);
-          }
-          if(res.driver){
-            this.setState(res.driver);
-          }
-        });
-      });
+      this.monitorTrip();
     }).catch(err => {
       this.props.navigation.navigate('Login');
+    });
+  }
+
+  monitorTrip = () => {
+    let { trip_id } = this.state;
+    let counter = 0;
+    firebase.database().ref(`server/taken_trips/${trip_id}/`).on('value', (snapshot) => {
+      let trip = snapshot.val();
+      if (trip) {
+        this.setState(parseTrip(trip));
+      } else if (!trip && counter) {
+        getActiveTrip().then(res => {
+          if(res.user){
+            this.setState({...res.user, ...parseTrip({ status: res.user.status }) });
+            if (res.user.status == 'holding') {
+              alert('Tu viaje ha regresado a la fila de espera');
+            }
+          }
+        }).catch(err => {
+          alert('Ha ocurrido un error');
+        })
+      }
+      counter++;
+    });
+
+    firebase.database().ref(`server/taken_trips/${trip_id}/`).once('child_removed', (snapshot) => {
+      this.setState({ status: 'finished' });
     });
   }
 
@@ -211,12 +221,22 @@ export default class AddressInfo extends Component {
                 {spinnerColor[status] && <Spinner style={styles.spinner} isVisible={true} size={50} type='Pulse' color={spinnerColor[status]}/>}
               </View>
             </View>
+            
+            {status != 'finished' && 
+              <View style={styles.cancelButtonWrapper}>
+                <Button rounded danger style={styles.cancelButton} onPress={this.handleCancel}>
+                  <Text style={styles.cancelText}>Cancelar viaje</Text>
+                </Button>
+              </View>
+            }
 
-            <View style={styles.cancelButtonWrapper}>
-              <Button rounded danger style={styles.cancelButton} onPress={this.handleCancel}>
-                <Text style={styles.cancelText}>Cancelar viaje</Text>
-              </Button>
-            </View>
+            {status == 'finished' && 
+              <View style={styles.cancelButtonWrapper}>
+                <Button rounded sucess style={styles.cancelButton} onPress={() => this.props.navigation.navigate('Map')}>
+                  <Text style={styles.cancelText}>Solicitar otro servicio</Text>
+                </Button>
+              </View>
+            }
 
           </ScrollView>
         </Content>
