@@ -66,7 +66,6 @@ export default class Login extends Component {
   }
 
   renderErrors = (errors) => {
-    console.log(errors)
     return errors.map((error, i) => {
       return <Text key={i} style={styles.errors}>{error.message}</Text>
     });

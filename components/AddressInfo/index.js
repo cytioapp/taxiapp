@@ -18,7 +18,6 @@ import Spinner from 'react-native-spinkit';
 import Api from '../../utils/api';
 import driversFace from '../../assets/face1.jpg';
 import taxiIcon1 from '../../assets/taxiIcon.png';
-import {RNSlidingButton, SlideDirection} from 'rn-sliding-button';
 import styles from './styles';
 import { colors, spinnerColor, spinnerMessage } from './variables';
 import { getActiveTrip, parseTrip } from '../../services/information';
@@ -80,7 +79,7 @@ export default class AddressInfo extends Component {
     });
   }
 
-  onSlideRight = () => {
+  handleCancel = () => {
     this.setState({
       isWaiting: true
     }, () => {
@@ -92,9 +91,12 @@ export default class AddressInfo extends Component {
           });
           this.props.navigation.navigate('Map');
         }).catch(err => {
+          err.response.data.errors ?
+          err = err.response.data.errors :
+          err = [{message: "No fue posible cancelar el viaje, porfavor inténtalo de nuevo"}]
           this.setState({
             isWaiting: false,
-            errors: err.response.data.errors,
+            errors: err,
             modalVisible: true
           });
         });
@@ -203,20 +205,10 @@ export default class AddressInfo extends Component {
               </View>
             </View>
 
-
-            <View style={styles.cancelButtonWrapper} >
-              <Text numberOfLines={1} style={styles.cancelText}>
-                Desliza para cancelar el viaje
-              </Text>
-              <RNSlidingButton
-                style={styles.cancelButton}
-                height={50}
-                onSlidingSuccess={this.onSlideRight}
-                slideDirection={SlideDirection.RIGHT}>
-                <View style={styles.cancelIconWrapper}>
-                  <Icon style={styles.cancelIcon} name="ios-close-circle"/>
-                </View>
-              </RNSlidingButton>
+            <View style={styles.cancelButtonWrapper}>
+              <Button rounded danger style={styles.cancelButton} onPress={this.handleCancel}>
+                <Text style={styles.cancelText}>Cancelar viaje</Text>
+              </Button>
             </View>
 
           </ScrollView>
