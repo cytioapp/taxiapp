@@ -71,11 +71,28 @@ export default class AddressInfo extends Component {
 
   monitorTrip = () => {
     let { trip_id } = this.state;
+    let counter = 0;
     firebase.database().ref(`server/taken_trips/${trip_id}/`).on('value', (snapshot) => {
-      trip = snapshot.val();
+      let trip = snapshot.val();
       if (trip) {
         this.setState(parseTrip(trip));
+      } else if (!trip && counter) {
+        getActiveTrip().then(res => {
+          if(res.user){
+            this.setState({...res.user, ...parseTrip({ status: res.user.status }) });
+            if (res.user.status == 'holding') {
+              alert('Tu viaje ha regresado a la fila de espera');
+            }
+          }
+        }).catch(err => {
+          alert('Ha ocurrido un error');
+        })
       }
+      counter++;
+    });
+
+    firebase.database().ref(`server/taken_trips/${trip_id}/`).once('child_removed', (snapshot) => {
+      this.setState({ status: 'finished' });
     });
   }
 
@@ -204,12 +221,22 @@ export default class AddressInfo extends Component {
                 {spinnerColor[status] && <Spinner style={styles.spinner} isVisible={true} size={50} type='Pulse' color={spinnerColor[status]}/>}
               </View>
             </View>
+            
+            {status != 'finished' && 
+              <View style={styles.cancelButtonWrapper}>
+                <Button rounded danger style={styles.cancelButton} onPress={this.handleCancel}>
+                  <Text style={styles.cancelText}>Cancelar viaje</Text>
+                </Button>
+              </View>
+            }
 
-            <View style={styles.cancelButtonWrapper}>
-              <Button rounded danger style={styles.cancelButton} onPress={this.handleCancel}>
-                <Text style={styles.cancelText}>Cancelar viaje</Text>
-              </Button>
-            </View>
+            {status == 'finished' && 
+              <View style={styles.cancelButtonWrapper}>
+                <Button rounded sucess style={styles.cancelButton} onPress={() => this.props.navigation.navigate('Map')}>
+                  <Text style={styles.cancelText}>Solicitar otro servicio</Text>
+                </Button>
+              </View>
+            }
 
           </ScrollView>
         </Content>
