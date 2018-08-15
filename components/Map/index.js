@@ -1,13 +1,21 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, TextInput, PermissionsAndroid, Platform, TouchableOpacity} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  TextInput,
+  PermissionsAndroid,
+  Platform,
+  TouchableOpacity
+} from 'react-native';
 import {
   Button,
   Container,
-  Form,
+  Spinner,
   Icon,
   Item,
-  Text
+  Text,
 } from 'native-base';
+import { Header } from 'native-base';
 import MapView from 'react-native-maps';
 import Geocoder from 'react-native-geocoder';
 import Geolocation from 'react-native-geolocation-service';
@@ -32,17 +40,20 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     position: 'absolute',
     top: 0,
-    width: '90%'
+    width: '98%'
   },
   searchContainer: {
     backgroundColor: '#FFFFFF',
     height: 40,
-    paddingRight: 10
+    paddingRight: 10,
+    paddingLeft: 10,
+    borderRadius: 8
   },
   searchText: {
     flex: 1,
     fontFamily: 'Nunito-Regular',
     textAlign: 'left',
+    color: '#989898'
   },
   buttonMenuWrapper: {
     backgroundColor: '#1F120D',
@@ -90,6 +101,9 @@ const styles = StyleSheet.create({
     marginTop: -48,
     position: 'absolute',
     top: '50%'
+  },
+  header: {
+    backgroundColor: '#262626'
   }
 });
 
@@ -215,17 +229,30 @@ class Home extends Component {
     let { region, error } = this.state;
     return (
       <Container contentContainerStyle={{ flex: 1, width: '100%' }}>
+        <Header style={styles.header} iosBarStyle="light-content" iosBarStyle="light-content">
+          <View style={styles.searchWrapper}>
+            <Item style={styles.searchContainer}>
+              <Icon name="ios-search" style={{ color: '#989898' }}/>
+              <TextInput
+                placeholder="Selecciona tu ubicación..."
+                value={this.state.address}
+                onChangeText={address => this.setState({ address })}
+                style={styles.searchText}
+              />
+            </Item>
+          </View>
+        </Header>
 
         <View style={{ flex: 1, width: '100%' }}>
           <TouchableOpacity style={styles.buttonMenuWrapper} onPress={this.props.navigation.openDrawer}>
-            <Icon style={styles.buttonMenuIcon} name='ios-arrow-forward' />
+            <Icon style={styles.buttonMenuIcon} name="ios-arrow-forward" />
           </TouchableOpacity>
           <Modal
             errors={this.state.errors}
             modalVisible={this.state.modalVisible}
             setModalVisible={this.setModalVisible}
           />
-          {this.state.isWaiting && <Loading />}
+          {/* this.state.isWaiting && <Loading />*/}
           {region.latitude &&
             <View style={{flex: 1}}>
               <MapView
@@ -239,19 +266,7 @@ class Home extends Component {
               <View pointerEvents="none" style={styles.markerFixed}>
                 <Icon style={styles.marker} name='ios-pin' />
               </View>
-              <View style={styles.searchWrapper}>
-                <Form>
-                  <Item rounded style={styles.searchContainer}>
-                    <Icon name="ios-search" />
-                    <TextInput
-                      placeholder="Selecciona tu ubicación..."
-                      value={this.state.address}
-                      onChangeText={address => this.setState({ address })}
-                      style={styles.searchText}
-                    />
-                  </Item>
-                </Form>
-              </View>
+              
               <View style={styles.buttonContainer}>
                 <Button
                   dark
@@ -260,6 +275,7 @@ class Home extends Component {
                   disabled={this.state.isServiceButtonDisabled}
                 >
                   <Text style={styles.buttonText}> Solicitar servicio </Text>
+                  {this.state.isWaiting && <Spinner color="black" />}
                 </Button>
               </View>
             </View>
