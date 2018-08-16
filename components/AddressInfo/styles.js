@@ -6,7 +6,6 @@ const terniaryColor = '#F6F6F6';
 
 const styles = StyleSheet.create({
   container:{
-    backgroundColor: terniaryColor,
     flex: 1,
   },
   body: {
@@ -26,7 +25,8 @@ const styles = StyleSheet.create({
     alignSelf: 'center'
   },
   cancelText: {
-    color: terniaryColor,
+    color: '#fb000c',
+    textDecorationLine: 'underline',
     fontFamily: 'Nunito-Bold'
   },
   statusWrapper: {

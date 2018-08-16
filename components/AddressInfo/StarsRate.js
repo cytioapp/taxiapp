@@ -1,7 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
 import { Icon, Item } from 'native-base';
-import { map } from 'rsvp';
 
 const StarsRate = ({ rate, stars }) => {
   return (

@@ -25,7 +25,7 @@ const spinnerColor = {
 const spinnerMessage = {
   'holding': 'Esperando que algún taxista acepte el viaje',
   'taken': 'Tú viaje ha sido tomado, el taxista va en camino',
-  'active': 'Estás llendo a tu destino, disfruta el viaje',
+  'active': 'Tú viaje ha sido tomado, el taxista va en camino', // 'Estás llendo a tu destino, disfruta el viaje',
   'finished': 'Ha terminado tu viaje, gracias por usar NOMBRE',
   'canceled': 'Se ha cancelado tú viaje'
 }

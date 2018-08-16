@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import {Image, ScrollView, View} from 'react-native';
+import { TouchableOpacity, ScrollView, View } from 'react-native';
 import {
   Body,
   Button,
-  Card,
-  CardItem,
   Container,
   Content,
   Header,
@@ -17,14 +15,12 @@ import {
 import VIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Spinner from 'react-native-spinkit';
 import Api from '../../utils/api';
-import driversFace from '../../assets/profile.png';
-import taxiIcon1 from '../../assets/taxiIcon.png';
 import styles from './styles';
 import { colors, spinnerColor, spinnerMessage, traductions } from './variables';
 import { getActiveTrip, parseTrip } from '../../services/information';
 import Loading from '../Loading';
 import Modal from '../Modal';
-import StarsRate from './StarsRate';
+import Driver from './Driver';
 import firebase from 'firebase';
 import firebaseConfig from '../../firebaseconfig.json';
 
@@ -177,68 +173,8 @@ export default class AddressInfo extends Component {
               </View>
             </View>
 
-            <View style={styles.driverImageWrapper}>
-              <Image style={styles.driverImage} source={driversFace}/>
-              <Text style={styles.driverLabel}>Conductor</Text>
-              <Text style={styles.driverName}>Nombre y Apellido</Text>
-              <StarsRate stars={5} rate={2} />
-            </View>
-
-            <View style={styles.vehicleWrapper}>
-              <View style={styles.vehicleCol}>
-                <Text style={styles.vehicleLabel}>Sitio</Text>
-                <Text style={styles.vehicleText}>El diezmo</Text>
-              </View>
-              <View style={styles.vehicleCol}>
-                <Text style={styles.vehicleLabel}>Placas</Text>
-                <Text style={styles.vehicleText}>FSCOL32</Text>
-              </View>
-              <View style={styles.vehicleCol}>
-                <Text style={styles.vehicleLabel}>Taxi</Text>
-                <Text style={styles.vehicleText}>D035</Text>
-              </View>
-            </View>
-
-            <View style={styles.callDriverWrapper}>
-              <Button style={styles.callDriverButton}>
-                <Icon name="ios-call" style={styles.phoneIcon}/>
-                <Text style={styles.callText}>Llamar al conductor</Text>
-              </Button>
-            </View>
-
             {driver_id &&
-              <View style={styles.driverCardWrapper}>
-                <Card style={styles.driverCard}>
-                  <CardItem styles={styles.driverCardHeader} header bordered>
-                    <Text style={styles.driverName}>{driver_name}</Text>
-                  </CardItem>
-                  <CardItem bordered>
-                    <Body style={styles.driverInfoBody}>
-                      <View style={styles.driverInfoWrapper}>
-                        <Text style={styles.label}>Sitio </Text>
-                        <Text style={styles.driverInfo}>"{organization}"</Text>
-                      </View>
-                      <View style={styles.driverInfoWrapper}>
-                        <Text style={styles.label}>Placas: </Text>
-                        <Text style={styles.driverInfo}>{license_plate}</Text>
-                      </View>
-                      <View style={styles.driverInfoWrapper}>
-                        <Text style={styles.label}>Taxi: </Text>
-                        <Text style={styles.driverInfo}>{model} {year}</Text>
-                      </View>
-                      <View style={styles.driverInfoWrapper}>
-                        <Image style={styles.taxiIcon} source={taxiIcon1}/>
-                      </View>
-                    </Body>
-                  </CardItem>
-                  <CardItem footer bordered style={styles.actionButtonsWrapper}>
-                    <View style={styles.button}>
-                      <Icon name="ios-call-outline" />
-                      <Text style={styles.buttonText}>Llamar al conductor</Text>
-                    </View>
-                  </CardItem>
-                </Card>
-              </View>
+              <Driver {...{ driver_name, organization, license_plate, model, year }} />
             }
 
             <View style={styles.messageWrapper}>
@@ -250,9 +186,9 @@ export default class AddressInfo extends Component {
             
             {status != 'finished' && 
               <View style={styles.cancelButtonWrapper}>
-                <Button rounded danger style={styles.cancelButton} onPress={this.handleCancel}>
-                  <Text style={styles.cancelText}>Cancelar viaje</Text>
-                </Button>
+                <TouchableOpacity style={styles.cancelButton} onPress={this.handleCancel}>
+                  <Text style={styles.cancelText}>Cancelar servicio</Text>
+                </TouchableOpacity>
               </View>
             }
 
