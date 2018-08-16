@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TouchableOpacity, ScrollView, View } from 'react-native';
+import { TouchableOpacity, ScrollView, View, Alert } from 'react-native';
 import {
   Body,
   Button,
@@ -89,12 +89,27 @@ export default class AddressInfo extends Component {
       counter++;
     });
 
-    firebase.database().ref(`server/taken_trips/${trip_id}/`).once('child_removed', (snapshot) => {
-      this.setState({ status: 'finished' });
+    firebase.database().ref(`server/finished_trips/${trip_id}/`).on('value', (snapshot) => {
+      let trip = snapshot.val();
+      if (trip) {
+        this.setState({ status: 'finished' });
+      }
     });
   }
 
   handleCancel = () => {
+    Alert.alert(
+      'Cancelar',
+      '¿Está seguro que desea cancelar el servicio?',
+      [
+        {text: 'No', onPress: () => {}, style: 'cancel'},
+        {text: 'Si', onPress: () => this.cancelTrip()},
+      ],
+      { cancelable: false }
+    );
+  }
+
+  cancelTrip = () => {
     this.setState({
       isWaiting: true
     }, () => {
@@ -141,7 +156,7 @@ export default class AddressInfo extends Component {
     return(
       <Container style={styles.container}>
         {this.state.isWaiting && <Loading />}
-        <Header style={styles.header} iosBarStyle="light-content" iosBarStyle="light-content">
+        <Header style={styles.header} iosBarStyle="light-content" androidStatusBarColor="#262626">
           <Left>
             <Button transparent onPress={this.props.navigation.openDrawer}>
               <Icon name='menu' style={{ color: '#e3c463' }} />
@@ -179,9 +194,11 @@ export default class AddressInfo extends Component {
 
             <View style={styles.messageWrapper}>
               <View style={styles.message}>
-                <Text style={styles.messageText}>{spinnerMessage[status]}</Text>
-                {spinnerColor[status] && <Spinner style={styles.spinner} isVisible={true} size={50} type='Pulse' color={spinnerColor[status]}/>}
+                <Text style={styles.messageText}>
+                  {spinnerMessage[status]}
+                </Text>
               </View>
+              {spinnerColor[status] && <Spinner style={styles.spinner} isVisible={true} size={50} type='Pulse' color={spinnerColor[status]}/>}
             </View>
             
             {status != 'finished' && 
@@ -193,9 +210,9 @@ export default class AddressInfo extends Component {
             }
 
             {status == 'finished' && 
-              <View style={styles.cancelButtonWrapper}>
-                <Button rounded sucess style={styles.cancelButton} onPress={() => this.props.navigation.navigate('Map')}>
-                  <Text style={styles.cancelText}>Solicitar otro servicio</Text>
+              <View style={styles.newServiceWrapper}>
+                <Button sucess style={styles.newServiceButton} onPress={() => this.props.navigation.navigate('Map')}>
+                  <Text style={styles.newServiceText}>Solicitar otro servicio</Text>
                 </Button>
               </View>
             }
