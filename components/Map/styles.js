@@ -14,9 +14,7 @@ const styles = StyleSheet.create({
   },
   searchWrapper: {
     alignSelf: 'center',
-    paddingTop: 20,
-    position: 'absolute',
-    top: 0,
+    justifyContent: 'center',
     width: '98%'
   },
   searchContainer: {
