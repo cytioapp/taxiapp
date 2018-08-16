@@ -184,6 +184,28 @@ export default class AddressInfo extends Component {
               <StarsRate stars={5} rate={2} />
             </View>
 
+            <View style={styles.vehicleWrapper}>
+              <View style={styles.vehicleCol}>
+                <Text style={styles.vehicleLabel}>Sitio</Text>
+                <Text style={styles.vehicleText}>El diezmo</Text>
+              </View>
+              <View style={styles.vehicleCol}>
+                <Text style={styles.vehicleLabel}>Placas</Text>
+                <Text style={styles.vehicleText}>FSCOL32</Text>
+              </View>
+              <View style={styles.vehicleCol}>
+                <Text style={styles.vehicleLabel}>Taxi</Text>
+                <Text style={styles.vehicleText}>D035</Text>
+              </View>
+            </View>
+
+            <View style={styles.callDriverWrapper}>
+              <Button style={styles.callDriverButton}>
+                <Icon name="ios-call" style={styles.phoneIcon}/>
+                <Text style={styles.callText}>Llamar al conductor</Text>
+              </Button>
+            </View>
+
             {driver_id &&
               <View style={styles.driverCardWrapper}>
                 <Card style={styles.driverCard}>

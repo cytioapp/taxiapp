@@ -86,6 +86,40 @@ const styles = StyleSheet.create({
     fontFamily: 'Nunito-Regular',
     color: '#5c5c5c'
   },
+  vehicleWrapper: {
+    flexDirection: 'row',
+    paddingLeft: 40,
+    paddingRight: 40
+  },
+  vehicleCol: {
+    flex: 1
+  },
+  vehicleLabel: {
+    fontFamily: 'Nunito-Bold',
+    color: '#383738'
+  },
+  vehicleText: {
+    fontFamily: 'Nunito-Regular',
+    color: '#818181'
+  },
+  callDriverWrapper: {
+    justifyContent: 'center',
+    flexDirection: 'row'
+  },
+  callDriverButton: {
+    width: '90%',
+    marginTop: 30,
+    backgroundColor: '#73b639',
+    textAlign: 'center',
+    justifyContent: 'center',
+    borderRadius: 0
+  },
+  callText: {
+    fontFamily: 'Nunito-Bold',
+  },
+  phoneIcon: {
+    marginRight: 0
+  },
   driverInfoBody: {
     alignItems: 'center',
     flexDirection: 'row',
