@@ -11,24 +11,22 @@ const getActiveTrip = () => {
       let active_trip = await Api.get('/users/active_trip');
   
       if (active_trip.data && active_trip.data.active) {
-        let { id } = active_trip.data.trip;
-        let trip = await Api.get(`/trips/${id}`);
-        let { address_origin, status, created_at } = trip.data;
+        let { trip } = active_trip.data;
+        let { id, address_origin, status, created_at, user_id } = trip;
         if (address_origin) {
           response.user = {
-            user_id: trip.data.user_id,
+            user_id,
             trip_id: id,
             origin: address_origin,
             status,
             created_at
           };
         }
-        if (trip.data.driver) {
-          const { id } = trip.data.driver;
-          const { license_plate, model, year, organization } = trip.data.vehicle;
+        if (trip.driver) {
+          const { license_plate, model, year, organization } = trip.vehicle;
           response.driver = {
-            driver_name: trip.data.driver.user.full_name,
-            driver_id: id,
+            driver_name: trip.driver.user.full_name,
+            driver_id: trip.driver.id,
             organization,
             license_plate,
             model,

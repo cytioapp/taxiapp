@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 
 const primaryColor = '#E3C463';
 const secondaryColor = '#1F120D';
@@ -19,10 +19,12 @@ const styles = StyleSheet.create({
     color: '#e3c463'
   },
   cancelButtonWrapper: {
-    flex: 1
+    flex: 1,
   },
   cancelButton: {
-    alignSelf: 'center'
+    alignSelf: 'center',
+    paddingTop: 10,
+    paddingBottom: 30
   },
   cancelText: {
     color: '#fb000c',
@@ -151,12 +153,14 @@ const styles = StyleSheet.create({
     fontFamily: 'Nunito-Bold'
   },
   messageWrapper: {
-    paddingBottom: 15
+    alignItems: 'center'
   },
   message: {
     alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    paddingTop: 15,
+    paddingBottom: 10
   },
   messageText: {
     flex: 1,
@@ -164,10 +168,25 @@ const styles = StyleSheet.create({
     fontSize: 14,
     paddingRight: 10,
     paddingLeft: 15,
-    textAlign: 'right'
+    textAlign: 'center'
   },
   spinner: {
     marginRight: 15
+  },
+  newServiceWrapper: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    paddingTop: 20,
+    paddingBottom: 20
+  },
+  newServiceButton: {
+    borderRadius: 0,
+    width: '90%',
+    justifyContent: 'center'
+  },
+  newServiceText: {
+    fontFamily: 'Nunito-Bold'
   }
 });
 
