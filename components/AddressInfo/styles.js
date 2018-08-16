@@ -12,8 +12,12 @@ const styles = StyleSheet.create({
   body: {
     flex: 2
   },
+  header: {
+    backgroundColor: '#262626'
+  },
   title: {
-    paddingLeft: 0
+    paddingLeft: 0,
+    color: '#e3c463'
   },
   cancelButtonWrapper: {
     flex: 1
@@ -27,39 +31,33 @@ const styles = StyleSheet.create({
   },
   statusWrapper: {
     borderColor: secondaryColor,
-    borderRadius: 30,
-    borderWidth: 0.5,
-    marginHorizontal: 110,
-    marginVertical: 10
-  },
-  status: {
+    paddingTop: 20,
+    paddingBottom: 20,
     flexDirection: 'row',
     justifyContent: 'center',
-    padding: 10
-  },
-  circleStatus: {
-    borderRadius: 50,
-    height: 20,
-    width: 20
   },
   statusText: {
     color: secondaryColor,
+    fontWeight: '700',
     fontFamily: 'Nunito-Regular',
     paddingLeft: 10
   },
   origin: {
     flexDirection: 'row',
-    padding: 10
+    padding: 10,
+    backgroundColor: '#f3f3f3'
   },
   pinIcon: {
-    color: secondaryColor,
-    fontSize: 40
+    color: '#5c5c5c',
+    fontSize: 40,
   },
   originText: {
     flex: 1,
     fontFamily: 'Nunito-Regular',
-    paddingLeft: 15,
-    paddingRight: 20
+    fontWeight: '600',
+    color: '#5c5c5c',
+    paddingRight: 20,
+    textAlign: 'center'
   },
   driverCardWrapper: {
     marginTop: 10,
@@ -70,18 +68,23 @@ const styles = StyleSheet.create({
   driverCardHeader: {
     flexDirection: 'row'
   },
-  driverName: {
-    color: secondaryColor,
-    fontFamily: 'Nunito-Bold'
-  },
   driverImageWrapper: {
     alignItems: 'center',
     padding: 10
   },
   driverImage: {
-    borderRadius: 10,
-    height: 60,
-    width: 60
+    borderRadius: 60,
+    height: 120,
+    width: 120
+  },
+  driverLabel: {
+    fontFamily: 'Nunito-Bold',
+    color: '#5c5c5c',
+    marginTop: 5
+  },
+  driverName: {
+    fontFamily: 'Nunito-Regular',
+    color: '#5c5c5c'
   },
   driverInfoBody: {
     alignItems: 'center',

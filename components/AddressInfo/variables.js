@@ -1,9 +1,17 @@
 const colors = {
-  'holding': '#FDE74C',
-  'taken': '#5BC0EB',
-  'active': '#9BC53D',
-  'finished': '#211A1E',
-  'canceled': '#C3423F'
+  'holding': '#C8CACC',
+  'taken': '#e3c463',
+  'active': '#e3c463',
+  'finished': '#69CDCD',
+  'canceled': '#EF604E'
+}
+
+const traductions = {
+  'holding': 'En espera',
+  'taken': 'Aceptado',
+  'active': 'Activo',
+  'finished': 'Finalizado',
+  'canceled': 'Cancelado'
 }
 
 const spinnerColor = {
@@ -25,6 +33,7 @@ const spinnerMessage = {
 export {
   colors,
   spinnerColor,
-  spinnerMessage
+  spinnerMessage,
+  traductions
 }
 

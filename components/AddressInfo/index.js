@@ -8,21 +8,23 @@ import {
   Container,
   Content,
   Header,
-  Icon,
   Left,
   Right,
   Text,
-  Title
+  Title,
+  Icon
 } from 'native-base';
+import VIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Spinner from 'react-native-spinkit';
 import Api from '../../utils/api';
-import driversFace from '../../assets/face1.jpg';
+import driversFace from '../../assets/profile.png';
 import taxiIcon1 from '../../assets/taxiIcon.png';
 import styles from './styles';
-import { colors, spinnerColor, spinnerMessage } from './variables';
+import { colors, spinnerColor, spinnerMessage, traductions } from './variables';
 import { getActiveTrip, parseTrip } from '../../services/information';
 import Loading from '../Loading';
 import Modal from '../Modal';
+import StarsRate from './StarsRate';
 import firebase from 'firebase';
 import firebaseConfig from '../../firebaseconfig.json';
 
@@ -143,10 +145,10 @@ export default class AddressInfo extends Component {
     return(
       <Container style={styles.container}>
         {this.state.isWaiting && <Loading />}
-        <Header>
+        <Header style={styles.header} iosBarStyle="light-content" iosBarStyle="light-content">
           <Left>
             <Button transparent onPress={this.props.navigation.openDrawer}>
-              <Icon name='menu' />
+              <Icon name='menu' style={{ color: '#e3c463' }} />
             </Button>
           </Left>
           <Body style={styles.body}>
@@ -162,26 +164,28 @@ export default class AddressInfo extends Component {
             setModalVisible={this.setModalVisible}
           />
           <ScrollView>
-            <View style={styles.statusWrapper}>
-              <View style={styles.status}>
-                <View style={[styles.circleStatus, {backgroundColor: colors[status]}]}>
-                </View>
-                <Text style={styles.statusText}>{status}</Text>
-              </View>
+            <View style={[styles.statusWrapper, { backgroundColor: colors[status] }]}>
+              <Text style={styles.statusText}>
+                {traductions[status]}
+              </Text>
             </View>
 
             <View style={styles.origin}>
-              <Icon style={styles.pinIcon} name="ios-pin" />
+              <VIcon style={styles.pinIcon} name="map-marker-outline" />
               <View>
                 <Text style={styles.originText}>{origin}</Text>
               </View>
             </View>
 
+            <View style={styles.driverImageWrapper}>
+              <Image style={styles.driverImage} source={driversFace}/>
+              <Text style={styles.driverLabel}>Conductor</Text>
+              <Text style={styles.driverName}>Nombre y Apellido</Text>
+              <StarsRate stars={5} rate={2} />
+            </View>
+
             {driver_id &&
               <View style={styles.driverCardWrapper}>
-                <View style={styles.driverImageWrapper}>
-                  <Image style={styles.driverImage} source={driversFace}/>
-                </View>
                 <Card style={styles.driverCard}>
                   <CardItem styles={styles.driverCardHeader} header bordered>
                     <Text style={styles.driverName}>{driver_name}</Text>
