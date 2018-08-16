@@ -56,18 +56,21 @@ const styles = StyleSheet.create({
     color: '#989898'
   },
   buttonMenuWrapper: {
+    borderTopLeftRadius: 0,
+    borderTopRightRadius: 100,
+    borderBottomRightRadius: 100,
+    borderBottomLeftRadius: 0,
     backgroundColor: '#1F120D',
-    borderRadius: 50,
-    height: 50,
+    height: 100,
     position: 'absolute',
     top: '35%',
-    width: 50,
-    zIndex: 1
+    width: 26,
+    zIndex: 1,
+    justifyContent: 'center'
   },
   buttonMenuIcon: {
     alignSelf: 'center',
     color: '#E3C463',
-    marginTop: 10
   },
   buttonContainer: {
     alignItems: 'center',
@@ -81,9 +84,14 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: '#E3C463',
-    borderRadius: 30,
+    borderRadius: 0,
     shadowColor: '#1F120D',
-    shadowOffset: { width: -1, height: 3 },
+    width: '90%',
+    justifyContent: 'center',
+    shadowOffset: {
+      width: -1,
+      height: 3
+    },
     shadowOpacity: 0.8,
     shadowRadius: 2
   },
