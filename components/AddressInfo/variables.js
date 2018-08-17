@@ -26,7 +26,7 @@ const spinnerMessage = {
   'holding': 'Esperando que algún taxista acepte el viaje',
   'taken': 'Tú viaje ha sido tomado, el taxista va en camino',
   'active': 'Tú viaje ha sido tomado, el taxista va en camino', // 'Estás llendo a tu destino, disfruta el viaje',
-  'finished': 'Ha terminado tu viaje, gracias por usar NOMBRE',
+  'finished': 'Ha terminado tu viaje, gracias por usar Cytio',
   'canceled': 'Se ha cancelado tú viaje'
 }
 
