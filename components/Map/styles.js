@@ -87,6 +87,11 @@ const styles = StyleSheet.create({
   },
   header: {
     backgroundColor: '#262626'
+  },
+  iconLocate: {
+    position: 'absolute',
+    right: 14,
+    top: 14
   }
 });
 

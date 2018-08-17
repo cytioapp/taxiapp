@@ -21,6 +21,9 @@ import Geolocation from 'react-native-geolocation-service';
 import Api from '../../utils/api';
 import Modal from '../Modal';
 import styles from './styles';
+import TimerMixin from 'react-timer-mixin';
+
+var timer;
 
 class Home extends Component {
 
@@ -41,9 +44,18 @@ class Home extends Component {
       modalVisible: false,
       drawerVisible: false
     }
+
   }
 
   componentDidMount() {
+    this.updatePosition();
+  }
+
+  componentWillUnmount() {
+    TimerMixin.clearTimeout(this.timer);
+  }
+  
+  updatePosition = () => {
     Platform.select({
       ios: () => this.getCurrentPosition(),
       android: () => {
@@ -61,40 +73,50 @@ class Home extends Component {
 
   getCurrentPosition = () => {
     let { region } = this.state;
-    Geolocation.getCurrentPosition(
-      (position) => {
-        let { latitude, longitude } = position.coords;
-        this.formattedAddress(latitude, longitude)
-        this.setState({
-          region: {
-            ...region,
-            latitude,
-            longitude,
-          }
-        });
-      },
-      (error) => this.setState({ error: error.message }),
-      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
-    );
+    try {
+      Geolocation.getCurrentPosition(
+        (position) => {
+          let { latitude, longitude } = position.coords;
+          this.setState({
+            region: {
+              ...region,
+              latitude,
+              longitude,
+            }
+          });
+          // Este cambio ejecuta automaticamente formattedAddress ya se dispara en la actualizacion de region
+        },
+        (error) => this.setState({ error: error.message }),
+        { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
+      );
+    } catch(err) {
+      console.log(err);
+    }
   }
 
-  formattedAddress = async (lat, lng) => {
-    try {
-      const res = await Geocoder.geocodePosition({lat, lng});
+  formattedAddress = (lat, lng) => {
+    Geocoder.geocodePosition({lat, lng}).then(res => {
       const { streetName, streetNumber, subLocality, locality } = res[0];
       this.setState({
         address: `${streetName} ${streetNumber}, ${subLocality}, ${locality}`
       });
-    } catch(err) {
+    }).catch(err => {
       console.log(`Formatted address error: ${err}`);
-    }
+    });
   };
 
   onRegionChange = region => {
-    this.formattedAddress(region.latitude, region.longitude)
     this.setState({
       region
     });
+
+    timer = TimerMixin.setTimeout(() => {
+      this.formattedAddress(region.latitude, region.longitude)
+    }, 1100);
+  }
+
+  onRegionStartChange = () => {
+    TimerMixin.clearTimeout(timer);
   }
 
   makeRequest = () => {
@@ -176,10 +198,15 @@ class Home extends Component {
                 showsMyLocationButton={true}
                 initialRegion={region}
                 onRegionChangeComplete={this.onRegionChange}
+                onRegionChange={this.onRegionStartChange}
               />
               <View pointerEvents="none" style={styles.markerFixed}>
                 <Icon style={styles.marker} name='ios-pin' />
               </View>
+              
+              <TouchableOpacity onPress={this.updatePosition} style={styles.iconLocate}>
+                <Icon name="md-locate" />
+              </TouchableOpacity>
               
               <View style={styles.buttonContainer}>
                 <Button

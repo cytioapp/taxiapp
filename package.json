@@ -20,6 +20,7 @@
     "react-native-spinkit": "^1.1.1",
     "react-native-vector-icons": "^4.6.0",
     "react-navigation": "^2.6.2",
+    "react-timer-mixin": "^0.13.4",
     "rn-sliding-button": "^1.1.5",
     "socket.io-client": "^2.1.1",
     "unstated": "^2.1.1"
