@@ -1,5 +1,4 @@
 import SInfo from 'react-native-sensitive-info';
-import { NavigationActions } from 'react-navigation';
 import { Container } from 'unstated';
 import Api from '../utils/api';
 
@@ -14,7 +13,6 @@ class SessionState extends Container {
     loginErrors: null,
     signupErrors: null
   };
-
 
   login = (email, password) => {
     this.setState({errors: false});
@@ -35,7 +33,7 @@ class SessionState extends Container {
       })
       .catch(err => {
         console.log('Login error', err.response.data.errors);
-        this.setState({loginErrors: err.response.data.errors});
+        this.setState({ loginErrors: err.response.data.errors });
       })
   }
 
@@ -43,7 +41,6 @@ class SessionState extends Container {
     return new Promise((resolve, reject) => {
       return SInfo.getItem('jwt', options)
         .then(value => {
-          console.log(value)
           if (value)
             this.setState({ isLogued: true }, ()=> {
               return resolve();
@@ -74,11 +71,12 @@ class SessionState extends Container {
     this.setState({errors: false});
     if(this.validatesEmail(data.email)){
       Api.post('/users/signup', data)
-      .then(res => {
-        this.login(data.email, data.password);
-      }).catch(err => {
-        console.log('Signup error', err.response)
-      });
+        .then(res => {
+          this.login(data.email, data.password);
+        }).catch(err => {
+          console.log('Signup error', err.response);
+          alert('Ha ocurrido un error al intentar registrarte');
+        });
     }else{
       this.setState({signupErrors: [{ message: "Email inválido" }]});
     }
