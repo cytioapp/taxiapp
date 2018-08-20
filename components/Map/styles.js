@@ -92,6 +92,17 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 14,
     top: 14
+  },
+  errorView: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 30
+  },
+  errorText: {
+    fontFamily: 'Nunito-Regular',
+    fontSize: 22,
+    textAlign: 'center'
   }
 });
 

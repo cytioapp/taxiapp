@@ -221,7 +221,11 @@ class Home extends Component {
               </View>
             </View>
           }
-          {error && <Text>{error}</Text>}
+          {error && 
+            <View style={styles.errorView}>
+              <Text style={styles.errorText}>{error}</Text>
+            </View>
+          }
         </View>
       </Container>
     );
