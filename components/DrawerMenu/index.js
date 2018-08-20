@@ -1,16 +1,36 @@
 import React from 'react';
-import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, ScrollView, TouchableHighlight, StyleSheet, Image } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import { Subscribe } from 'unstated';
 import sessionState from '../../states/session';
+import logoImage from '../../assets/logo2.png';
 
+const underlayColor = '#989898';
 const styles = StyleSheet.create({
+  logoWrapper: {
+    alignItems: 'center',
+    backgroundColor: '#333333',
+    paddingTop: 22,
+    paddingBottom: 35
+  },
+  logo: {
+    width: 80,
+    height: 67
+  },
   item: {
     paddingTop: 16,
     paddingBottom: 16,
     paddingLeft: 10,
     paddingRight: 10,
-    backgroundColor: '#FAFAFA'
+    backgroundColor: '#262626'
+  },
+  itemText: {
+    color: 'white',
+    fontFamily: 'Nunito-Regular',
+    fontSize: 18
+  },
+  menu: {
+    backgroundColor: '#262626'
   }
 })
 
@@ -19,23 +39,32 @@ export default class DrawerMenu extends React.Component {
     return (
       <Subscribe to={[sessionState]}>
         {(session) => (
-          <ScrollView>
+          <ScrollView style={styles.menu}>
             <SafeAreaView style={{ flex: 1 }} forceInset={{ top: 'always', horizontal: 'never' }}>
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('Home')}>
+              <View style={styles.logoWrapper}>
+                <Image source={logoImage} style={styles.logo}/>
+              </View>
+              <TouchableHighlight onPress={() => this.props.navigation.navigate('Home')} underlayColor={underlayColor}>
                 <View style={styles.item}>
-                  <Text>Inicio</Text>
+                  <Text style={styles.itemText}>
+                    Inicio
+                  </Text>
                 </View>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('Profile')}>
+              </TouchableHighlight>
+              <TouchableHighlight onPress={() => this.props.navigation.navigate('Profile')} underlayColor={underlayColor}>
                 <View style={styles.item}>
-                  <Text>Perfil</Text>
+                  <Text style={styles.itemText}>
+                    Perfil
+                  </Text>
                 </View>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={session.logout}>
+              </TouchableHighlight>
+              <TouchableHighlight onPress={session.logout} underlayColor={underlayColor}>
                 <View style={styles.item}>
-                  <Text>Cerrar sessión</Text>
+                  <Text style={styles.itemText}>
+                    Cerrar sessión
+                  </Text>
                 </View>
-              </TouchableOpacity>
+              </TouchableHighlight>
             </SafeAreaView>
           </ScrollView>
         )}
