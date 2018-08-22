@@ -72,7 +72,6 @@ class SessionState extends Container {
   }
 
   signup = (data) => {
-
     this.setState({errors: false});
     if(this.validatesEmail(data.email) &&
        this.validatesPassword(data.password, data.repeated_password)){
