@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
   origin: {
     flexDirection: 'row',
     padding: 10,
+    paddingRight: 20,
     backgroundColor: '#f3f3f3'
   },
   pinIcon: {
@@ -58,8 +59,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Nunito-Regular',
     fontWeight: '600',
     color: '#5c5c5c',
-    paddingRight: 20,
-    textAlign: 'center'
+    paddingRight: 20
   },
   driverCardWrapper: {
     marginTop: 10,
@@ -90,19 +90,20 @@ const styles = StyleSheet.create({
   },
   vehicleWrapper: {
     flexDirection: 'row',
-    paddingLeft: 40,
-    paddingRight: 40
+    paddingHorizontal: 40,
   },
   vehicleCol: {
     flex: 1
   },
   vehicleLabel: {
     fontFamily: 'Nunito-Bold',
-    color: '#383738'
+    color: '#383738',
+    textAlign: 'center'
   },
   vehicleText: {
     fontFamily: 'Nunito-Regular',
-    color: '#818181'
+    color: '#818181',
+    textAlign: 'center'
   },
   callDriverWrapper: {
     justifyContent: 'center',
@@ -127,10 +128,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between'
-  },
-  driverInfoWrapper: {
-    flexDirection: 'row',
-    marginBottom: 10
   },
   label: {
     fontFamily: 'Nunito-Italic'
