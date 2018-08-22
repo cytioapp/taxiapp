@@ -42,7 +42,7 @@ export default class EditEmail extends Component {
         '¿Guardar y salir?',
         [
           {text: 'No'},
-          {text: 'Si', onPress: () => this.handleSave(true)},
+          {text: 'Si', onPress: () => this.handleSave()},
         ],
         { cancelable: false }
       );
@@ -51,16 +51,11 @@ export default class EditEmail extends Component {
     }
   }
 
-  handleSave = (returnFlag = false) => {
-    if(returnFlag) {
-      Api.put('/users/profile', {email: this.state.new_email}).then( res => {
-        this.props.navigation.navigate('Profile')
-      });
-    } else {
-      Api.put('/users/profile', {email: this.state.new_email}).then( res => {
-        this.fillFields();
-      });
-    }
+  handleSave = () => {
+    Api.put('/users/profile', {email: this.state.new_email}).then( () => {
+      this.props.navigation.navigate('Profile')
+    });
+
   }
 
   difference = () => {
