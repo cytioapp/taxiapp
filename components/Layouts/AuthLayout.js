@@ -64,7 +64,7 @@ export default class AuthLayout extends Component {
     return(
       <KeyboardAwareScrollView style={styles.container}>
          <StatusBar
-            backgroundColor="blue"
+            backgroundColor="#262626"
             barStyle="light-content"
           />
         <ImageBackground source={fondo2} style={styles.backgroundImage}>

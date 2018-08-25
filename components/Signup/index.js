@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   signupButtonWrapper: {
-    margin: 40
+    margin: 30
   },
   signupButton: {
     backgroundColor: '#E3C463',
@@ -142,14 +142,6 @@ export default class Signup extends Component {
                   <Icon active name="eye" style={{ color: 'white' }} />
                 </TouchableOpacity>
               </Item>
-            </View>
-
-            <View style={styles.forgotPasswordButtonWrapper}>
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('ChangePassword')}>
-                <Text style={{ color: '#E3C463', textDecorationLine: 'underline' }}>
-                  ¿Olvidaste tu contraseña?
-                </Text>
-              </TouchableOpacity>
             </View>
 
             <View style={styles.signupButtonWrapper} >
