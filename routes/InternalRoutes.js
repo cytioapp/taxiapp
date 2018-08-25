@@ -4,6 +4,8 @@ import MapComponent from '../components/Map';
 import AddressInfo from '../components/AddressInfo';
 import DrawerMenu from '../components/DrawerMenu';
 import Profile from '../components/Profile';
+import EditName from '../components/EditName';
+import EditEmail from '../components/EditEmail';
 
 export default createDrawerNavigator({
   Home: {
@@ -17,7 +19,14 @@ export default createDrawerNavigator({
   },
   Profile: {
     screen: Profile
+  },
+  EditEmail: {
+    screen: EditEmail
+  },
+  EditName: {
+    screen: EditName
   }
+
 },{
   headerMode: 'none',
   contentComponent: DrawerMenu

@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     marginTop: window.height / 2 - 90,
     padding: 20,
     shadowColor: '#1F120D',
-    shadowOffset: { width: - 1, height: 3 },
+    shadowOffset: { width: -1, height: 3 },
     shadowOpacity: 0.8,
     shadowRadius: 2,
     width: 280
@@ -40,46 +40,45 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: '#E3C463',
     padding: 20
-  },
-  buttonText: {
-
   }
 });
 
-export default class errorModal extends Component {
-
-  renderErrors = (errors) => {
+export default class ErrorModal extends Component {
+  renderErrors = errors => {
     return errors.map((error, i) => {
-      return <Text key={i}>{error.message}</Text>
+      return <Text key={i}>{error.message}</Text>;
     });
-  }
+  };
 
-  render(){
-    const { errors, modalVisible } = this.props;
-    return(
+  render() {
+    const { errors, modalVisible, setModalVisible, ...modalProps } = this.props;
+    console.log('Modal: ', this.props);
+    return (
       <Modal
-          animationType="slide"
-          style={styles.modal}
-          transparent={true}
-          visible={modalVisible}
-          onRequestClose={() => {}}>
-          <View style={styles.backgroundView}>
-            <View style={styles.alert}>
-              <View style={styles.messages}>
-                {this.renderErrors(errors)}
-              </View>
-              <View style={styles.buttonWrapper}>
-                <Button rounded
-                  onPress={() => {
-                    this.props.setModalVisible(!modalVisible);
-                  }}
-                  style={styles.button}>
-                  <Text style={styles.buttonText}>Ok</Text>
-                </Button>
-              </View>
+        animationType="slide"
+        style={styles.modal}
+        transparent
+        visible={modalVisible}
+        onRequestClose={() => {}}
+        {...modalProps}
+      >
+        <View style={styles.backgroundView}>
+          <View style={styles.alert}>
+            <View style={styles.messages}>{this.renderErrors(errors)}</View>
+            <View style={styles.buttonWrapper}>
+              <Button
+                rounded
+                onPress={() => {
+                  this.props.setModalVisible(!modalVisible);
+                }}
+                style={styles.button}
+              >
+                <Text style={styles.buttonText}>Ok</Text>
+              </Button>
             </View>
           </View>
-        </Modal>
-    )
+        </View>
+      </Modal>
+    );
   }
 }

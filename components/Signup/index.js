@@ -6,12 +6,12 @@ import sessionState from '../../states/session';
 import AuthLayout from '../Layouts/AuthLayout';
 
 const styles = StyleSheet.create({
-  container:{
+  container: {
     flex: 1,
     justifyContent: 'center',
     backgroundColor: '#1C1C1C'
   },
-  errorsContainer:{
+  errorsContainer: {
     alignItems: 'center',
     flexDirection: 'row',
     paddingHorizontal: 30
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
   form: {
     marginBottom: 20,
     marginTop: 10,
-    paddingHorizontal: 30,
+    paddingHorizontal: 30
   },
   item: {
     borderBottomWidth: 0.5,
@@ -38,10 +38,10 @@ const styles = StyleSheet.create({
     color: 'white'
   },
   forgotPasswordButtonWrapper: {
-    alignItems: 'center',
+    alignItems: 'center'
   },
   signupButtonWrapper: {
-    margin: 40
+    margin: 30
   },
   signupButton: {
     backgroundColor: '#E3C463',
@@ -67,26 +67,21 @@ export default class Signup extends Component {
     password: '',
     repeated_password: '',
     hidePassword: true
-  }
+  };
 
-  renderErrors = (errors) => {
-    return errors.map((error, i) => {
-      return <Text key={i} style={styles.errors}>{error.message}</Text>
-    });
-  }
-
-
-  render(){
-    return(
+  render() {
+    return (
       <Subscribe to={[sessionState]}>
-        {(session) => (
+        {session => (
           <AuthLayout>
-            {session.state.signupErrors &&
+            {session.state.signupErrors && (
               <View style={styles.errorsContainer}>
                 <Icon active name="md-alert" style={styles.errorsIcon} />
-                {this.renderErrors(session.state.signupErrors)}
+                <Text style={styles.errors}>
+                  {session.state.signupErrors[0]}
+                </Text>
               </View>
-            }
+            )}
             <View style={styles.form}>
               <Item style={styles.item}>
                 <Icon active name="person" style={{ color: 'white' }} />
@@ -98,7 +93,7 @@ export default class Signup extends Component {
                   placeholderTextColor="white"
                   style={styles.input}
                 />
-                <View style={{paddingHorizontal: 15}}></View>
+                <View style={{ paddingHorizontal: 15 }} />
               </Item>
               <Item style={styles.item}>
                 <Icon active name="mail" style={{ color: 'white' }} />
@@ -111,7 +106,7 @@ export default class Signup extends Component {
                   placeholderTextColor="white"
                   style={styles.input}
                 />
-                <View style={{paddingHorizontal: 15}}></View>
+                <View style={{ paddingHorizontal: 15 }} />
               </Item>
               <Item style={styles.item}>
                 <Icon active name="lock" style={{ color: 'white' }} />
@@ -123,7 +118,11 @@ export default class Signup extends Component {
                   placeholderTextColor="white"
                   style={styles.input}
                 />
-                <TouchableOpacity onPress={() => this.setState({ hidePassword: !this.state.hidePassword })}>
+                <TouchableOpacity
+                  onPress={() =>
+                    this.setState({ hidePassword: !this.state.hidePassword })
+                  }
+                >
                   <Icon active name="eye" style={{ color: 'white' }} />
                 </TouchableOpacity>
               </Item>
@@ -133,26 +132,24 @@ export default class Signup extends Component {
                 <Input
                   placeholder="Repite la contraseña"
                   secureTextEntry={this.state.hidePassword}
-                  onChangeText={repeated_password => this.setState({ repeated_password })}
+                  onChangeText={repeated_password =>
+                    this.setState({ repeated_password })
+                  }
                   value={this.state.repeated_password}
                   placeholderTextColor="white"
                   style={styles.input}
                 />
-                <TouchableOpacity onPress={() => this.setState({ hidePassword: !this.state.hidePassword })}>
+                <TouchableOpacity
+                  onPress={() =>
+                    this.setState({ hidePassword: !this.state.hidePassword })
+                  }
+                >
                   <Icon active name="eye" style={{ color: 'white' }} />
                 </TouchableOpacity>
               </Item>
             </View>
 
-            <View style={styles.forgotPasswordButtonWrapper}>
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('ChangePassword')}>
-                <Text style={{ color: '#E3C463', textDecorationLine: 'underline' }}>
-                  ¿Olvidaste tu contraseña?
-                </Text>
-              </TouchableOpacity>
-            </View>
-
-            <View style={styles.signupButtonWrapper} >
+            <View style={styles.signupButtonWrapper}>
               <Button
                 block
                 style={styles.signupButton}
@@ -163,9 +160,13 @@ export default class Signup extends Component {
             </View>
 
             <View style={styles.createAccountWrapper}>
-              <Text style={{ color: '#E3C463'}}>¿Ya tienes cuenta? </Text>
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
-                <Text style={{ color: '#E3C463', textDecorationLine: 'underline' }}>
+              <Text style={{ color: '#E3C463' }}>¿Ya tienes cuenta? </Text>
+              <TouchableOpacity
+                onPress={() => this.props.navigation.navigate('Login')}
+              >
+                <Text
+                  style={{ color: '#E3C463', textDecorationLine: 'underline' }}
+                >
                   Inicia sesión
                 </Text>
               </TouchableOpacity>
@@ -173,6 +174,6 @@ export default class Signup extends Component {
           </AuthLayout>
         )}
       </Subscribe>
-    )
+    );
   }
 }

@@ -20,7 +20,7 @@ import Geocoder from 'react-native-geocoder';
 import Geolocation from 'react-native-geolocation-service';
 import Api from '../../utils/api';
 import Modal from '../Modal';
-import styles from './styles';
+import styles from './style';
 import TimerMixin from 'react-timer-mixin';
 
 var timer;
@@ -54,7 +54,7 @@ class Home extends Component {
   componentWillUnmount() {
     TimerMixin.clearTimeout(this.timer);
   }
-  
+
   updatePosition = () => {
     Platform.select({
       ios: () => this.getCurrentPosition(),
@@ -203,11 +203,11 @@ class Home extends Component {
               <View pointerEvents="none" style={styles.markerFixed}>
                 <Icon style={styles.marker} name='ios-pin' />
               </View>
-              
+
               <TouchableOpacity onPress={this.updatePosition} style={styles.iconLocate}>
                 <Icon name="md-locate" />
               </TouchableOpacity>
-              
+
               <View style={styles.buttonContainer}>
                 <Button
                   dark
@@ -221,7 +221,7 @@ class Home extends Component {
               </View>
             </View>
           }
-          {error && 
+          {error &&
             <View style={styles.errorView}>
               <Text style={styles.errorText}>{error}</Text>
             </View>

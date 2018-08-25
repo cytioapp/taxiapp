@@ -15,7 +15,7 @@ import {
 import VIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Spinner from 'react-native-spinkit';
 import Api from '../../utils/api';
-import styles from './styles';
+import styles from './style';
 import { colors, spinnerColor, spinnerMessage, traductions } from './variables';
 import { getActiveTrip, parseTrip } from '../../services/information';
 import Loading from '../Loading';
@@ -73,7 +73,8 @@ export default class AddressInfo extends Component {
     firebase.database().ref(`server/taken_trips/${trip_id}/`).on('value', (snapshot) => {
       let trip = snapshot.val();
       if (trip) {
-        this.setState(parseTrip(trip));
+        this.setState(parseTrip(trip), () => {console.log(this.state)});
+
       } else if (!trip && counter) {
         getActiveTrip().then(res => {
           if(res.user){
@@ -153,6 +154,7 @@ export default class AddressInfo extends Component {
       driver_id
     } = this.state;
 
+
     return(
       <Container style={styles.container}>
         {this.state.isWaiting && <Loading />}
@@ -188,8 +190,8 @@ export default class AddressInfo extends Component {
               </View>
             </View>
 
-            {driver_id &&
-              <Driver {...{ driver_name, organization, license_plate, model, year }} />
+            {driver_id && organization &&
+              <Driver {...{ driver_name, organization }} />
             }
 
             <View style={styles.messageWrapper}>
@@ -200,8 +202,8 @@ export default class AddressInfo extends Component {
               </View>
               {spinnerColor[status] && <Spinner style={styles.spinner} isVisible={true} size={50} type='Pulse' color={spinnerColor[status]}/>}
             </View>
-            
-            {status != 'finished' && 
+
+            {status !== 'finished' &&
               <View style={styles.cancelButtonWrapper}>
                 <TouchableOpacity style={styles.cancelButton} onPress={this.handleCancel}>
                   <Text style={styles.cancelText}>Cancelar servicio</Text>
@@ -209,7 +211,7 @@ export default class AddressInfo extends Component {
               </View>
             }
 
-            {status == 'finished' && 
+            {status === 'finished' &&
               <View style={styles.newServiceWrapper}>
                 <Button sucess style={styles.newServiceButton} onPress={() => this.props.navigation.navigate('Map')}>
                   <Text style={styles.newServiceText}>Solicitar otro servicio</Text>

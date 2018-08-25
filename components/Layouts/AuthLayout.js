@@ -3,12 +3,12 @@ import {
   Dimensions,
   Image,
   ImageBackground,
+  StatusBar,
   StyleSheet,
   Text,
   TouchableOpacity,
   View
 } from 'react-native';
-import {Content, Footer} from 'native-base';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import logo2 from '../../assets/logo2.png';
 import fondo2 from '../../assets/fondo2.jpg';
@@ -63,6 +63,10 @@ export default class AuthLayout extends Component {
 
     return(
       <KeyboardAwareScrollView style={styles.container}>
+         <StatusBar
+            backgroundColor="#262626"
+            barStyle="light-content"
+          />
         <ImageBackground source={fondo2} style={styles.backgroundImage}>
           <View style={styles.completeContainer}>
             <View style={styles.content}>

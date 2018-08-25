@@ -6,11 +6,11 @@ import sessionState from '../../states/session';
 import AuthLayout from '../Layouts/AuthLayout';
 
 const styles = StyleSheet.create({
-  container:{
+  container: {
     flex: 1,
     justifyContent: 'center'
   },
-  errorsContainer:{
+  errorsContainer: {
     alignItems: 'center',
     flexDirection: 'row',
     paddingHorizontal: 30
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   },
   form: {
     marginBottom: 20,
-    paddingHorizontal: 30,
+    paddingHorizontal: 30
   },
   item: {
     borderBottomWidth: 0.5,
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     color: 'white'
   },
   forgotPasswordButtonWrapper: {
-    alignItems: 'center',
+    alignItems: 'center'
   },
   loginButtonWrapper: {
     margin: 40
@@ -63,25 +63,21 @@ export default class Login extends Component {
     email: '',
     password: '',
     hidePassword: true
-  }
+  };
 
-  renderErrors = (errors) => {
-    return errors.map((error, i) => {
-      return <Text key={i} style={styles.errors}>{error.message}</Text>
-    });
-  }
-
-  render(){
-    return(
+  render() {
+    return (
       <Subscribe to={[sessionState]}>
-        {(session) => (
+        {session => (
           <AuthLayout>
-            {session.state.loginErrors &&
+            {session.state.loginErrors && (
               <View style={styles.errorsContainer}>
                 <Icon active name="md-alert" style={styles.errorsIcon} />
-                {this.renderErrors(session.state.loginErrors)}
+                <Text style={styles.errors}>
+                  {session.state.loginErrors[0]}
+                </Text>
               </View>
-            }
+            )}
             <View style={styles.form}>
               <Item style={styles.item}>
                 <Icon active name="mail" style={{ color: 'white' }} />
@@ -94,7 +90,7 @@ export default class Login extends Component {
                   placeholderTextColor="white"
                   style={styles.input}
                 />
-                <View style={{paddingHorizontal: 15}}></View>
+                <View style={{ paddingHorizontal: 15 }} />
               </Item>
               <Item style={styles.item}>
                 <Icon active name="lock" style={{ color: 'white' }} />
@@ -106,34 +102,48 @@ export default class Login extends Component {
                   placeholderTextColor="white"
                   style={styles.input}
                 />
-                <TouchableOpacity onPress={() => this.setState({ hidePassword: !this.state.hidePassword })}>
+                <TouchableOpacity
+                  onPress={() =>
+                    this.setState({ hidePassword: !this.state.hidePassword })
+                  }
+                >
                   <Icon active name="eye" style={{ color: 'white' }} />
                 </TouchableOpacity>
               </Item>
             </View>
 
             <View style={styles.forgotPasswordButtonWrapper}>
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('ChangePassword')}>
-                <Text style={{ color: '#E3C463', textDecorationLine: 'underline' }}>
+              <TouchableOpacity
+                onPress={() => this.props.navigation.navigate('ChangePassword')}
+              >
+                <Text
+                  style={{ color: '#E3C463', textDecorationLine: 'underline' }}
+                >
                   ¿Olvidaste tu contraseña?
                 </Text>
               </TouchableOpacity>
             </View>
 
-            <View style={styles.loginButtonWrapper} >
+            <View style={styles.loginButtonWrapper}>
               <Button
                 block
                 style={styles.loginButton}
-                onPress={() => session.login(this.state.email, this.state.password)}
+                onPress={() =>
+                  session.login(this.state.email, this.state.password)
+                }
               >
                 <Text style={styles.loginButtonText}>Iniciar Sesión</Text>
               </Button>
             </View>
 
             <View style={styles.createAccountWrapper}>
-              <Text style={{ color: '#E3C463'}}>¿No tienes cuenta? </Text>
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('Signup')}>
-                <Text style={{ color: '#E3C463', textDecorationLine: 'underline' }}>
+              <Text style={{ color: '#E3C463' }}>¿No tienes cuenta? </Text>
+              <TouchableOpacity
+                onPress={() => this.props.navigation.navigate('Signup')}
+              >
+                <Text
+                  style={{ color: '#E3C463', textDecorationLine: 'underline' }}
+                >
                   Regístrate
                 </Text>
               </TouchableOpacity>
@@ -141,7 +151,6 @@ export default class Login extends Component {
           </AuthLayout>
         )}
       </Subscribe>
-    )
+    );
   }
 }
-
