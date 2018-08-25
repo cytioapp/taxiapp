@@ -5,12 +5,12 @@ import StarsRate from './StarsRate';
 import styles from './style';
 import profileHolder from '../../assets/profile.png';
 
-const Driver = ({ driver_name, organization: {name} }) => {
+const Driver = ({ driver_name, organization: { name } }) => {
   return (
     <View style={styles.driverInfoWrapper}>
       <View style={styles.driverImageWrapper}>
-        <Image style={styles.driverImage} source={profileHolder}/>
-        <Text style={styles.driverLabel}>Conductor</Text>
+        <Image style={styles.driverImage} source={profileHolder} />
+        <Text style={styles.driverLabel}>Conductor:</Text>
         <Text style={styles.driverName}>{driver_name}</Text>
         <StarsRate stars={5} rate={0} />
       </View>
@@ -29,12 +29,12 @@ const Driver = ({ driver_name, organization: {name} }) => {
 
       <View style={styles.callDriverWrapper}>
         <Button style={styles.callDriverButton}>
-          <Icon name="ios-call" style={styles.phoneIcon}/>
+          <Icon name="ios-call" style={styles.phoneIcon} />
           <Text style={styles.callText}>Llamar al conductor</Text>
         </Button>
       </View>
     </View>
-  )
-}
+  );
+};
 
 export default Driver;
