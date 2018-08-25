@@ -44,15 +44,8 @@ const styles = StyleSheet.create({
 });
 
 export default class ErrorModal extends Component {
-  renderErrors = errors => {
-    return errors.map((error, i) => {
-      return <Text key={i}>{error.message}</Text>;
-    });
-  };
-
   render() {
     const { errors, modalVisible, setModalVisible, ...modalProps } = this.props;
-    console.log('Modal: ', this.props);
     return (
       <Modal
         animationType="slide"
@@ -64,7 +57,9 @@ export default class ErrorModal extends Component {
       >
         <View style={styles.backgroundView}>
           <View style={styles.alert}>
-            <View style={styles.messages}>{this.renderErrors(errors)}</View>
+            <View style={styles.messages}>
+              <Text>{`${errors[0]}. Vuelve a intentarlo.`}</Text>
+            </View>
             <View style={styles.buttonWrapper}>
               <Button
                 rounded
