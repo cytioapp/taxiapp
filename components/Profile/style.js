@@ -33,13 +33,13 @@ const styles = StyleSheet.create({
   },
   menuIcon: {
     color: yellow,
-    fontSize: 20,
+    fontSize: 34,
     padding: 0
   },
   headerBottom: {
     alignItems: 'center',
     flexDirection: 'row',
-    marginVertical: 15,
+    marginVertical: 15
   },
   profilePhotoWrapper: {
     backgroundColor: 'white',
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     width: 65
   },
-  profilePhoto:{
+  profilePhoto: {
     alignSelf: 'center',
     borderRadius: 31,
     height: 62,
