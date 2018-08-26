@@ -21,10 +21,10 @@ const Driver = ({ driver_name, organization: { name } }) => {
           <Text style={styles.vehicleText}>{name}</Text>
         </View>
 
-        <View style={styles.vehicleCol}>
+        {/* <View style={styles.vehicleCol}>
           <Text style={styles.vehicleLabel}>Taxi</Text>
           <Text style={styles.vehicleText}>D035</Text>
-        </View>
+        </View> */}
       </View>
 
       <View style={styles.callDriverWrapper}>
