@@ -184,7 +184,11 @@ export default class AddressInfo extends Component {
         >
           <Left>
             <Button transparent onPress={this.props.navigation.openDrawer}>
-              <Icon name="menu" style={{ color: '#e3c463' }} />
+              <Icon
+                style={styles.menuIcon}
+                name="menu"
+                style={{ color: '#e3c463' }}
+              />
             </Button>
           </Left>
           <Body style={styles.body}>
