@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Nunito-Bold'
   },
   header: {
-    backgroundColor: headerBackground,
+    backgroundColor: headerBackground
   },
   leftHeader: {
     flex: 1
@@ -71,6 +71,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Nunito-Bold',
     fontWeight: '500'
   }
-})
+});
 
 export default styles;

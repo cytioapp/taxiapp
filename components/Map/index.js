@@ -6,14 +6,7 @@ import {
   Platform,
   TouchableOpacity
 } from 'react-native';
-import {
-  Button,
-  Container,
-  Spinner,
-  Icon,
-  Item,
-  Text,
-} from 'native-base';
+import { Button, Container, Spinner, Icon, Item, Text } from 'native-base';
 import { Header } from 'native-base';
 import MapView from 'react-native-maps';
 import Geocoder from 'react-native-geocoder';
@@ -26,7 +19,6 @@ import TimerMixin from 'react-timer-mixin';
 var timer;
 
 class Home extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -35,7 +27,7 @@ class Home extends Component {
         latitude: null,
         longitude: null,
         latitudeDelta: 0.003,
-        longitudeDelta: 0.003,
+        longitudeDelta: 0.003
       },
       error: null,
       errors: [],
@@ -43,8 +35,7 @@ class Home extends Component {
       isWaiting: false,
       modalVisible: false,
       drawerVisible: false
-    }
-
+    };
   }
 
   componentDidMount() {
@@ -59,50 +50,53 @@ class Home extends Component {
     Platform.select({
       ios: () => this.getCurrentPosition(),
       android: () => {
-        PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION)
-          .then(granted => {
-            if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-              this.getCurrentPosition()
-            } else {
-              this.setState({ error: 'Se requieren permisos de ubicación' })
-            }
-          });
+        PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
+        ).then(granted => {
+          if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+            this.getCurrentPosition();
+          } else {
+            this.setState({ error: 'Se requieren permisos de ubicación' });
+          }
+        });
       }
     })();
-  }
+  };
 
   getCurrentPosition = () => {
     let { region } = this.state;
     try {
       Geolocation.getCurrentPosition(
-        (position) => {
+        position => {
           let { latitude, longitude } = position.coords;
           this.setState({
             region: {
               ...region,
               latitude,
-              longitude,
+              longitude
             }
           });
           // Este cambio ejecuta automaticamente formattedAddress ya se dispara en la actualizacion de region
         },
-        (error) => this.setState({ error: error.message }),
-        { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
+        error => this.setState({ error: error.message }),
+        { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
       );
-    } catch(err) {
+    } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   formattedAddress = (lat, lng) => {
-    Geocoder.geocodePosition({lat, lng}).then(res => {
-      const { streetName, streetNumber, subLocality, locality } = res[0];
-      this.setState({
-        address: `${streetName} ${streetNumber}, ${subLocality}, ${locality}`
+    Geocoder.geocodePosition({ lat, lng })
+      .then(res => {
+        const { streetName, streetNumber, subLocality, locality } = res[0];
+        this.setState({
+          address: `${streetName} ${streetNumber}, ${subLocality}, ${locality}`
+        });
+      })
+      .catch(err => {
+        console.log(`Formatted address error: ${err}`);
       });
-    }).catch(err => {
-      console.log(`Formatted address error: ${err}`);
-    });
   };
 
   onRegionChange = region => {
@@ -111,65 +105,79 @@ class Home extends Component {
     });
 
     timer = TimerMixin.setTimeout(() => {
-      this.formattedAddress(region.latitude, region.longitude)
+      this.formattedAddress(region.latitude, region.longitude);
     }, 1100);
-  }
+  };
 
   onRegionStartChange = () => {
     TimerMixin.clearTimeout(timer);
-  }
+  };
 
   makeRequest = () => {
-    Api.get('/service_types')
-      .then(res => {
-        console.log(res.data);
-      });
-  }
+    Api.get('/service_types').then(res => {
+      console.log(res.data);
+    });
+  };
 
   handleOrder = () => {
-    this.setState({
-      isWaiting: true,
-      isServiceButtonDisabled: true
-    }, () => {
-      let { address, region: { latitude, longitude } } = this.state;
-      Api.post('/trips', {
-        address_origin: address,
-        lat_origin: latitude,
-        lng_origin: longitude,
-      }).then(res => {
-        this.setState({
-          isWaiting: false
-        }, () => {
-          if (res.status == 201){
-            this.props.navigation.navigate('AddressInfo');
-          }
-        });
-      }).catch(err => {
-        this.setState({
-          isWaiting: false,
-          errors: err.response.data.errors,
-          modalVisible: true,
-          isServiceButtonDisabled: false
+    this.setState(
+      {
+        isWaiting: true,
+        isServiceButtonDisabled: true
+      },
+      () => {
+        let {
+          address,
+          region: { latitude, longitude }
+        } = this.state;
+        Api.post('/trips', {
+          address_origin: address,
+          lat_origin: latitude,
+          lng_origin: longitude
         })
-      })
-    });
-  }
+          .then(res => {
+            this.setState(
+              {
+                isWaiting: false
+              },
+              () => {
+                if (res.status == 201) {
+                  this.props.navigation.navigate('AddressInfo');
+                }
+              }
+            );
+          })
+          .catch(err => {
+            this.setState({
+              isWaiting: false,
+              errors: [`${err.response.data.errors[0]}. Vuelve a intentarlo.`],
+              modalVisible: true,
+              isServiceButtonDisabled: false
+            });
+          });
+      }
+    );
+  };
 
-  setModalVisible = (visible) => {
+  setModalVisible = visible => {
     this.setState({
       modalVisible: visible,
       errors: visible ? this.state.errors : []
     });
-  }
+  };
 
   render() {
     let { region, error } = this.state;
     return (
       <Container contentContainerStyle={{ flex: 1, width: '100%' }}>
-        <Header style={styles.header} iosBarStyle="light-content" androidStatusBarColor="#262626">
+        <Header
+          style={styles.header}
+          iosBarStyle="light-content"
+          androidStatusBarColor="#262626"
+        >
           <View style={styles.searchWrapper}>
             <Item style={styles.searchContainer}>
-              <Icon name="ios-search" style={{ color: '#989898' }}/>
+              <Icon name="ios-search" style={{ color: '#989898' }} />
               <TextInput
                 placeholder="Selecciona tu ubicación..."
                 value={this.state.address}
@@ -181,7 +189,10 @@ class Home extends Component {
         </Header>
 
         <View style={{ flex: 1, width: '100%' }}>
-          <TouchableOpacity style={styles.buttonMenuWrapper} onPress={this.props.navigation.openDrawer}>
+          <TouchableOpacity
+            style={styles.buttonMenuWrapper}
+            onPress={this.props.navigation.openDrawer}
+          >
             <Icon style={styles.buttonMenuIcon} name="ios-arrow-forward" />
           </TouchableOpacity>
           <Modal
@@ -189,8 +200,8 @@ class Home extends Component {
             modalVisible={this.state.modalVisible}
             setModalVisible={this.setModalVisible}
           />
-          {region.latitude &&
-            <View style={{flex: 1}}>
+          {region.latitude && (
+            <View style={{ flex: 1 }}>
               <MapView
                 style={styles.map}
                 region={region}
@@ -201,10 +212,13 @@ class Home extends Component {
                 onRegionChange={this.onRegionStartChange}
               />
               <View pointerEvents="none" style={styles.markerFixed}>
-                <Icon style={styles.marker} name='ios-pin' />
+                <Icon style={styles.marker} name="ios-pin" />
               </View>
 
-              <TouchableOpacity onPress={this.updatePosition} style={styles.iconLocate}>
+              <TouchableOpacity
+                onPress={this.updatePosition}
+                style={styles.iconLocate}
+              >
                 <Icon name="md-locate" />
               </TouchableOpacity>
 
@@ -220,16 +234,15 @@ class Home extends Component {
                 </Button>
               </View>
             </View>
-          }
-          {error &&
+          )}
+          {error && (
             <View style={styles.errorView}>
               <Text style={styles.errorText}>{error}</Text>
             </View>
-          }
+          )}
         </View>
       </Container>
     );
-
   }
 }
 

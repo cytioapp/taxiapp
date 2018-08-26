@@ -5,8 +5,8 @@ const secondaryColor = '#1F120D';
 const terniaryColor = '#F6F6F6';
 
 const styles = StyleSheet.create({
-  container:{
-    flex: 1,
+  container: {
+    flex: 1
   },
   body: {
     flex: 2
@@ -14,12 +14,15 @@ const styles = StyleSheet.create({
   header: {
     backgroundColor: '#262626'
   },
+  menuIcon: {
+    fontSize: 34
+  },
   title: {
     paddingLeft: 0,
     color: '#e3c463'
   },
   cancelButtonWrapper: {
-    flex: 1,
+    flex: 1
   },
   cancelButton: {
     alignSelf: 'center',
@@ -36,7 +39,7 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     paddingBottom: 20,
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   statusText: {
     color: secondaryColor,
@@ -52,7 +55,7 @@ const styles = StyleSheet.create({
   },
   pinIcon: {
     color: '#5c5c5c',
-    fontSize: 40,
+    fontSize: 40
   },
   originText: {
     flex: 1,
@@ -65,8 +68,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     padding: 10
   },
-  driverCard: {
-  },
+  driverCard: {},
   driverCardHeader: {
     flexDirection: 'row'
   },
@@ -90,7 +92,7 @@ const styles = StyleSheet.create({
   },
   vehicleWrapper: {
     flexDirection: 'row',
-    paddingHorizontal: 40,
+    paddingHorizontal: 40
   },
   vehicleCol: {
     flex: 1
@@ -118,7 +120,7 @@ const styles = StyleSheet.create({
     borderRadius: 0
   },
   callText: {
-    fontFamily: 'Nunito-Bold',
+    fontFamily: 'Nunito-Bold'
   },
   phoneIcon: {
     marginRight: 0

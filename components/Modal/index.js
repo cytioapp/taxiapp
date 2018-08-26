@@ -1,12 +1,5 @@
 import React, { Component } from 'react';
-import {
-  Dimensions,
-  Modal,
-  StyleSheet,
-  Text,
-  TouchableHighlight,
-  View
-} from 'react-native';
+import { Dimensions, Modal, StyleSheet, Text, View } from 'react-native';
 import { Button } from 'native-base';
 const window = Dimensions.get('window');
 
@@ -44,15 +37,8 @@ const styles = StyleSheet.create({
 });
 
 export default class ErrorModal extends Component {
-  renderErrors = errors => {
-    return errors.map((error, i) => {
-      return <Text key={i}>{error.message}</Text>;
-    });
-  };
-
   render() {
     const { errors, modalVisible, setModalVisible, ...modalProps } = this.props;
-    console.log('Modal: ', this.props);
     return (
       <Modal
         animationType="slide"
@@ -64,7 +50,9 @@ export default class ErrorModal extends Component {
       >
         <View style={styles.backgroundView}>
           <View style={styles.alert}>
-            <View style={styles.messages}>{this.renderErrors(errors)}</View>
+            <View style={styles.messages}>
+              <Text>{errors[0]}</Text>
+            </View>
             <View style={styles.buttonWrapper}>
               <Button
                 rounded

@@ -71,10 +71,7 @@ export default class ChangePassword extends Component {
         this.setState({
           isWaiting: false,
           alerts: [
-            {
-              message:
-                'Se envió un correo a tu email que te dirá cómo cambiar tu contraseña, sigue las instrucciones y regresa de nuevo a la aplicación para loguearte.'
-            }
+            'Se envió un correo a tu email que te dirá cómo cambiar tu contraseña, sigue las instrucciones y regresa de nuevo a la aplicación para loguearte.'
           ],
           modalVisible: true
         });
@@ -82,7 +79,7 @@ export default class ChangePassword extends Component {
       .catch(() => {
         this.setState({
           isWaiting: false,
-          alerts: [{ message: 'Ha ocurrido un error, vuelve a intentarlo' }],
+          alerts: ['Ha ocurrido un error, vuelve a intentarlo'],
           modalVisible: true
         });
       });
