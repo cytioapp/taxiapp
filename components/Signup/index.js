@@ -66,7 +66,8 @@ export default class Signup extends Component {
     email: '',
     password: '',
     repeated_password: '',
-    hidePassword: true
+    hidePassword: true,
+    hideCopyPassword: true
   };
 
   render() {
@@ -131,7 +132,7 @@ export default class Signup extends Component {
                 <Icon active name="lock" style={{ color: 'white' }} />
                 <Input
                   placeholder="Repite la contraseña"
-                  secureTextEntry={this.state.hidePassword}
+                  secureTextEntry={this.state.hideCopyPassword}
                   onChangeText={repeated_password =>
                     this.setState({ repeated_password })
                   }
@@ -141,7 +142,9 @@ export default class Signup extends Component {
                 />
                 <TouchableOpacity
                   onPress={() =>
-                    this.setState({ hidePassword: !this.state.hidePassword })
+                    this.setState({
+                      hideCopyPassword: !this.state.hideCopyPassword
+                    })
                   }
                 >
                   <Icon active name="eye" style={{ color: 'white' }} />
