@@ -31,7 +31,6 @@ class SessionState extends Container {
         }
       })
       .catch(err => {
-        console.log('Login error', err.response.data.errors);
         this.setState({ loginErrors: err.response.data.errors });
       });
   };
@@ -104,8 +103,9 @@ class SessionState extends Container {
           this.setState({ errors: false });
         })
         .catch(err => {
-          console.log('Signup error', err.response);
-          alert('Ha ocurrido un error al intentar registrarte');
+          alert(
+            'Ha ocurrido un error al intentar registrarte, vuelve a intentarlo.'
+          );
         });
     }
   };

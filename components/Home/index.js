@@ -11,14 +11,14 @@ class Home extends Component {
         } else {
           this.props.navigation.navigate('Map');
         }
-      }).catch(err => {
+      })
+      .catch(err => {
         if (err.response.status == 401) {
           this.props.screenProps.session.logout();
         }
-        console.log(err.response);
       });
   }
-  
+
   render() {
     return <Loading />;
   }

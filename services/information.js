@@ -9,7 +9,7 @@ const getActiveTrip = () => {
   return new Promise(async (resolve, reject) => {
     try {
       let active_trip = await Api.get('/users/active_trip');
-  
+
       if (active_trip.data && active_trip.data.active) {
         let { trip } = active_trip.data;
         let { id, address_origin, status, created_at, user_id } = trip;
@@ -30,19 +30,18 @@ const getActiveTrip = () => {
             organization,
             license_plate,
             model,
-            year,
+            year
           };
         }
         return resolve(response);
       }
-    } catch(err) {
-      console.log(err.response);
+    } catch (err) {
       return reject(err);
     }
-  }) 
-}
+  });
+};
 
-const parseTrip = (tripInfo) => {
+const parseTrip = tripInfo => {
   let trip = {
     driver_name: '',
     driver_id: null,
@@ -62,12 +61,12 @@ const parseTrip = (tripInfo) => {
       organization,
       license_plate,
       model,
-      year,
+      year
     };
   }
   let { status } = tripInfo;
-  
+
   return { status, ...trip };
-}
+};
 
 export { getActiveTrip, parseTrip };

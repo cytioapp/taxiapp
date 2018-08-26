@@ -76,9 +76,7 @@ export default class AddressInfo extends Component {
       .on('value', snapshot => {
         let trip = snapshot.val();
         if (trip) {
-          this.setState(parseTrip(trip), () => {
-            console.log(this.state);
-          });
+          this.setState(parseTrip(trip));
         } else if (!trip && counter) {
           getActiveTrip()
             .then(res => {
