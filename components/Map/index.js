@@ -150,7 +150,7 @@ class Home extends Component {
           .catch(err => {
             this.setState({
               isWaiting: false,
-              errors: err.response.data.errors,
+              errors: [`${err.response.data.errors[0]}. Vuelve a intentarlo.`],
               modalVisible: true,
               isServiceButtonDisabled: false
             });

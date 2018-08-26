@@ -1,12 +1,5 @@
 import React, { Component } from 'react';
-import {
-  Dimensions,
-  Modal,
-  StyleSheet,
-  Text,
-  TouchableHighlight,
-  View
-} from 'react-native';
+import { Dimensions, Modal, StyleSheet, Text, View } from 'react-native';
 import { Button } from 'native-base';
 const window = Dimensions.get('window');
 
@@ -58,7 +51,7 @@ export default class ErrorModal extends Component {
         <View style={styles.backgroundView}>
           <View style={styles.alert}>
             <View style={styles.messages}>
-              <Text>{`${errors[0]}. Vuelve a intentarlo.`}</Text>
+              <Text>{errors[0]}</Text>
             </View>
             <View style={styles.buttonWrapper}>
               <Button

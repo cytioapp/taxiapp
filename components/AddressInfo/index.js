@@ -136,7 +136,11 @@ export default class AddressInfo extends Component {
           })
           .catch(err => {
             err.response.data.errors
-              ? (err = err.response.data.errors)
+              ? (err = [
+                  `${
+                    err.response.data.errors[0]
+                  }. El viaje no puede cancelarse después de 1 minuto que el taxista lo haya aceptado.`
+                ])
               : (err = [
                   'No fue posible cancelar el viaje, porfavor inténtalo de nuevo'
                 ]);
