@@ -15,6 +15,7 @@ import Api from '../../utils/api';
 import Modal from '../Modal';
 import styles from './style';
 import TimerMixin from 'react-timer-mixin';
+import SimpleLoading from '../SimpleLoading';
 
 var timer;
 
@@ -34,11 +35,13 @@ class Home extends Component {
       isServiceButtonDisabled: false,
       isWaiting: false,
       modalVisible: false,
-      drawerVisible: false
+      drawerVisible: false,
+      isWaitingSimple: false
     };
   }
 
   componentDidMount() {
+    this.setState({ isWaitingSimple: true });
     this.updatePosition();
   }
 
@@ -78,7 +81,8 @@ class Home extends Component {
           });
           // Este cambio ejecuta automaticamente formattedAddress ya se dispara en la actualizacion de region
         },
-        error => this.setState({ error: error.message }),
+        error =>
+          this.setState({ error: error.message, isWaitingSimple: false }),
         { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
       );
     } catch (err) {
@@ -91,10 +95,12 @@ class Home extends Component {
       .then(res => {
         const { streetName, streetNumber, subLocality, locality } = res[0];
         this.setState({
-          address: `${streetName} ${streetNumber}, ${subLocality}, ${locality}`
+          address: `${streetName} ${streetNumber}, ${subLocality}, ${locality}`,
+          isWaitingSimple: false
         });
       })
       .catch(err => {
+        this.setState({ isWaitingSimple: false });
         console.log(`Formatted address error: ${err}`);
       });
   };
@@ -170,6 +176,7 @@ class Home extends Component {
     let { region, error } = this.state;
     return (
       <Container contentContainerStyle={{ flex: 1, width: '100%' }}>
+        {this.state.isWaitingSimple && <SimpleLoading />}
         <Header
           style={styles.header}
           iosBarStyle="light-content"
