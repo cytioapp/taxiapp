@@ -30,7 +30,8 @@ const getActiveTrip = () => {
             organization,
             license_plate,
             model,
-            year
+            year,
+            phone_number: trip.driver.phone_number
           };
         }
         return resolve(response);
@@ -48,12 +49,13 @@ const parseTrip = tripInfo => {
     organization: '',
     license_plate: '',
     model: '',
-    year: ''
+    year: '',
+    phone_number: ''
   };
 
   if (tripInfo.driver) {
     let { driver, vehicle } = tripInfo;
-    let { user, id } = driver;
+    let { user, id, phone_number } = driver;
     let { organization, model, year, license_plate } = vehicle;
     trip = {
       driver_name: user.full_name,
@@ -61,7 +63,8 @@ const parseTrip = tripInfo => {
       organization,
       license_plate,
       model,
-      year
+      year,
+      phone_number
     };
   }
   let { status } = tripInfo;

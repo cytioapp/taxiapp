@@ -6,11 +6,11 @@ import {
   Container,
   Content,
   Header,
+  Icon,
   Left,
   Right,
   Text,
-  Title,
-  Icon
+  Title
 } from 'native-base';
 import VIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Spinner from 'react-native-spinkit';
@@ -47,7 +47,8 @@ export default class AddressInfo extends Component {
       show_menu: true,
       isWaiting: false,
       errors: [],
-      modalVisible: false
+      modalVisible: false,
+      phone_number: ''
     };
   }
 
@@ -171,6 +172,7 @@ export default class AddressInfo extends Component {
       license_plate,
       model,
       year,
+      phone_number,
       driver_id
     } = this.state;
 
@@ -221,7 +223,9 @@ export default class AddressInfo extends Component {
             </View>
 
             {driver_id &&
-              organization && <Driver {...{ driver_name, organization }} />}
+              organization && (
+                <Driver {...{ driver_name, organization, phone_number }} />
+              )}
 
             <View style={styles.messageWrapper}>
               <View style={styles.message}>
