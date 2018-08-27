@@ -1,11 +1,20 @@
 import React from 'react';
-import { View, Image } from 'react-native';
+import { View, Image, PermissionsAndroid } from 'react-native';
 import { Icon, Text, Button } from 'native-base';
 import StarsRate from './StarsRate';
 import styles from './style';
 import profileHolder from '../../assets/profile.png';
+import call from 'react-native-phone-call';
 
-const Driver = ({ driver_name, organization: { name } }) => {
+const Driver = ({ driver_name, phone_number, organization: { name } }) => {
+  makeCall = () => {
+    const args = {
+      number: phone_number,
+      prompt: false
+    };
+    call(args).catch(err => alert(err));
+  };
+
   return (
     <View style={styles.driverInfoWrapper}>
       <View style={styles.driverImageWrapper}>
@@ -28,7 +37,7 @@ const Driver = ({ driver_name, organization: { name } }) => {
       </View>
 
       <View style={styles.callDriverWrapper}>
-        <Button style={styles.callDriverButton}>
+        <Button style={styles.callDriverButton} onPress={() => this.makeCall()}>
           <Icon name="ios-call" style={styles.phoneIcon} />
           <Text style={styles.callText}>Llamar al conductor</Text>
         </Button>
