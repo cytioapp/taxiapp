@@ -3,8 +3,8 @@ import { Container } from 'unstated';
 import Api from '../utils/api';
 
 const options = {
-  sharedPreferencesName: 'taxiapp',
-  keychainService: 'taxiapp'
+  sharedPreferencesName: 'cytiouser',
+  keychainService: 'cytiouser'
 };
 
 class SessionState extends Container {
