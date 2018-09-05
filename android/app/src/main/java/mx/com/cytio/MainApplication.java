@@ -1,4 +1,4 @@
-package com.cytiouser;
+package mx.com.cytio;
 
 import android.app.Application;
 

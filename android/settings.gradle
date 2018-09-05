@@ -1,4 +1,4 @@
-rootProject.name = 'cytiouser'
+rootProject.name = 'cytio'
 include ':react-native-spinkit'
 project(':react-native-spinkit').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-spinkit/android')
 include ':react-native-sensitive-info'

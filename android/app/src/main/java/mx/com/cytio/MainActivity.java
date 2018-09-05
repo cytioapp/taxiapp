@@ -1,4 +1,4 @@
-package com.cytiouser;
+package mx.com.cytio;
 
 import com.facebook.react.ReactActivity;
 
@@ -10,6 +10,6 @@ public class MainActivity extends ReactActivity {
      */
     @Override
     protected String getMainComponentName() {
-        return "cytiouser";
+        return "cytio";
     }
 }
