@@ -47,8 +47,6 @@
 		41F88CCC78584F03B416FC57 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6B3D2D64529047B0973117C4 /* Feather.ttf */; };
 		4373815CC3EF4FE5BB5E458F /* Nunito-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D858EAB9A53445FFB494F151 /* Nunito-ExtraLightItalic.ttf */; };
 		4E70018EEB504398845A7DE9 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D78728BB74204CA9930A7CF6 /* Feather.ttf */; };
-		5059980B2CED47F79FE88F43 /* libRNSensitiveInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EF91E8993044AD2883C4D5A /* libRNSensitiveInfo.a */; };
-		51C85A06210941D70084CFB1 /* libRNSpinkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 51C85A03210941AE0084CFB1 /* libRNSpinkit.a */; };
 		55CA2D386A0E4AA4B573FE19 /* Nunito-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5895797F73374E2D96DE60E7 /* Nunito-Italic.ttf */; };
 		5BCB50BD290E4552812F6B32 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9C7CFF36054D465796F60991 /* Entypo.ttf */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
@@ -502,9 +500,7 @@
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
-				51C85A06210941D70084CFB1 /* libRNSpinkit.a in Frameworks */,
 				1BF27C0E28B038A7CCE6BB10 /* libPods-taxiapp.a in Frameworks */,
-				5059980B2CED47F79FE88F43 /* libRNSensitiveInfo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

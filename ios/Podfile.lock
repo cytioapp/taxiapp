@@ -37,6 +37,8 @@ PODS:
     - React
   - react-native-maps (0.21.0):
     - React
+  - react-native-spinkit (1.0.2):
+    - React
   - React/Core (0.56.0):
     - yoga (= 0.56.0.React)
   - React/CxxBridge (0.56.0):
@@ -82,7 +84,7 @@ PODS:
     - React/Core
     - React/fishhook
     - React/RCTBlob
-  - RNVectorIcons (4.6.0):
+  - RNVectorIcons (5.0.0):
     - React
   - yoga (0.56.0.React)
 
@@ -95,6 +97,7 @@ DEPENDENCIES:
   - react-native-geocoder (from `../node_modules/react-native-geocoder`)
   - react-native-google-maps (from `../node_modules/react-native-maps`)
   - react-native-maps (from `../node_modules/react-native-maps`)
+  - react-native-spinkit (from `../node_modules/react-native-spinkit`)
   - React/Core (from `../node_modules/react-native`)
   - React/CxxBridge (from `../node_modules/react-native`)
   - React/DevSupport (from `../node_modules/react-native`)
@@ -132,6 +135,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-maps"
   react-native-maps:
     :path: "../node_modules/react-native-maps"
+  react-native-spinkit:
+    :path: "../node_modules/react-native-spinkit"
   RNVectorIcons:
     :path: "../node_modules/react-native-vector-icons"
   yoga:
@@ -148,9 +153,10 @@ SPEC CHECKSUMS:
   react-native-geocoder: 33b16a5929aa868fef37acb4f7ee10a428cd5fff
   react-native-google-maps: 2cfe3b01f8422c7dae51d8764139fd70f888cfce
   react-native-maps: 066c2afcc89e18726377bcc685315f989ca22449
+  react-native-spinkit: c9f5826e1a0bf0da889b3795278eb96ae15c1350
   RNVectorIcons: c0dbfbf6068fefa240c37b0f71bd03b45dddac44
   yoga: b1ce48b6cf950b98deae82838f5173ea7cf89e85
 
-PODFILE CHECKSUM: c5caef8fab140f72e2efbd2857f38cd7f3444d2f
+PODFILE CHECKSUM: 70a466790fc1429fbf2bbec7ea05d9b6da58ba6d
 
 COCOAPODS: 1.5.3
