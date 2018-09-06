@@ -37,6 +37,8 @@ PODS:
     - React
   - react-native-maps (0.21.0):
     - React
+  - react-native-sensitive-info (5.2.4):
+    - React
   - react-native-spinkit (1.0.2):
     - React
   - React/Core (0.56.0):
@@ -97,6 +99,7 @@ DEPENDENCIES:
   - react-native-geocoder (from `../node_modules/react-native-geocoder`)
   - react-native-google-maps (from `../node_modules/react-native-maps`)
   - react-native-maps (from `../node_modules/react-native-maps`)
+  - react-native-sensitive-info (from `../node_modules/react-native-sensitive-info`)
   - react-native-spinkit (from `../node_modules/react-native-spinkit`)
   - React/Core (from `../node_modules/react-native`)
   - React/CxxBridge (from `../node_modules/react-native`)
@@ -135,6 +138,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-maps"
   react-native-maps:
     :path: "../node_modules/react-native-maps"
+  react-native-sensitive-info:
+    :path: "../node_modules/react-native-sensitive-info"
   react-native-spinkit:
     :path: "../node_modules/react-native-spinkit"
   RNVectorIcons:
@@ -153,10 +158,11 @@ SPEC CHECKSUMS:
   react-native-geocoder: 33b16a5929aa868fef37acb4f7ee10a428cd5fff
   react-native-google-maps: 2cfe3b01f8422c7dae51d8764139fd70f888cfce
   react-native-maps: 066c2afcc89e18726377bcc685315f989ca22449
+  react-native-sensitive-info: f78f6471a8ee7de67e11ffccc7060eb93b969ef5
   react-native-spinkit: c9f5826e1a0bf0da889b3795278eb96ae15c1350
   RNVectorIcons: c0dbfbf6068fefa240c37b0f71bd03b45dddac44
   yoga: b1ce48b6cf950b98deae82838f5173ea7cf89e85
 
-PODFILE CHECKSUM: 70a466790fc1429fbf2bbec7ea05d9b6da58ba6d
+PODFILE CHECKSUM: 7e7f52ab91deb7d5580b42257e2b3ee06e1b4800
 
 COCOAPODS: 1.5.3
