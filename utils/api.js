@@ -4,8 +4,8 @@ import axios from 'axios';
 class Api {
   static headers = async function(contentType) {
     const options = {
-      sharedPreferencesName: 'taxiapp',
-      keychainService: 'taxiapp'
+      sharedPreferencesName: 'cytiouser',
+      keychainService: 'cytiouser'
     };
     const jwt = await SInfo.getItem('jwt', options);
     let auth_header = 'Bearer ' + jwt;
