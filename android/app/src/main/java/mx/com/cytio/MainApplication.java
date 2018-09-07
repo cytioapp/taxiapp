@@ -3,6 +3,7 @@ package mx.com.cytio;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import io.invertase.firebase.RNFirebasePackage;
 import com.react.rnspinkit.RNSpinkitPackage;
 import br.com.classapp.RNSensitiveInfo.RNSensitiveInfoPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -29,6 +30,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNFirebasePackage(),
             new RNSpinkitPackage(),
             new RNSensitiveInfoPackage(),
             new VectorIconsPackage(),
