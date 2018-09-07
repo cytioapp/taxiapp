@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
 
 const SimpleLoading = () => {
   return (
-    <Modal animationType="fade" transparent={true}>
+    <Modal animationType="fade" transparent={true} onRequestClose={() => {}}>
       <View style={styles.backgroundView}>
         <Spinner color="#1F120D" />
       </View>
