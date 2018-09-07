@@ -15,7 +15,6 @@ import Api from '../../utils/api';
 import Modal from '../Modal';
 import styles from './style';
 import TimerMixin from 'react-timer-mixin';
-import SimpleLoading from '../SimpleLoading';
 
 var timer;
 
@@ -36,12 +35,11 @@ class Home extends Component {
       isWaiting: false,
       modalVisible: false,
       drawerVisible: false,
-      isWaitingSimple: false
+      isWaitingLocation: false
     };
   }
 
   componentDidMount() {
-    this.setState({ isWaitingSimple: true });
     this.updatePosition();
   }
 
@@ -82,7 +80,7 @@ class Home extends Component {
           // Este cambio ejecuta automaticamente formattedAddress ya se dispara en la actualizacion de region
         },
         error =>
-          this.setState({ error: error.message, isWaitingSimple: false }),
+          this.setState({ error: error.message }),
         { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
       );
     } catch (err) {
@@ -96,20 +94,21 @@ class Home extends Component {
         const { streetName, streetNumber, subLocality, locality } = res[0];
         this.setState({
           address: `${streetName} ${streetNumber}, ${subLocality}, ${locality}`,
-          isWaitingSimple: false
+          isWaitingLocation: false,
+          isServiceButtonDisabled: false
         });
       })
       .catch(err => {
-        this.setState({ isWaitingSimple: false });
         console.log(`Formatted address error: ${err}`);
       });
   };
 
   onRegionChange = region => {
     this.setState({
-      region
+      region,
     });
 
+    this.setState({ isWaitingLocation: true, isServiceButtonDisabled: true })
     timer = TimerMixin.setTimeout(() => {
       this.formattedAddress(region.latitude, region.longitude);
     }, 1100);
@@ -176,7 +175,6 @@ class Home extends Component {
     let { region, error } = this.state;
     return (
       <Container contentContainerStyle={{ flex: 1, width: '100%' }}>
-        {this.state.isWaitingSimple && <SimpleLoading />}
         <Header
           style={styles.header}
           iosBarStyle="light-content"
@@ -236,8 +234,7 @@ class Home extends Component {
                   onPress={this.handleOrder}
                   disabled={this.state.isServiceButtonDisabled}
                 >
-                  <Text style={styles.buttonText}> Solicitar servicio </Text>
-                  {this.state.isWaiting && <Spinner color="black" />}
+                  {!(this.state.isWaitingLocation || this.state.isWaiting) ? <Text style={styles.buttonText}> Solicitar servicio </Text> : <Spinner color="black" />}
                 </Button>
               </View>
             </View>
