@@ -8,14 +8,15 @@
 @import GoogleMaps; //add this line if you want to use Google Maps
 
 #import "AppDelegate.h"
+#import <Firebase.h>
 
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 
 @implementation AppDelegate
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  [FIRApp configure];
   [GMSServices provideAPIKey:@"AIzaSyCc1VdHEAkYyTeRiUjTxJJAYECgfm5JOrw"]; // add this line using the api key obtained from Google Console
   NSURL *jsCodeLocation;
 

@@ -21,12 +21,7 @@ import { getActiveTrip, parseTrip } from '../../services/information';
 import Loading from '../Loading';
 import Modal from '../Modal';
 import Driver from './Driver';
-import firebase from 'firebase';
-import firebaseConfig from '../../firebaseconfig.json';
-
-if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig);
-}
+import firebase from 'react-native-firebase';
 
 export default class AddressInfo extends Component {
   constructor() {
