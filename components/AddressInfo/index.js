@@ -61,6 +61,24 @@ export default class AddressInfo extends Component {
       .catch(err => {
         this.props.navigation.navigate('Login');
       });
+    
+    firebase.messaging().requestPermission()
+      .then(() => {
+        // User has authorised  
+        firebase.messaging().getToken()
+          .then(fcmToken => {
+            if (fcmToken) {
+              Api.put('/users/profile', { device_id: fcmToken }).then(res => {
+                console.log(res)
+              });
+            } else {
+              // user doesn't have a device token yet
+            }
+          });
+      })
+      .catch(error => {
+        // User has rejected permissions  
+      });
   }
 
   monitorTrip = () => {

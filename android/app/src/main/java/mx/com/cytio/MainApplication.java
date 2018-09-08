@@ -5,6 +5,7 @@ import android.app.Application;
 import com.facebook.react.ReactApplication;
 import io.invertase.firebase.RNFirebasePackage;
 import io.invertase.firebase.database.RNFirebaseDatabasePackage;
+import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
 import com.react.rnspinkit.RNSpinkitPackage;
 import br.com.classapp.RNSensitiveInfo.RNSensitiveInfoPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -33,6 +34,7 @@ public class MainApplication extends Application implements ReactApplication {
           new MainReactPackage(),
             new RNFirebasePackage(),
             new RNFirebaseDatabasePackage(),
+            new RNFirebaseMessagingPackage(),
             new RNSpinkitPackage(),
             new RNSensitiveInfoPackage(),
             new VectorIconsPackage(),
