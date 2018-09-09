@@ -6,7 +6,7 @@ import styles from './style';
 import profileHolder from '../../assets/profile.png';
 import call from 'react-native-phone-call';
 
-const Driver = ({ driver_name, phone_number, organization: { name } }) => {
+const Driver = ({ driver_name, phone_number, number, rate, organization: { name } }) => {
   makeCall = () => {
     const args = {
       number: phone_number,
@@ -21,19 +21,19 @@ const Driver = ({ driver_name, phone_number, organization: { name } }) => {
         <Image style={styles.driverImage} source={profileHolder} />
         <Text style={styles.driverLabel}>Conductor:</Text>
         <Text style={styles.driverName}>{driver_name}</Text>
-        <StarsRate stars={5} rate={0} />
+        <StarsRate stars={5} rate={5} />
       </View>
 
       <View style={styles.vehicleWrapper}>
-        <View style={styles.vehicleCol}>
+        {/* <View style={styles.vehicleCol}>
           <Text style={styles.vehicleLabel}>Sitio</Text>
           <Text style={styles.vehicleText}>{name}</Text>
-        </View>
-
-        {/* <View style={styles.vehicleCol}>
-          <Text style={styles.vehicleLabel}>Taxi</Text>
-          <Text style={styles.vehicleText}>D035</Text>
         </View> */}
+
+        <View style={styles.vehicleCol}>
+          <Text style={styles.vehicleLabel}>Taxi</Text>
+          <Text style={styles.vehicleText}>{name} {number}</Text>
+        </View>
       </View>
 
       <View style={styles.callDriverWrapper}>
