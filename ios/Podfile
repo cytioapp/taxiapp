@@ -47,6 +47,7 @@ target 'cytio' do
   # Required by RNFirebase
   pod 'Firebase/Core', '~> 5.3.0'
   pod 'Firebase/Database', '~> 5.3.0'
+  pod 'Firebase/Messaging', '~> 5.3.0'
 
 end
 
