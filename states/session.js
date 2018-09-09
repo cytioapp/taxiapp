@@ -78,6 +78,13 @@ class SessionState extends Container {
       return false;
     }
 
+    if (data.phone_number.length < 6) {
+      this.setState({
+        signupErrors: ['El número teléfonico no cumple la longitud minima']
+      });
+      return false;
+    }
+
     if (data.password.length < 6) {
       this.setState({
         signupErrors: ['La contraseña debe tener mínimo 6 caracteres']

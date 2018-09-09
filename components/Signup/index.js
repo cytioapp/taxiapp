@@ -66,6 +66,7 @@ export default class Signup extends Component {
     email: '',
     password: '',
     repeated_password: '',
+    phone_number: '',
     hidePassword: true,
     hideCopyPassword: true
   };
@@ -150,6 +151,20 @@ export default class Signup extends Component {
                   <Icon active name="eye" style={{ color: 'white' }} />
                 </TouchableOpacity>
               </Item>
+
+              <Item style={styles.item}>
+                <Icon active name="ios-phone-portrait" style={{ color: 'white' }} />
+                <Input
+                  placeholder="Teléfono"
+                  onChangeText={phone_number =>
+                    this.setState({ phone_number })
+                  }
+                  value={this.state.phone_number}
+                  placeholderTextColor="white"
+                  style={styles.input}
+                />
+              </Item>
+              <View style={{ paddingHorizontal: 15 }} />
             </View>
 
             <View style={styles.signupButtonWrapper}>

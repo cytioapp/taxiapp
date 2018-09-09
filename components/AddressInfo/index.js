@@ -34,8 +34,9 @@ export default class AddressInfo extends Component {
       status: '',
       created_at: null,
       driver_name: '',
+      rate: 0,
       driver_id: null,
-      organization: '',
+      organization: null,
       license_plate: '',
       model: '',
       year: '',
@@ -43,6 +44,7 @@ export default class AddressInfo extends Component {
       isWaiting: false,
       errors: [],
       modalVisible: false,
+      number: '',
       phone_number: ''
     };
   }
@@ -181,13 +183,17 @@ export default class AddressInfo extends Component {
       status,
       created_at,
       driver_name,
+      rate,
       organization,
       license_plate,
       model,
       year,
+      number,
       phone_number,
       driver_id
     } = this.state;
+
+    //console.log(this.state)
 
     return (
       <Container style={styles.container}>
@@ -237,7 +243,7 @@ export default class AddressInfo extends Component {
 
             {driver_id &&
               organization && (
-                <Driver {...{ driver_name, organization, phone_number }} />
+                <Driver {...{ driver_name, organization, phone_number, number, rate }} />
               )}
 
             <View style={styles.messageWrapper}>
