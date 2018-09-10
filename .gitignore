@@ -31,6 +31,7 @@ android/app/release/
 .gradle
 local.properties
 *.iml
+google-services.json
 
 # node.js
 #
