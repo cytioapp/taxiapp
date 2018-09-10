@@ -58,6 +58,13 @@ export default class DrawerMenu extends React.Component {
                   </Text>
                 </View>
               </TouchableHighlight>
+              <TouchableHighlight onPress={() => this.props.navigation.navigate('Directory')} underlayColor={underlayColor}>
+                <View style={styles.item}>
+                  <Text style={styles.itemText}>
+                    Directorio Telefónico
+                  </Text>
+                </View>
+              </TouchableHighlight>
               <TouchableHighlight onPress={session.logout} underlayColor={underlayColor}>
                 <View style={styles.item}>
                   <Text style={styles.itemText}>

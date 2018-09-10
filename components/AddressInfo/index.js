@@ -22,6 +22,7 @@ import Loading from '../Loading';
 import Modal from '../Modal';
 import Driver from './Driver';
 import firebase from 'react-native-firebase';
+import TimerMixin from 'react-timer-mixin';
 
 export default class AddressInfo extends Component {
   constructor() {
@@ -45,11 +46,18 @@ export default class AddressInfo extends Component {
       errors: [],
       modalVisible: false,
       number: '',
-      phone_number: ''
+      phone_number: '',
+      showMessage: false
     };
   }
 
   componentDidMount() {
+    TimerMixin.setTimeout(() => {
+      this.setState({
+        showMessage: true
+      });
+    }, 480000);
+
     getActiveTrip()
       .then(res => {
         if (res.user) {
@@ -122,6 +130,7 @@ export default class AddressInfo extends Component {
           this.setState({ status: 'finished' });
         }
       });
+    
   };
 
   handleCancel = () => {
@@ -136,7 +145,7 @@ export default class AddressInfo extends Component {
     );
   };
 
-  cancelTrip = () => {
+  cancelTrip = (Route = 'Map') => {
     this.setState(
       {
         isWaiting: true
@@ -148,7 +157,7 @@ export default class AddressInfo extends Component {
               status: 'canceled',
               isWaiting: false
             });
-            this.props.navigation.navigate('Map');
+            this.props.navigation.navigate(Route);
           })
           .catch(err => {
             err.response.data.errors
@@ -190,10 +199,9 @@ export default class AddressInfo extends Component {
       year,
       number,
       phone_number,
-      driver_id
+      driver_id,
+      showMessage
     } = this.state;
-
-    //console.log(this.state)
 
     return (
       <Container style={styles.container}>
@@ -207,7 +215,7 @@ export default class AddressInfo extends Component {
             <Button transparent onPress={this.props.navigation.openDrawer}>
               <Icon
                 style={styles.menuIcon}
-                name="menu"
+                name="ios-menu"
                 style={{ color: '#e3c463' }}
               />
             </Button>
@@ -250,6 +258,7 @@ export default class AddressInfo extends Component {
               <View style={styles.message}>
                 <Text style={styles.messageText}>{spinnerMessage[status]}</Text>
               </View>
+              
               {spinnerColor[status] && (
                 <Spinner
                   style={styles.spinner}
@@ -259,6 +268,31 @@ export default class AddressInfo extends Component {
                   color={spinnerColor[status]}
                 />
               )}
+
+              {(status == 'holding' && showMessage) && 
+                <View style={{ width: '100%' }}>
+                  <View style={styles.message}>
+                    <Text style={styles.messageText}>
+                      Hay pocos choferes disponibles, puedes ayudarnos invitando a más taxistas a unirse al proyecto para modernizar el servicio.
+                    </Text>
+                  </View>
+                  <View style={styles.message}>
+                    <Text style={styles.messageText}>
+                      ¡Con tu ayuda lo lograremos!
+                    </Text>
+                  </View>
+                  <View style={styles.message}>
+                    <Text style={styles.messageText}>
+                      www.cytio.com.mx/taxista
+                    </Text>
+                  </View>
+                  <View style={styles.message}>
+                    <Button transparent onPress={() => this.cancelTrip('Directory')}>
+                      <Text>¿No quieres esperar?</Text>
+                    </Button>
+                  </View>
+                </View>
+              }
             </View>
 
             {status !== 'finished' && (

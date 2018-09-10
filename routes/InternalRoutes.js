@@ -6,6 +6,7 @@ import DrawerMenu from '../components/DrawerMenu';
 import Profile from '../components/Profile';
 import EditName from '../components/EditName';
 import EditEmail from '../components/EditEmail';
+import Directory from '../components/Directory';
 
 export default createDrawerNavigator({
   Home: {
@@ -25,6 +26,9 @@ export default createDrawerNavigator({
   },
   EditName: {
     screen: EditName
+  },
+  Directory: {
+    screen: Directory
   }
 
 },{
