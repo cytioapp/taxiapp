@@ -38,7 +38,7 @@ export default class Profile extends Component {
           <View style={styles.headerTop}>
             <Left style={styles.leftHeader}>
               <Button transparent onPress={this.props.navigation.openDrawer}>
-                <Icon name="menu" style={styles.menuIcon} />
+                <Icon name="ios-menu" style={styles.menuIcon} />
               </Button>
             </Left>
             <Body />
