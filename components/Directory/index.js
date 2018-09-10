@@ -9,8 +9,20 @@ export default class EditEmail extends Component {
   state = {
     sitios: [
       {
-        name: 'Sitio Libertad',
+        name: 'Radio Taxi 1',
+        phone_number: '3114848'
+      },
+      {
+        name: 'Radio Taxi 2',
+        phone_number: '3114949'
+      },
+      {
+        name: 'Sitio Libertad 1',
         phone_number: '3120003'
+      },
+      {
+        name: 'Sitio Libertad 2',
+        phone_number: '3121446'
       },
       {
         name: 'Sitio Madero y Juarez',
