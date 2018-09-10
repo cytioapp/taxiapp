@@ -32,6 +32,7 @@ android/app/release/
 local.properties
 *.iml
 google-services.json
+GoogleService-Info.plist
 
 # node.js
 #
