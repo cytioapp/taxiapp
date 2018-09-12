@@ -7,8 +7,11 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View
+  View,
+  Modal,
+  WebView
 } from 'react-native';
+import { Icon } from 'native-base';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import logo2 from '../../assets/logo2.png';
 import fondo2 from '../../assets/fondo2.jpg';
@@ -54,19 +57,44 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     borderColor: 'transparent',
     marginVertical: 15
+  },
+  termsModal: {
+    flex: 1,
+    alignItems: 'center'
+  },
+  termsModalText: {
+    color: '#fff',
+    fontSize: 20,
+    marginLeft: 15,
+    marginTop: 10
+  },
+  termsModalCloseBtn: {
+    alignItems: 'flex-start',
+    backgroundColor: '#E3C463',
+    paddingTop: 10,
+    paddingBottom: 5
+  },
+  termsModalWebView: {
+    marginTop: 5,
+    width: 400,
+    flex: 1,
+    paddingLeft: 10,
+    paddingRight: 10
   }
 });
 
 export default class AuthLayout extends Component {
-  openTermsAndConditions = () => {
-    var url = 'http://www.cytio.com.mx/terminos_y_condiciones';
-    Linking.canOpenURL(url).then(supported => {
-      if (supported) {
-        Linking.openURL(url);
-      } else {
-        console.log('No se pudo abrir la uri' + url);
+
+  state = {
+    modalVisible: false,
+  };
+
+  toggleTermsAndConditions = () => {
+    this.setState((oldState) => {
+      return {
+        modalVisible: !oldState.modalVisible
       }
-    });
+    })
   };
 
   render(){
@@ -81,6 +109,27 @@ export default class AuthLayout extends Component {
         <ImageBackground source={fondo2} style={styles.backgroundImage}>
           <View style={styles.completeContainer}>
             <View style={styles.content}>
+              <Modal
+                animationType="slide"
+                transparent={false}
+                visible={this.state.modalVisible}
+                onRequestClose={() => {}}>
+                <View style={styles.termsModalCloseBtn}>
+                  <TouchableOpacity onPress={this.toggleTermsAndConditions}>
+                    <Text style={styles.termsModalText}>
+                      <Icon ios='ios-arrow-round-back' android="md-arrow-round-back" style={{ color: '#fff', fontSize: 20 }} />
+                      &nbsp;
+                      Regresar
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+                <View style={styles.termsModal}>
+                  <WebView
+                    source={{uri: 'https://www.cytio.com.mx/terminos_y_condiciones'}} 
+                    style={styles.termsModalWebView}
+                  />
+                </View>
+              </Modal>  
               <View style={styles.logoContainer}>
                 <Image source={logo2} style={styles.logoImage}/>
               </View>
@@ -89,7 +138,7 @@ export default class AuthLayout extends Component {
               </View>
             </View>
             <View style={styles.footer}>
-              <TouchableOpacity onPress={this.openTermsAndConditions}>
+              <TouchableOpacity onPress={this.toggleTermsAndConditions}>
                 <Text style={styles.termsTextButton}>
                   Términos, condiciones y aviso de privacidad
                 </Text>
