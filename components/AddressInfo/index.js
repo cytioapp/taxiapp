@@ -146,11 +146,7 @@ export default class AddressInfo extends Component {
   };
 
   cancelTrip = (Route = 'Map') => {
-    this.setState(
-      {
-        isWaiting: true
-      },
-      () => {
+    this.setState({ isWaiting: true }, () => {
         Api.put(`/users/cancel_trip`)
           .then(res => {
             this.setState({
@@ -160,18 +156,15 @@ export default class AddressInfo extends Component {
             this.props.navigation.navigate(Route);
           })
           .catch(err => {
-            err.response.data.errors
-              ? (err = [
-                  `${
-                    err.response.data.errors[0]
-                  }. El viaje no puede cancelarse después de 1 minuto que el taxista lo haya aceptado.`
-                ])
-              : (err = [
-                  'No fue posible cancelar el viaje, porfavor inténtalo de nuevo'
-                ]);
+            let errors = ['No fue posible cancelar el viaje, porfavor inténtalo de nuevo'];
+            if (err.response.status == 422 && Array.isArray(err.response.data.errors)) {
+              errors = [
+                `${err.response.data.errors[0]}. El viaje no puede cancelarse después de 1 minuto que el taxista lo haya aceptado.`
+              ];
+            }
             this.setState({
               isWaiting: false,
-              errors: err,
+              errors: errors,
               modalVisible: true
             });
           });
