@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { Item, Input, Button, Text, Icon } from 'native-base';
+import EntypoIcon from 'react-native-vector-icons/Entypo';
 import { Subscribe } from 'unstated';
 import sessionState from '../../states/session';
 import AuthLayout from '../Layouts/AuthLayout';
+import { LoginManager, AccessToken, GraphRequest, GraphRequestManager } from 'react-native-fbsdk';
 
 const styles = StyleSheet.create({
   container: {
@@ -41,6 +43,19 @@ const styles = StyleSheet.create({
   loginButtonWrapper: {
     margin: 40
   },
+  loginFbWrapper: {
+    marginHorizontal: 80
+  },
+  fbLoginButton: {
+    backgroundColor: '#4267B2',
+    borderRadius: 5,
+    height: 35
+  },
+  fbLoginButtonText: {
+    color: 'white',
+    fontWeight: '500',
+    fontSize: 15
+  },
   loginButton: {
     backgroundColor: '#E3C463',
     borderRadius: 0
@@ -64,6 +79,47 @@ export default class Login extends Component {
     password: '',
     hidePassword: true
   };
+
+  onFbLoginSuccess = (error, result) => {
+
+    LoginManager.logInWithReadPermissions(['public_profile']).then((result) => {
+        if (result.isCancelled) {
+          console.log('Login cancelled');
+        } else {
+          console.log('Login success with permissions: ' +result.grantedPermissions.toString());
+          AccessToken.getCurrentAccessToken().then(
+            (data) => {
+              console.log(data.accessToken.toString())
+              this.createFbUser()
+            }
+          )
+        }
+      },
+      function(error) {
+        console.log('Login fail with error: ' + error);
+      }
+    )
+  }
+
+  createFbUser = () => {
+    const infoRequest = new GraphRequest(
+      '/me',
+      {
+        httpMethod: 'GET',
+        version: 'v2.5',
+        parameters: {
+            'fields': {
+                'string' : 'email,name'
+            }
+        }
+      },
+      (err, res) => {
+        console.log('TCL: Login -> createFbUser -> res', res);
+        console.log('TCL: Login -> createFbUser -> err', err);
+    });
+    // Start the graph request.
+    new GraphRequestManager().addRequest(infoRequest).start();
+  }
 
   render() {
     return (
@@ -134,6 +190,20 @@ export default class Login extends Component {
               >
                 <Text style={styles.loginButtonText}>Iniciar Sesión</Text>
               </Button>
+            </View>
+            <View style={styles.loginFbWrapper}>
+              <Button
+                style={styles.fbLoginButton}
+                onPress={this.onFbLoginSuccess}
+              >
+                <EntypoIcon active name="facebook" style={{ color: 'white', fontSize: 20, marginLeft: 10 }} />
+                <Text style={styles.fbLoginButtonText}>Continúa con Facebook</Text>
+              </Button>
+
+              {/* <LoginButton
+                readPermissions={['public_profile', 'email']}
+                onLoginFinished={this.onFbLoginSuccess}
+                onLogoutFinished={() => console.log("logout.")}/> */}
             </View>
 
             <View style={styles.createAccountWrapper}>
