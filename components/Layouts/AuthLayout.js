@@ -11,11 +11,13 @@ import {
   Modal,
   WebView
 } from 'react-native';
-import { Icon } from 'native-base';
+import { Icon, Button, Header, Left } from 'native-base';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import logo2 from '../../assets/logo2.png';
 import fondo2 from '../../assets/fondo2.jpg';
 const window = Dimensions.get('window');
+const headerBackground = '#262626';
+const yellow = '#E3C463';
 
 const styles = StyleSheet.create({
   container: {
@@ -80,7 +82,13 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingLeft: 10,
     paddingRight: 10
-  }
+  },
+  header: {
+    backgroundColor: headerBackground
+  },
+  menuIcon: {
+    color: yellow
+  },
 });
 
 export default class AuthLayout extends Component {
@@ -114,15 +122,17 @@ export default class AuthLayout extends Component {
                 transparent={false}
                 visible={this.state.modalVisible}
                 onRequestClose={() => {}}>
-                <View style={styles.termsModalCloseBtn}>
-                  <TouchableOpacity onPress={this.toggleTermsAndConditions}>
-                    <Text style={styles.termsModalText}>
-                      <Icon ios='ios-arrow-round-back' android="md-arrow-round-back" style={{ color: '#fff', fontSize: 20 }} />
-                      &nbsp;
-                      Regresar
-                    </Text>
-                  </TouchableOpacity>
-                </View>
+                <Header
+                  style={styles.header}
+                  iosBarStyle="light-content"
+                  androidStatusBarColor="#262626"
+                >
+                  <Left>
+                    <Button transparent onPress={this.toggleTermsAndConditions}>
+                      <Icon name="ios-arrow-back" style={styles.menuIcon} />
+                    </Button>
+                  </Left>
+                </Header>
                 <View style={styles.termsModal}>
                   <WebView
                     source={{uri: 'https://www.cytio.com.mx/terminos_y_condiciones'}} 
