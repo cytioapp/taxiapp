@@ -9,7 +9,8 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 export default class Profile extends Component {
   state = {
     full_name: '',
-    email: ''
+    email: '',
+    phone_number: ''
   };
 
   componentDidMount() {
@@ -21,7 +22,8 @@ export default class Profile extends Component {
       .then(res => {
         this.setState({
           full_name: res.data.full_name,
-          email: res.data.email
+          email: res.data.email,
+          phone_number: res.data.phone_number
         });
       })
       .catch(err => console.log(`Fetch user's info error: ${err}`));
@@ -74,6 +76,22 @@ export default class Profile extends Component {
                 transparent
                 onPress={() => {
                   this.props.navigation.navigate('EditEmail');
+                }}
+              >
+                <Icon name="create" style={styles.menuIcon} />
+              </Button>
+            </View>
+          </View>
+        </View>
+        <View style={styles.container}>
+          <View style={styles.darkFieldWrapper}>
+            <Text style={styles.label}>Teléfono:</Text>
+            <View style={styles.rowWrapper}>
+              <Text style={styles.text}>{this.state.phone_number}</Text>
+              <Button
+                transparent
+                onPress={() => {
+                  this.props.navigation.navigate('EditPhone');
                 }}
               >
                 <Icon name="create" style={styles.menuIcon} />

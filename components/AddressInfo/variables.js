@@ -9,7 +9,7 @@ const colors = {
 const traductions = {
   'holding': 'En espera',
   'taken': 'Aceptado',
-  'active': 'Activo',
+  'active': 'En proceso',
   'finished': 'Finalizado',
   'canceled': 'Cancelado'
 }

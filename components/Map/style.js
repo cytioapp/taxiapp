@@ -1,4 +1,9 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
+const window = Dimensions.get('window');
+
+const headerBackground = '#262626';
+const yellow = '#E3C463';
+const label = '#000';
 
 const styles = StyleSheet.create({
   map: {
@@ -86,7 +91,7 @@ const styles = StyleSheet.create({
     top: '50%'
   },
   header: {
-    backgroundColor: '#262626'
+    backgroundColor: headerBackground
   },
   iconLocate: {
     position: 'absolute',
@@ -103,7 +108,31 @@ const styles = StyleSheet.create({
     fontFamily: 'Nunito-Regular',
     fontSize: 22,
     textAlign: 'center'
-  }
+  },
+  menuIcon: {
+    color: yellow
+  },
+  fontText: {
+    color: yellow,
+    fontFamily: 'Nunito-Bold'
+  },
+  keyboard: {
+    height: window.height
+  },
+  confirmContainer: {
+    flex: 1,
+    padding: 15
+  },
+  label: {
+    color: label,
+    fontFamily: 'Nunito-Bold'
+  },
+  buttonContinue: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginBottom: 20,
+  },
 });
 
 export default styles;
