@@ -69,6 +69,18 @@ export default class EditEmail extends Component {
         phone_number: '3142313'
       },
       {
+        name: 'Taxi Estándar & Ejecutivo 1',
+        phone_number: '3144087'
+      },
+      {
+        name: 'Taxi Estándar & Ejecutivo 2',
+        phone_number: '3122234240'
+      },
+      {
+        name: 'Taxi Estándar & Ejecutivo 3',
+        phone_number: '3121340276'
+      },
+      {
         name: 'Taxi Express',
         phone_number: '3133109'
       },

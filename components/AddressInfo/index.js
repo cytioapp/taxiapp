@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TouchableOpacity, ScrollView, View, Alert } from 'react-native';
+import { TouchableOpacity, ScrollView, View, Alert, Image } from 'react-native';
 import {
   Body,
   Button,
@@ -23,6 +23,7 @@ import Modal from '../Modal';
 import Driver from './Driver';
 import firebase from 'react-native-firebase';
 import TimerMixin from 'react-timer-mixin';
+import waitingTaxi from '../../assets/waitingtaxi.png';
 
 export default class AddressInfo extends Component {
   constructor() {
@@ -249,8 +250,20 @@ export default class AddressInfo extends Component {
 
             <View style={styles.messageWrapper}>
               <View style={styles.message}>
-                <Text style={styles.messageText}>{spinnerMessage[status]}</Text>
+                <Text style={styles.mainMessageText}>{spinnerMessage[status]}</Text>
               </View>
+              {status=='holding' &&
+                <View>
+                  <Image source={waitingTaxi} style={styles.waitingTaxiImg} />
+                  {!showMessage &&
+                    <View style={styles.message}>
+                      <Text style={styles.messageText}>
+                        El tiempo promedio de respuesta es de 7 minutos
+                      </Text>
+                    </View>
+                  }
+                </View>
+              }
               
               {spinnerColor[status] && (
                 <Spinner
