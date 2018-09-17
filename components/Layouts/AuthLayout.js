@@ -9,9 +9,10 @@ import {
   TouchableOpacity,
   View,
   Modal,
-  WebView
+  WebView,
+  Platform
 } from 'react-native';
-import { Icon, Button, Header, Left } from 'native-base';
+import { Icon, Button, Header, Left, Right, Body } from 'native-base';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import logo2 from '../../assets/logo2.png';
 import fondo2 from '../../assets/fondo2.jpg';
@@ -132,6 +133,8 @@ export default class AuthLayout extends Component {
                       <Icon name="ios-arrow-back" style={styles.menuIcon} />
                     </Button>
                   </Left>
+                  <Body/>
+                  <Right/>
                 </Header>
                 <View style={styles.termsModal}>
                   <WebView
