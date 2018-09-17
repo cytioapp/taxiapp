@@ -154,6 +154,14 @@ const styles = StyleSheet.create({
   messageWrapper: {
     alignItems: 'center'
   },
+  mainMessageText: {
+    flex: 1,
+    fontFamily: 'Nunito-SemiBold',
+    fontSize: 18,
+    paddingRight: 50,
+    paddingLeft: 50,
+    textAlign: 'center'
+  },
   message: {
     alignItems: 'center',
     flexDirection: 'row',
@@ -186,6 +194,10 @@ const styles = StyleSheet.create({
   },
   newServiceText: {
     fontFamily: 'Nunito-Bold'
+  },
+  waitingTaxiImg: {
+    height: 200,
+    width: 300
   }
 });
 

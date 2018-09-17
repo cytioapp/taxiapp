@@ -15,6 +15,7 @@ import Api from '../../utils/api';
 import Modal from '../Modal';
 import styles from './style';
 import TimerMixin from 'react-timer-mixin';
+import ConfirmModal from './ConfirmModal';
 
 var timer;
 
@@ -35,7 +36,8 @@ class Home extends Component {
       isWaiting: false,
       modalVisible: false,
       drawerVisible: false,
-      isWaitingLocation: false
+      isWaitingLocation: false,
+      showConfirmModal: false
     };
   }
 
@@ -124,46 +126,6 @@ class Home extends Component {
     });
   };
 
-  handleOrder = () => {
-    this.setState(
-      {
-        isWaiting: true,
-        isServiceButtonDisabled: true
-      },
-      () => {
-        let {
-          address,
-          region: { latitude, longitude }
-        } = this.state;
-        Api.post('/trips', {
-          address_origin: address,
-          lat_origin: latitude,
-          lng_origin: longitude
-        })
-          .then(res => {
-            this.setState(
-              {
-                isWaiting: false
-              },
-              () => {
-                if (res.status == 201) {
-                  this.props.navigation.navigate('AddressInfo');
-                }
-              }
-            );
-          })
-          .catch(err => {
-            this.setState({
-              isWaiting: false,
-              errors: [`${err.response.data.errors[0]}. Vuelve a intentarlo.`],
-              modalVisible: true,
-              isServiceButtonDisabled: false
-            });
-          });
-      }
-    );
-  };
-
   setModalVisible = visible => {
     this.setState({
       modalVisible: visible,
@@ -171,8 +133,14 @@ class Home extends Component {
     });
   };
 
+  toggleConfirmModal = () => {
+    this.setState({
+      showConfirmModal: !this.state.showConfirmModal
+    });
+  }
+
   render() {
-    let { region, error } = this.state;
+    let { region, error, showConfirmModal, address } = this.state;
     return (
       <Container contentContainerStyle={{ flex: 1, width: '100%' }}>
         <Header
@@ -185,7 +153,7 @@ class Home extends Component {
               <Icon name="ios-search" style={{ color: '#989898' }} />
               <TextInput
                 placeholder="Selecciona tu ubicación..."
-                value={this.state.address}
+                value={address}
                 onChangeText={address => this.setState({ address })}
                 style={styles.searchText}
               />
@@ -231,7 +199,7 @@ class Home extends Component {
                 <Button
                   dark
                   style={styles.button}
-                  onPress={this.handleOrder}
+                  onPress={this.toggleConfirmModal}
                   disabled={this.state.isServiceButtonDisabled}
                 >
                   {!(this.state.isWaitingLocation || this.state.isWaiting) ? <Text style={styles.buttonText}> Solicitar servicio </Text> : <Spinner color="black" />}
@@ -245,6 +213,17 @@ class Home extends Component {
             </View>
           )}
         </View>
+        {showConfirmModal && 
+          <ConfirmModal
+            modalVisible={showConfirmModal}
+            toggleConfirmModal={this.toggleConfirmModal}
+            tripInfo={{
+              address,
+              region
+            }}
+            navigation={this.props.navigation}
+          />
+        }
       </Container>
     );
   }
