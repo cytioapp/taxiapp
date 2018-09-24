@@ -10,6 +10,8 @@ import { Button, Container, Spinner, Icon, Item, Text } from 'native-base';
 import { Header } from 'native-base';
 import MapView from 'react-native-maps';
 import Geocoder from 'react-native-geocoder';
+import { copilot, walkthroughable, CopilotStep } from '@okgrow/react-native-copilot';
+import StepTooltip from './StepTooltip';
 import Geolocation from 'react-native-geolocation-service';
 import Api from '../../utils/api';
 import Modal from '../Modal';
@@ -18,6 +20,9 @@ import TimerMixin from 'react-timer-mixin';
 import ConfirmModal from './ConfirmModal';
 
 var timer;
+
+const TouchableOpacityStep = walkthroughable(TouchableOpacity)
+const ViewStep = walkthroughable(View)
 
 class Home extends Component {
   constructor(props) {
@@ -43,6 +48,9 @@ class Home extends Component {
 
   componentDidMount() {
     this.updatePosition();
+
+    // Init the instructions
+    this.props.start()
   }
 
   componentWillUnmount() {
@@ -148,26 +156,32 @@ class Home extends Component {
           iosBarStyle="light-content"
           androidStatusBarColor="#262626"
         >
-          <View style={styles.searchWrapper}>
-            <Item style={styles.searchContainer}>
-              <Icon name="ios-search" style={{ color: '#989898' }} />
-              <TextInput
-                placeholder="Selecciona tu ubicación..."
-                value={address}
-                onChangeText={address => this.setState({ address })}
-                style={styles.searchText}
-              />
-            </Item>
-          </View>
+          <CopilotStep text="Puedes ver la dirección y modificarla si es necesario" order={4} name="address">
+            <ViewStep style={styles.searchWrapper}>
+              <Item style={styles.searchContainer}>
+                <Icon name="ios-search" style={{ color: '#989898' }} />
+                <TextInput
+                  placeholder="Selecciona tu ubicación..."
+                  value={address}
+                  onChangeText={address => this.setState({ address })}
+                  style={styles.searchText}
+                />
+              </Item>
+            </ViewStep>
+          </CopilotStep>
         </Header>
 
         <View style={{ flex: 1, width: '100%' }}>
-          <TouchableOpacity
-            style={styles.buttonMenuWrapper}
-            onPress={this.props.navigation.openDrawer}
-          >
-            <Icon style={styles.buttonMenuIcon} name="ios-arrow-forward" />
-          </TouchableOpacity>
+
+          <CopilotStep text="Usa el menú para ver configurar tu cuenta, consultar numero de las bases, etc." order={1} name="menu">
+            <TouchableOpacityStep
+              style={styles.buttonMenuWrapper}
+              onPress={this.props.navigation.openDrawer}
+            >
+              <Icon style={styles.buttonMenuIcon} name="ios-arrow-forward" />
+            </TouchableOpacityStep>
+          </CopilotStep>
+ 
           <Modal
             errors={this.state.errors}
             modalVisible={this.state.modalVisible}
@@ -184,27 +198,33 @@ class Home extends Component {
                 onRegionChangeComplete={this.onRegionChange}
                 onRegionChange={this.onRegionStartChange}
               />
-              <View pointerEvents="none" style={styles.markerFixed}>
-                <Icon style={styles.marker} name="ios-pin" />
-              </View>
+              <CopilotStep text="Desliza la pantalla para ubicar el marcador en el lugar donde necesites el servicio" order={2} name="map">
+                <ViewStep pointerEvents="none" style={styles.markerFixed}>
+                  <Icon style={styles.marker} name="ios-pin" />
+                </ViewStep>
+              </CopilotStep>
 
-              <TouchableOpacity
-                onPress={this.updatePosition}
-                style={styles.iconLocate}
-              >
-                <Icon name="md-locate" />
-              </TouchableOpacity>
-
-              <View style={styles.buttonContainer}>
-                <Button
-                  dark
-                  style={styles.button}
-                  onPress={this.toggleConfirmModal}
-                  disabled={this.state.isServiceButtonDisabled}
+              <CopilotStep text="Usa el botón para obtener tu ubicación actual" order={3} name="location">
+                <TouchableOpacityStep
+                  onPress={this.updatePosition}
+                  style={styles.iconLocate}
                 >
-                  {!(this.state.isWaitingLocation || this.state.isWaiting) ? <Text style={styles.buttonText}> Solicitar servicio </Text> : <Spinner color="black" />}
-                </Button>
-              </View>
+                  <Icon name="md-locate" />
+                </TouchableOpacityStep>
+              </CopilotStep>
+
+              <CopilotStep text="¡Listo! Pide tu cytio y disfruta tu viaje" order={5} name="confirm">
+                <ViewStep style={styles.buttonContainer}>
+                  <Button
+                    dark
+                    style={styles.button}
+                    onPress={this.toggleConfirmModal}
+                    disabled={this.state.isServiceButtonDisabled}
+                  >
+                    {!(this.state.isWaitingLocation || this.state.isWaiting) ? <Text style={styles.buttonText}> Solicitar servicio </Text> : <Spinner color="black" />}
+                  </Button>
+                </ViewStep>
+              </CopilotStep>
             </View>
           )}
           {error && (
@@ -229,4 +249,7 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default copilot({
+  animated: true,
+  tooltipComponent: StepTooltip
+})(Home);

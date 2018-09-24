@@ -126,6 +126,8 @@ PODS:
     - React/Core
     - React/fishhook
     - React/RCTBlob
+  - RNSVG (7.0.3):
+    - React
   - RNVectorIcons (5.0.0):
     - React
   - yoga (0.56.0.React)
@@ -157,6 +159,7 @@ DEPENDENCIES:
   - React/RCTText (from `../node_modules/react-native`)
   - React/RCTVibration (from `../node_modules/react-native`)
   - React/RCTWebSocket (from `../node_modules/react-native`)
+  - RNSVG (from `../node_modules/react-native-svg`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - yoga (from `../node_modules/react-native/ReactCommon/yoga/yoga.podspec`)
 
@@ -195,6 +198,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-sensitive-info"
   react-native-spinkit:
     :path: "../node_modules/react-native-spinkit"
+  RNSVG:
+    :path: "../node_modules/react-native-svg"
   RNVectorIcons:
     :path: "../node_modules/react-native-vector-icons"
   yoga:
@@ -223,9 +228,10 @@ SPEC CHECKSUMS:
   react-native-maps: 066c2afcc89e18726377bcc685315f989ca22449
   react-native-sensitive-info: f78f6471a8ee7de67e11ffccc7060eb93b969ef5
   react-native-spinkit: c9f5826e1a0bf0da889b3795278eb96ae15c1350
+  RNSVG: 6252323c0312735f0af5f58b5adf2965b6a9ffbf
   RNVectorIcons: c0dbfbf6068fefa240c37b0f71bd03b45dddac44
   yoga: b1ce48b6cf950b98deae82838f5173ea7cf89e85
 
-PODFILE CHECKSUM: 4dfae3c2d88582fb009569334e4c72374b1c3e32
+PODFILE CHECKSUM: 27f69ca6a8b0de5a95c7e63b8bf0771c28fdef25
 
 COCOAPODS: 1.5.3
