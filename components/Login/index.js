@@ -5,6 +5,7 @@ import EntypoIcon from 'react-native-vector-icons/Entypo';
 import { Subscribe } from 'unstated';
 import sessionState from '../../states/session';
 import AuthLayout from '../Layouts/AuthLayout';
+import AfterLoginModal from './AfterLoginModal';
 import { LoginManager, AccessToken, GraphRequest, GraphRequestManager } from 'react-native-fbsdk';
 
 const styles = StyleSheet.create({
@@ -77,7 +78,14 @@ export default class Login extends Component {
   state = {
     email: '',
     password: '',
-    hidePassword: true
+    hidePassword: true,
+    showAfterStep: false,
+    fbRegisterData: {
+      token: null,
+      name: '',
+      email: '',
+      phone: null
+    }
   };
 
   onFbLoginSuccess = (error, result) => {
@@ -90,7 +98,7 @@ export default class Login extends Component {
           AccessToken.getCurrentAccessToken().then(
             (data) => {
               console.log(data.accessToken.toString())
-              this.createFbUser()
+              this.createFbUser(data.accessToken.toString())
             }
           )
         }
@@ -101,7 +109,7 @@ export default class Login extends Component {
     )
   }
 
-  createFbUser = () => {
+  createFbUser = (token) => {
     const infoRequest = new GraphRequest(
       '/me',
       {
@@ -114,11 +122,37 @@ export default class Login extends Component {
         }
       },
       (err, res) => {
+        if (!err) {
+          console.log('apocos si')
+          this.setState({
+            showAfterStep: true,
+            fbRegisterData: {
+              ...this.state.fbRegisterData,
+              token,
+              name: res.name,
+              email: res.email
+            }
+          })
+        }
         console.log('TCL: Login -> createFbUser -> res', res);
         console.log('TCL: Login -> createFbUser -> err', err);
     });
     // Start the graph request.
     new GraphRequestManager().addRequest(infoRequest).start();
+  }
+
+  completeRegisterFbUser = () => {
+    const data = { ...this.state.fbRegisterData, provider: 'facebook' }
+    console.log('send this to the server: ', data);
+  }
+
+  onPhoneHandler = (phone) => {
+    this.setState({
+      fbRegisterData: {
+        ...this.state.fbRegisterData,
+        phone
+      }
+    })
   }
 
   render() {
@@ -199,11 +233,6 @@ export default class Login extends Component {
                 <EntypoIcon active name="facebook" style={{ color: 'white', fontSize: 20, marginLeft: 10 }} />
                 <Text style={styles.fbLoginButtonText}>Continúa con Facebook</Text>
               </Button>
-
-              {/* <LoginButton
-                readPermissions={['public_profile', 'email']}
-                onLoginFinished={this.onFbLoginSuccess}
-                onLogoutFinished={() => console.log("logout.")}/> */}
             </View>
 
             <View style={styles.createAccountWrapper}>
@@ -218,6 +247,12 @@ export default class Login extends Component {
                 </Text>
               </TouchableOpacity>
             </View>
+            <AfterLoginModal 
+              modalVisible={this.state.showAfterStep}
+              onSetPhoneNumber={this.onPhoneHandler}
+              phone={this.state.fbRegisterData.phone}
+              onComplete={this.completeRegisterFbUser}
+            />
           </AuthLayout>
         )}
       </Subscribe>
