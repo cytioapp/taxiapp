@@ -251,5 +251,6 @@ class Home extends Component {
 
 export default copilot({
   animated: true,
-  tooltipComponent: StepTooltip
+  tooltipComponent: StepTooltip,
+  androidStatusBarVisible: true
 })(Home);
