@@ -148,6 +148,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-svg')
     implementation project(':react-native-firebase')
     implementation project(':react-native-spinkit')
     implementation project(':react-native-sensitive-info')
