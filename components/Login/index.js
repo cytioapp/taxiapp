@@ -5,7 +5,6 @@ import EntypoIcon from 'react-native-vector-icons/Entypo';
 import { Subscribe } from 'unstated';
 import sessionState from '../../states/session';
 import AuthLayout from '../Layouts/AuthLayout';
-import AfterLoginModal from './AfterLoginModal';
 import { LoginManager, AccessToken, GraphRequest, GraphRequestManager } from 'react-native-fbsdk';
 
 const styles = StyleSheet.create({
@@ -78,27 +77,15 @@ export default class Login extends Component {
   state = {
     email: '',
     password: '',
-    hidePassword: true,
-    showAfterStep: false,
-    fbRegisterData: {
-      token: null,
-      name: '',
-      email: '',
-      phone: null
-    }
+    hidePassword: true
   };
 
   onFbLoginSuccess = (error, result) => {
-
     LoginManager.logInWithReadPermissions(['public_profile']).then((result) => {
-        if (result.isCancelled) {
-          console.log('Login cancelled');
-        } else {
-          console.log('Login success with permissions: ' +result.grantedPermissions.toString());
+        if (!result.isCancelled) {
           AccessToken.getCurrentAccessToken().then(
             (data) => {
-              console.log(data.accessToken.toString())
-              this.createFbUser(data.accessToken.toString())
+              this.loginFbuser()
             }
           )
         }
@@ -109,7 +96,7 @@ export default class Login extends Component {
     )
   }
 
-  createFbUser = (token) => {
+  loginFbuser = () => {
     const infoRequest = new GraphRequest(
       '/me',
       {
@@ -123,36 +110,12 @@ export default class Login extends Component {
       },
       (err, res) => {
         if (!err) {
-          console.log('apocos si')
-          this.setState({
-            showAfterStep: true,
-            fbRegisterData: {
-              ...this.state.fbRegisterData,
-              token,
-              name: res.name,
-              email: res.email
-            }
-          })
+          this.props.screenProps.session.login(res.email, res.id, res.name, 'facebook') // We use the facebook id of the user as the password.
         }
-        console.log('TCL: Login -> createFbUser -> res', res);
-        console.log('TCL: Login -> createFbUser -> err', err);
     });
+
     // Start the graph request.
     new GraphRequestManager().addRequest(infoRequest).start();
-  }
-
-  completeRegisterFbUser = () => {
-    const data = { ...this.state.fbRegisterData, provider: 'facebook' }
-    console.log('send this to the server: ', data);
-  }
-
-  onPhoneHandler = (phone) => {
-    this.setState({
-      fbRegisterData: {
-        ...this.state.fbRegisterData,
-        phone
-      }
-    })
   }
 
   render() {
@@ -247,12 +210,6 @@ export default class Login extends Component {
                 </Text>
               </TouchableOpacity>
             </View>
-            <AfterLoginModal 
-              modalVisible={this.state.showAfterStep}
-              onSetPhoneNumber={this.onPhoneHandler}
-              phone={this.state.fbRegisterData.phone}
-              onComplete={this.completeRegisterFbUser}
-            />
           </AuthLayout>
         )}
       </Subscribe>
