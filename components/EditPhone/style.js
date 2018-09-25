@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Nunito-Bold'
   },
   header: {
-    backgroundColor: headerBackground,
+    backgroundColor: headerBackground
   },
   leftHeader: {
     flex: 1
@@ -70,6 +70,16 @@ const styles = StyleSheet.create({
     color: label,
     fontFamily: 'Nunito-Bold',
     fontWeight: '500'
+  },
+  phoneInfo: {
+    paddingHorizontal: 15,
+    paddingTop: 10,
+    marginLeft: 20,
+  },
+  phoneInfoText: {
+    fontFamily: 'Nunito-Bold',
+    fontSize: 12,
+    fontWeight: '300'
   }
 })
 
