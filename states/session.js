@@ -1,4 +1,5 @@
 import SInfo from 'react-native-sensitive-info';
+import { AsyncStorage } from 'react-native';
 import { Container } from 'unstated';
 import Api from '../utils/api';
 
@@ -57,6 +58,7 @@ class SessionState extends Container {
   logout = () => {
     this.setState({ isLogued: false }, () => {
       SInfo.deleteItem('jwt', options);
+      AsyncStorage.removeItem('tutorialFinished') // Delete the tutorial checker, so on new session we can show it again
     });
   };
 

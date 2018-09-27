@@ -4,7 +4,8 @@ import {
   TextInput,
   PermissionsAndroid,
   Platform,
-  TouchableOpacity
+  TouchableOpacity,
+  AsyncStorage
 } from 'react-native';
 import { Button, Container, Spinner, Icon, Item, Text } from 'native-base';
 import { Header } from 'native-base';
@@ -46,11 +47,24 @@ class Home extends Component {
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.updatePosition();
 
-    // Init the instructions
-    this.props.start()
+    const startTutorial = await AsyncStorage.getItem('tutorialFinished')
+    
+    if (!startTutorial) {
+      // Start the tutorial for the user
+      this.props.start()
+  
+      this.props.copilotEvents.on('stop', async () => {
+        // tutorial finished!
+        try {
+          await AsyncStorage.setItem('tutorialFinished', 'true')
+        } catch (error) {
+          console.error('Cant write to phone memory.')
+        }
+      });
+    }
   }
 
   componentWillUnmount() {
@@ -173,7 +187,7 @@ class Home extends Component {
 
         <View style={{ flex: 1, width: '100%' }}>
 
-          <CopilotStep text="Usa el menú para ver configurar tu cuenta, consultar numero de las bases, etc." order={1} name="menu">
+          <CopilotStep text="Usa el menú para configurar tu cuenta, consultar numero de las bases, etc." order={1} name="menu">
             <TouchableOpacityStep
               style={styles.buttonMenuWrapper}
               onPress={this.props.navigation.openDrawer}
