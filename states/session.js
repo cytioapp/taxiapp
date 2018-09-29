@@ -91,6 +91,7 @@ class SessionState extends Container {
       });
       return false;
     }
+    return true
   };
 
   signup = data => {
