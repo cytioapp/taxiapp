@@ -65,7 +65,6 @@ export default class Signup extends Component {
     full_name: '',
     email: '',
     password: '',
-    repeated_password: '',
     phone_number: '',
     hidePassword: true,
     hideCopyPassword: true
@@ -130,35 +129,13 @@ export default class Signup extends Component {
               </Item>
 
               <Item style={styles.item}>
-                <Icon active name="lock" style={{ color: 'white' }} />
-                <Input
-                  placeholder="Repite la contraseña"
-                  secureTextEntry={this.state.hideCopyPassword}
-                  onChangeText={repeated_password =>
-                    this.setState({ repeated_password })
-                  }
-                  value={this.state.repeated_password}
-                  placeholderTextColor="white"
-                  style={styles.input}
-                />
-                <TouchableOpacity
-                  onPress={() =>
-                    this.setState({
-                      hideCopyPassword: !this.state.hideCopyPassword
-                    })
-                  }
-                >
-                  <Icon active name="eye" style={{ color: 'white' }} />
-                </TouchableOpacity>
-              </Item>
-
-              <Item style={styles.item}>
                 <Icon active name="ios-phone-portrait" style={{ color: 'white' }} />
                 <Input
                   placeholder="Teléfono"
                   onChangeText={phone_number =>
                     this.setState({ phone_number })
                   }
+                  keyboardType="phone-pad"
                   value={this.state.phone_number}
                   placeholderTextColor="white"
                   style={styles.input}
