@@ -53,6 +53,8 @@ target 'cytio' do
   pod 'FBSDKLoginKit'
 
   pod 'react-native-fbsdk', :path => '../node_modules/react-native-fbsdk'
+  pod 'Fabric'
+  pod 'Crashlytics'
 
 end
 

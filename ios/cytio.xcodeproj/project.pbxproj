@@ -904,6 +904,7 @@
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				17C975661C8974F81B284BD5 /* [CP] Copy Pods Resources */,
+				59F7B4E02158A62A00E4EF02 /* Run Script Build Phase */,
 			);
 			buildRules = (
 			);
@@ -1538,6 +1539,20 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
+		59F7B4E02158A62A00E4EF02 /* Run Script Build Phase */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script Build Phase";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" b6b2fd82ee02addbf7068eb74d0dcd4a3995bf6a 03309bb5ad07fc67ace9870b629195f72dd2713f6b5aa330d9216e86ae6255d8";
+		};
 		7F29DFB7990D974E410F3482 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1684,6 +1699,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = cytio/cytio.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = R2EM6F92CX;
@@ -1701,6 +1717,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = mx.com.cytio;
 				PRODUCT_NAME = cytio;
+				PROVISIONING_PROFILE = "6602fecb-e8fc-4b1f-b212-44e21356242c";
+				PROVISIONING_PROFILE_SPECIFIER = "Cytio User";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1711,6 +1729,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = cytio/cytio.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Michelada, LLC (R2EM6F92CX)";
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = R2EM6F92CX;
 				HEADER_SEARCH_PATHS = (
@@ -1727,6 +1746,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = mx.com.cytio;
 				PRODUCT_NAME = cytio;
+				PROVISIONING_PROFILE = "6602fecb-e8fc-4b1f-b212-44e21356242c";
+				PROVISIONING_PROFILE_SPECIFIER = "Cytio User";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
