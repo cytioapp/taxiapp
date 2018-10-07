@@ -187,7 +187,7 @@ class Home extends Component {
 
         <View style={{ flex: 1, width: '100%' }}>
 
-          <CopilotStep text="Usa el menú para configurar tu cuenta, consultar numero de las bases, etc." order={1} name="menu">
+          <CopilotStep text="Usa el menú para configurar tu cuenta, consultar número de las bases, etc." order={1} name="menu">
             <TouchableOpacityStep
               style={styles.buttonMenuWrapper}
               onPress={this.props.navigation.openDrawer}
