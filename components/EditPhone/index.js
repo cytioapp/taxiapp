@@ -94,7 +94,7 @@ export default class EditPhone extends Component {
             </Button>
           </Left>
           <Body style={styles.bodyHeader}>
-            <Title style={styles.fontText}>{isSetPhone ? 'Agrega un telefono' : 'Editar Teléfono'}</Title>
+            <Title style={styles.fontText}>{isSetPhone ? 'Agrega un teléfono' : 'Editar Teléfono'}</Title>
           </Body>
           <Right style={styles.rightHeader} />
         </Header>
@@ -117,7 +117,7 @@ export default class EditPhone extends Component {
           </View>
           {
             isSetPhone && <View style={styles.phoneInfo}>
-              <Text style={styles.phoneInfoText}>* Necesitas un numero de teléfono valido para poder usar la aplicación, esto con la finalidad de ofrecerte un mejor servicio</Text>
+              <Text style={styles.phoneInfoText}>* Necesitas un número de teléfono valido para poder usar la aplicación, esto con la finalidad de ofrecerte un mejor servicio</Text>
             </View>
           }
 
