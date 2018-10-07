@@ -1,6 +1,18 @@
 PODS:
+  - Bolts (1.9.0):
+    - Bolts/AppLinks (= 1.9.0)
+    - Bolts/Tasks (= 1.9.0)
+  - Bolts/AppLinks (1.9.0):
+    - Bolts/Tasks
+  - Bolts/Tasks (1.9.0)
   - boost-for-react-native (1.63.0)
   - DoubleConversion (1.1.5)
+  - FBSDKCoreKit (4.37.0):
+    - Bolts (~> 1.7)
+  - FBSDKLoginKit (4.37.0):
+    - FBSDKCoreKit
+  - FBSDKShareKit (4.37.0):
+    - FBSDKCoreKit (~> 4.37.0)
   - Firebase/Core (5.3.0):
     - Firebase/CoreOnly
     - FirebaseAnalytics (= 5.0.1)
@@ -69,6 +81,20 @@ PODS:
   - Protobuf (3.6.1)
   - React (0.56.0):
     - React/Core (= 0.56.0)
+  - react-native-fbsdk (0.8.0):
+    - React
+    - react-native-fbsdk/Core (= 0.8.0)
+    - react-native-fbsdk/Login (= 0.8.0)
+    - react-native-fbsdk/Share (= 0.8.0)
+  - react-native-fbsdk/Core (0.8.0):
+    - FBSDKCoreKit
+    - React
+  - react-native-fbsdk/Login (0.8.0):
+    - FBSDKLoginKit
+    - React
+  - react-native-fbsdk/Share (0.8.0):
+    - FBSDKShareKit
+    - React
   - react-native-geocoder (0.5.0):
     - React
   - react-native-google-maps (0.21.0):
@@ -134,6 +160,7 @@ PODS:
 
 DEPENDENCIES:
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
+  - FBSDKLoginKit
   - Firebase/Core (~> 5.3.0)
   - Firebase/Database (~> 5.3.0)
   - Firebase/Messaging (~> 5.3.0)
@@ -141,6 +168,7 @@ DEPENDENCIES:
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - Google-Maps-iOS-Utils
   - GoogleMaps
+  - react-native-fbsdk (from `../node_modules/react-native-fbsdk`)
   - react-native-geocoder (from `../node_modules/react-native-geocoder`)
   - react-native-google-maps (from `../node_modules/react-native-maps`)
   - react-native-maps (from `../node_modules/react-native-maps`)
@@ -165,7 +193,11 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - Bolts
     - boost-for-react-native
+    - FBSDKCoreKit
+    - FBSDKLoginKit
+    - FBSDKShareKit
     - Firebase
     - FirebaseAnalytics
     - FirebaseCore
@@ -188,6 +220,8 @@ EXTERNAL SOURCES:
     :podspec: "../node_modules/react-native/third-party-podspecs/glog.podspec"
   React:
     :path: "../node_modules/react-native"
+  react-native-fbsdk:
+    :path: "../node_modules/react-native-fbsdk"
   react-native-geocoder:
     :path: "../node_modules/react-native-geocoder"
   react-native-google-maps:
@@ -206,8 +240,12 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga/yoga.podspec"
 
 SPEC CHECKSUMS:
+  Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   DoubleConversion: a9706f16e388b53ff12cca34473428ee29746a26
+  FBSDKCoreKit: fe5f3474499a81963e11e3f3a5c753d0a95ca2b4
+  FBSDKLoginKit: 2f7249686d1e30ce8a5ef5400eedf50b3e3df332
+  FBSDKShareKit: 52e0083222c38e930eb6878007478326599195c3
   Firebase: 68afeeb05461db02d7c9e3215cda28068670f4aa
   FirebaseAnalytics: b3628aea54c50464c32c393fb2ea032566e7ecc2
   FirebaseCore: 62f1b792a49bb9e8b4073f24606d2c93ffc352f0
@@ -223,6 +261,7 @@ SPEC CHECKSUMS:
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
   React: 1fe0eb13d90b625d94c3b117c274dcfd2e760e11
+  react-native-fbsdk: d5f98cc5abecbcc463e3c35c04743d716d002d37
   react-native-geocoder: 33b16a5929aa868fef37acb4f7ee10a428cd5fff
   react-native-google-maps: 2cfe3b01f8422c7dae51d8764139fd70f888cfce
   react-native-maps: 066c2afcc89e18726377bcc685315f989ca22449

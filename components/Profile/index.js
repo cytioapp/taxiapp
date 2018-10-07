@@ -91,7 +91,7 @@ export default class Profile extends Component {
               <Button
                 transparent
                 onPress={() => {
-                  this.props.navigation.navigate('EditPhone');
+                  this.props.navigation.navigate('EditPhone', { isSetPhone: false });
                 }}
               >
                 <Icon name="create" style={styles.menuIcon} />

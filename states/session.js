@@ -15,9 +15,9 @@ class SessionState extends Container {
     signupErrors: null
   };
 
-  login = (email, password) => {
+  login = (email, password, full_name, provider) => {
     this.setState({ errors: false });
-    Api.post('/users/login', { email, password })
+    Api.post('/users/login', { email, password, full_name, provider })
       .then(res => {
         if (res.data.jwt) {
           SInfo.setItem('jwt', res.data.jwt, options).then(() => {
@@ -93,15 +93,7 @@ class SessionState extends Container {
       });
       return false;
     }
-
-    if (data.password !== data.repeated_password) {
-      this.setState({
-        signupErrors: ['Las contraseñas no coinciden']
-      });
-      return false;
-    } else {
-      return true;
-    }
+    return true
   };
 
   signup = data => {
