@@ -91,15 +91,7 @@ class SessionState extends Container {
       });
       return false;
     }
-
-    if (data.password !== data.repeated_password) {
-      this.setState({
-        signupErrors: ['Las contraseñas no coinciden']
-      });
-      return false;
-    } else {
-      return true;
-    }
+    return true
   };
 
   signup = data => {
