@@ -10,8 +10,6 @@
 #import "AppDelegate.h"
 #import <Firebase.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
-#import <Fabric/Fabric.h>
-#import <Crashlytics/Crashlytics.h>
 
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
@@ -20,7 +18,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   [FIRApp configure];
-  [Fabric with:@[[Crashlytics class]]];
   [GMSServices provideAPIKey:@"AIzaSyCc1VdHEAkYyTeRiUjTxJJAYECgfm5JOrw"]; // add this line using the api key obtained from Google Console
   NSURL *jsCodeLocation;
   [[FBSDKApplicationDelegate sharedInstance] application:application
