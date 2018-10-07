@@ -14,9 +14,9 @@ class SessionState extends Container {
     signupErrors: null
   };
 
-  login = (email, password) => {
+  login = (email, password, full_name, provider) => {
     this.setState({ errors: false });
-    Api.post('/users/login', { email, password })
+    Api.post('/users/login', { email, password, full_name, provider })
       .then(res => {
         if (res.data.jwt) {
           SInfo.setItem('jwt', res.data.jwt, options).then(() => {

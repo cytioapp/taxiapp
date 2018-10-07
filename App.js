@@ -17,7 +17,7 @@ class App extends Component {
             } else if (session.state.isLogued) {
               return <InternalRoutes screenProps={{ session }}  />
             } else {
-              return <ExternalRoutes />
+              return <ExternalRoutes screenProps={{ session }} />
             }
           }}
         </Subscribe>

@@ -6,35 +6,42 @@ import Api from '../../utils/api';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Modal from '../Modal';
 
-export default class EditEmail extends Component {
+export default class EditPhone extends Component {
   state = {
     phone_number: '',
     buttonDisabled: false,
     errors: [],
-    modalVisible: false
+    modalVisible: false,
+    isSetPhone: this.props.navigation.getParam('isSetPhone', false)
   };
 
   componentDidMount() {
     this.fillFields();
   }
 
+  componentWillUnmount() {
+    this.setState({ isSetPhone: false })
+  }
+
   fillFields = () => {
     Api.get('/users/profile')
       .then(res => {
         this.setState({
-          phone_number: res.data.phone_number,
+          phone_number: res.data.phone_number || '',
         });
       })
       .catch(err => console.log(err));
   };
 
   handleReturn = () => {
-    Alert.alert(
-      'Cambios sin guardar',
-      '¿Guardar y salir?',
-      [{ text: 'No' }, { text: 'Si', onPress: () => this.handleSave() }],
-      { cancelable: false }
-    );
+    if (!this.state.isSetPhone) {
+      Alert.alert(
+        'Cambios sin guardar',
+        '¿Guardar y salir?',
+        [{ text: 'No' }, { text: 'Si', onPress: () => this.handleSave() }],
+        { cancelable: false }
+      );
+    }
   };
 
   handleSave = () => {
@@ -42,7 +49,11 @@ export default class EditEmail extends Component {
       Api.put('/users/profile', {
         phone_number: this.state.phone_number
       }).then(() => {
-        this.props.navigation.navigate('Profile');
+        if (this.state.isSetPhone) {
+          this.props.navigation.navigate('Map');
+        } else {
+          this.props.navigation.navigate('Profile');
+        }
       });
     } else {
       this.setState({
@@ -60,6 +71,8 @@ export default class EditEmail extends Component {
   };
 
   render() {
+    const { isSetPhone } = this.state
+
     return (
       <KeyboardAwareScrollView style={styles.keyboard}>
         <Modal
@@ -74,11 +87,14 @@ export default class EditEmail extends Component {
         >
           <Left style={styles.leftHeader}>
             <Button transparent onPress={() => this.handleReturn()}>
-              <Icon name="ios-arrow-back" style={styles.menuIcon} />
+              { isSetPhone ? 
+                  <Icon name="md-tablet-portrait" style={styles.menuIcon} />
+                  : <Icon name="ios-arrow-back" style={styles.menuIcon} />
+              }
             </Button>
           </Left>
           <Body style={styles.bodyHeader}>
-            <Title style={styles.fontText}>Editar Teléfono</Title>
+            <Title style={styles.fontText}>{isSetPhone ? 'Agrega un teléfono' : 'Editar Teléfono'}</Title>
           </Body>
           <Right style={styles.rightHeader} />
         </Header>
@@ -99,6 +115,11 @@ export default class EditEmail extends Component {
               />
             </View>
           </View>
+          {
+            isSetPhone && <View style={styles.phoneInfo}>
+              <Text style={styles.phoneInfoText}>* Necesitas un número de teléfono valido para poder usar la aplicación, esto con la finalidad de ofrecerte un mejor servicio</Text>
+            </View>
+          }
 
           <View style={styles.buttonWrapper}>
             <Button
