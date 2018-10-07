@@ -37,8 +37,6 @@
 		2D16E6881FA4F8E400B85C8A /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D16E6891FA4F8E400B85C8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* cytioTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* cytioTests.m */; };
 		2DF0FFEE2056DD460020B375 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
-		3D15E805589344C49138E5FD /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0714785BFBAF4ECDBF83121C /* Octicons.ttf */; };
-		41F88CCC78584F03B416FC57 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6B3D2D64529047B0973117C4 /* Feather.ttf */; };
 		4373815CC3EF4FE5BB5E458F /* Nunito-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D858EAB9A53445FFB494F151 /* Nunito-ExtraLightItalic.ttf */; };
 		55CA2D386A0E4AA4B573FE19 /* Nunito-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5895797F73374E2D96DE60E7 /* Nunito-Italic.ttf */; };
 		59C9F3882141B8DF00A4BC29 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 59C9F35B2141B8DF00A4BC29 /* GoogleService-Info.plist */; };
@@ -60,7 +58,6 @@
 		C23254D8B4A140919A285588 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8662C68AC27F430E85211603 /* EvilIcons.ttf */; };
 		D54726F2CDC04946856DA84B /* Nunito-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DC711F54EAA74ABAB7861AD5 /* Nunito-Bold.ttf */; };
 		D68A626C3476409F9414652D /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9AC3B4EDAC604123A56517AA /* Foundation.ttf */; };
-		F5FCC7F692BA4891998EEDC4 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 553043D2C82D4E2FAE5CCEF5 /* Ionicons.ttf */; };
 		F9539DA2AC5543C983B96D9A /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8E94EC15F7B846DCB89FAE59 /* MaterialCommunityIcons.ttf */; };
 /* End PBXBuildFile section */
 
@@ -797,8 +794,6 @@
 			isa = PBXGroup;
 			children = (
 				D78728BB74204CA9930A7CF6 /* Feather.ttf */,
-				B95EA8099D484CE68CDDD3C7 /* FontAwesome.ttf */,
-				F06FC563D63A42BA859E5250 /* Ionicons.ttf */,
 				5D6BBBE333FB47D880EF8E50 /* Octicons.ttf */,
 				9C7CFF36054D465796F60991 /* Entypo.ttf */,
 				8662C68AC27F430E85211603 /* EvilIcons.ttf */,
@@ -1354,17 +1349,9 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
-				5BCB50BD290E4552812F6B32 /* Entypo.ttf in Resources */,
 				C23254D8B4A140919A285588 /* EvilIcons.ttf in Resources */,
-				41F88CCC78584F03B416FC57 /* Feather.ttf in Resources */,
-				182F4F7B9F934523AF5F689F /* FontAwesome.ttf in Resources */,
 				D68A626C3476409F9414652D /* Foundation.ttf in Resources */,
-				F5FCC7F692BA4891998EEDC4 /* Ionicons.ttf in Resources */,
 				F9539DA2AC5543C983B96D9A /* MaterialCommunityIcons.ttf in Resources */,
-				8822424E823E4CEAA73A13BD /* MaterialIcons.ttf in Resources */,
-				3D15E805589344C49138E5FD /* Octicons.ttf in Resources */,
-				040E7446EEE042A5836D1C8B /* SimpleLineIcons.ttf in Resources */,
-				63BB52F799144078A32195A8 /* Zocial.ttf in Resources */,
 				A1FBA8D379D542AF9F183A04 /* Nunito-Black.ttf in Resources */,
 				6E844335074C485EBAEAEDAD /* Nunito-BlackItalic.ttf in Resources */,
 				D54726F2CDC04946856DA84B /* Nunito-Bold.ttf in Resources */,

@@ -648,6 +648,7 @@
 "@okgrow/react-native-copilot@^2.4.1":
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/@okgrow/react-native-copilot/-/react-native-copilot-2.4.1.tgz#93242d78f958f060083744ea3851bfa9e12c596b"
+  integrity sha512-r/GawM4MHRMEL4fEXj0frSrqZq2wC21aARxBZ6ERkaLCB1qbHopDEGO+lPFCyxnZytjgYGt4cHY1fOnDRhynxg==
   dependencies:
     hoist-non-react-statics "^3.0.1"
     mitt "^1.1.3"
@@ -1977,6 +1978,7 @@ color-support@^1.1.3:
 color@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/color/-/color-2.0.1.tgz#e4ed78a3c4603d0891eba5430b04b86314f4c839"
+  integrity sha512-ubUCVVKfT7r2w2D3qtHakj8mbmKms+tThR8gI8zEYCbUBl8/voqFGt3kgBqGwXAopgXybnkuOq+qMYCRrp4cXw==
   dependencies:
     color-convert "^1.9.1"
     color-string "^1.5.2"
@@ -3089,6 +3091,7 @@ hoist-non-react-statics@^2.2.0, hoist-non-react-statics@^2.3.1, hoist-non-react-
 hoist-non-react-statics@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.0.1.tgz#fba3e7df0210eb9447757ca1a7cb607162f0a364"
+  integrity sha512-1kXwPsOi0OGQIZNVMPvgWJ9tSnGMiMfJdihqEzrPEXlHOBh9AAHXX/QYmAJTXztnz/K+PQ8ryCb4eGaN6HlGbQ==
   dependencies:
     react-is "^16.3.2"
 
@@ -4224,6 +4227,7 @@ lodash@4.17.10, lodash@^4.0.0, lodash@^4.10.1, lodash@^4.11.1, lodash@^4.13.1, l
 lodash@^4.16.6:
   version "4.17.11"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
+  integrity sha512-cQKh8igo5QUhZ7lg38DYWAxMvjSAKG0A8wGSVimP07SIUEK2UO+arSRKbRZWtelMtN5V0Hkwh5ryOto/SshYIg==
 
 loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.3.1:
   version "1.4.0"
@@ -4591,6 +4595,7 @@ minizlib@^1.1.0:
 mitt@^1.1.3:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/mitt/-/mitt-1.1.3.tgz#528c506238a05dce11cd914a741ea2cc332da9b8"
+  integrity sha512-mUDCnVNsAi+eD6qA0HkRkwYczbLHJ49z17BGe2PYRhZL4wpZUFZGJHU7/5tmvohoma+Hdn0Vh/oJTiPEmgSruA==
 
 mixin-deep@^1.2.0:
   version "1.3.1"
@@ -5390,6 +5395,7 @@ react-devtools-core@^3.2.2:
 react-is@^16.3.2:
   version "16.5.2"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.5.2.tgz#e2a7b7c3f5d48062eb769fcb123505eb928722e3"
+  integrity sha512-hSl7E6l25GTjNEZATqZIuWOgSnpXb3kD0DVCujmg46K5zLxsbiKaaT6VO9slkSBDPZfYs30lwfJwbOFOnoEnKQ==
 
 react-is@^16.4.1:
   version "16.4.2"
@@ -5530,6 +5536,7 @@ react-native-spinkit@^1.1.1:
 react-native-svg@^7.0.3:
   version "7.0.3"
   resolved "https://registry.yarnpkg.com/react-native-svg/-/react-native-svg-7.0.3.tgz#1ced56f4f6e96ad95374d66706390f51fa86bea7"
+  integrity sha512-fIMgoum2YWY1mBM93G+vYIj7l0te4v4XmndxAfq7A6GZPYrNNM0rysg+bsGMCFiYQQbjeoqzqQkY3jWqZgY7UQ==
   dependencies:
     color "^2.0.1"
     lodash "^4.16.6"
