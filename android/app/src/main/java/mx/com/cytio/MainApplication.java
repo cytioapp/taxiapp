@@ -3,6 +3,7 @@ package mx.com.cytio;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.horcrux.svg.SvgPackage;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import io.invertase.firebase.RNFirebasePackage;
 import io.invertase.firebase.database.RNFirebaseDatabasePackage;
@@ -43,16 +44,17 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new FBSDKPackage(mCallbackManager),
-            new RNFirebasePackage(),
-            new RNFirebaseDatabasePackage(),
-            new RNFirebaseMessagingPackage(),
-            new RNSpinkitPackage(),
-            new RNSensitiveInfoPackage(),
-            new VectorIconsPackage(),
-            new RNFusedLocationPackage(),
-            new RNGeocoderPackage(),
-            new MapsPackage()
+          new SvgPackage(),
+          new FBSDKPackage(mCallbackManager),
+          new RNFirebasePackage(),
+          new RNFirebaseDatabasePackage(),
+          new RNFirebaseMessagingPackage(),
+          new RNSpinkitPackage(),
+          new RNSensitiveInfoPackage(),
+          new VectorIconsPackage(),
+          new RNFusedLocationPackage(),
+          new RNGeocoderPackage(),
+          new MapsPackage()
       );
     }
 
