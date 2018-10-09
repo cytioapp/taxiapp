@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     right: 0,
-    bottom: 0,
+    bottom: 0
   },
   container: {
     flex: 1,
@@ -117,11 +117,13 @@ const styles = StyleSheet.create({
     fontFamily: 'Nunito-Bold'
   },
   keyboard: {
-    height: window.height
+    height: window.height,
+    paddingTop: window.height - 320,
   },
   confirmContainer: {
     flex: 1,
-    padding: 15
+    paddingHorizontal: 15,
+    backgroundColor: 'white'
   },
   label: {
     color: label,
@@ -131,8 +133,22 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'center',
-    marginBottom: 20,
+    marginBottom: 5,
   },
+  buttonCancelActionsheet: {
+    borderBottomColor: '#DDDDDD',
+    borderBottomWidth: 1,
+    alignItems: 'flex-end',
+    paddingTop: 5
+  },
+  overlayMap: { 
+    backgroundColor: 'rgba(0,0,0,0.8)',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0
+  }
 });
 
 export default styles;

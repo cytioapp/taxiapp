@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, View, TextInput } from 'react-native';
+import { Modal, View, TextInput, Button as RCTButton } from 'react-native';
 import { Body, Button, Header, Icon, Left, Right, Text, Title, Spinner } from 'native-base';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Api from '../../utils/api';
@@ -67,31 +67,21 @@ class ConfirmModal extends React.Component {
     return (
       <Modal
           animationType="slide"
-          transparent={false}
+          transparent
           visible={this.props.modalVisible}
           onRequestClose={() => {
             Alert.alert('Modal has been closed.');
           }}
         >
-        <KeyboardAwareScrollView style={styles.keyboard}>
-          <Header
-            style={styles.header}
-            iosBarStyle="light-content"
-            androidStatusBarColor="#262626"
-          >
-            <Left style={styles.leftHeader}>
-              <Button transparent onPress={this.props.toggleConfirmModal}>
-                <Icon name="ios-arrow-back" style={styles.menuIcon} />
-              </Button>
-            </Left>
-            <Body style={styles.bodyHeader}>
-              <Title style={styles.fontText}>Confirmación</Title>
-            </Body>
-            <Right style={styles.rightHeader} />
-          </Header>
-
+        <View style={styles.keyboard}>
           <View style={styles.confirmContainer}>
-            <View style={{ paddingBottom: 20 }}>
+            <View style={styles.buttonCancelActionsheet}>
+              <RCTButton
+                title='Cancelar'
+                onPress={this.handleReturn}
+              />
+            </View>
+            <View style={{ paddingVertical: 20 }}>
               <Text style={styles.label}>Dirección:</Text>
               <TextInput 
                 multiline={true}
@@ -102,7 +92,7 @@ class ConfirmModal extends React.Component {
                 onChangeText={text => this.setState({ address: text })}
               />
             </View>
-            <View style={{ paddingBottom: 50 }}>
+            <View style={{ paddingBottom: 40 }}>
               <Text style={styles.label}>Indicaciones: (opcional)</Text>
               <TextInput 
                 multiline={true}
@@ -125,7 +115,7 @@ class ConfirmModal extends React.Component {
               </Button>
             </View>
           </View>
-        </KeyboardAwareScrollView>
+        </View>
       </Modal>
     );
   }

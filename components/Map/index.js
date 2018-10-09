@@ -212,6 +212,7 @@ class Home extends Component {
                 onRegionChangeComplete={this.onRegionChange}
                 onRegionChange={this.onRegionStartChange}
               />
+              {showConfirmModal && <View style={styles.overlayMap}></View>}
               <CopilotStep text="Desliza la pantalla para ubicar el marcador en el lugar donde necesites el servicio" order={2} name="map">
                 <ViewStep pointerEvents="none" style={styles.markerFixed}>
                   <Icon style={styles.marker} name="ios-pin" />
