@@ -49,8 +49,11 @@ target 'cytio' do
   pod 'Firebase/Database', '~> 5.3.0'
   pod 'Firebase/Messaging', '~> 5.3.0'
 
-  pod 'Fabric'
-  pod 'Crashlytics'
+  pod 'RNSVG', :path => '../node_modules/react-native-svg'
+  # Facebook
+  pod 'FBSDKLoginKit'
+
+  pod 'react-native-fbsdk', :path => '../node_modules/react-native-fbsdk'
 
 end
 

@@ -7,10 +7,12 @@
     "test": "jest"
   },
   "dependencies": {
+    "@okgrow/react-native-copilot": "^2.4.1",
     "axios": "^0.18.0",
     "native-base": "^2.8.0",
     "react": "^16.4.2",
     "react-native": "^0.56.0",
+    "react-native-fbsdk": "^0.8.0",
     "react-native-firebase": "^4.3.8",
     "react-native-geocoder": "^0.5.0",
     "react-native-geolocation-service": "^1.1.0",
@@ -19,6 +21,7 @@
     "react-native-phone-call": "^1.0.8",
     "react-native-sensitive-info": "^5.2.4",
     "react-native-spinkit": "^1.1.1",
+    "react-native-svg": "^7.0.3",
     "react-native-vector-icons": "^5.0.0",
     "react-navigation": "^2.12.1",
     "react-timer-mixin": "^0.13.4",

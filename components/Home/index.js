@@ -9,7 +9,14 @@ class Home extends Component {
         if (res.data && res.data.active) {
           this.props.navigation.navigate('AddressInfo');
         } else {
-          this.props.navigation.navigate('Map');
+          Api.get('/users/profile')
+            .then(res => {
+              if (!res.data.phone_number) {
+                this.props.navigation.navigate('EditPhone', { isSetPhone: true });
+              } else {
+                this.props.navigation.navigate('Map')
+              }
+            })
         }
       })
       .catch(err => {

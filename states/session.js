@@ -1,4 +1,5 @@
 import SInfo from 'react-native-sensitive-info';
+import { AsyncStorage } from 'react-native';
 import { Container } from 'unstated';
 import Api from '../utils/api';
 
@@ -14,9 +15,9 @@ class SessionState extends Container {
     signupErrors: null
   };
 
-  login = (email, password) => {
+  login = (email, password, full_name, provider) => {
     this.setState({ errors: false });
-    Api.post('/users/login', { email, password })
+    Api.post('/users/login', { email, password, full_name, provider })
       .then(res => {
         if (res.data.jwt) {
           SInfo.setItem('jwt', res.data.jwt, options).then(() => {
@@ -57,6 +58,7 @@ class SessionState extends Container {
   logout = () => {
     this.setState({ isLogued: false }, () => {
       SInfo.deleteItem('jwt', options);
+      AsyncStorage.removeItem('tutorialFinished') // Delete the tutorial checker, so on new session we can show it again
     });
   };
 
@@ -91,15 +93,7 @@ class SessionState extends Container {
       });
       return false;
     }
-
-    if (data.password !== data.repeated_password) {
-      this.setState({
-        signupErrors: ['Las contraseñas no coinciden']
-      });
-      return false;
-    } else {
-      return true;
-    }
+    return true
   };
 
   signup = data => {
