@@ -69,9 +69,7 @@ class ConfirmModal extends React.Component {
           animationType="slide"
           transparent={false}
           visible={this.props.modalVisible}
-          onRequestClose={() => {
-            Alert.alert('Modal has been closed.');
-          }}
+          onRequestClose={this.handleReturn}
         >
         <KeyboardAwareScrollView style={styles.keyboard}>
           <Header
