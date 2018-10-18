@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
   fbLoginButtonText: {
     color: 'white',
     fontWeight: '500',
-    fontSize: 15
+    fontSize: 13
   },
   loginButton: {
     backgroundColor: '#E3C463',
