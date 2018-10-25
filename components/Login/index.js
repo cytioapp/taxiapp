@@ -81,7 +81,8 @@ export default class Login extends Component {
   };
 
   onFbLoginSuccess = (error, result) => {
-    LoginManager.logInWithReadPermissions(['public_profile']).then((result) => {
+    LoginManager.logOut();
+    LoginManager.logInWithReadPermissions(['public_profile', 'email']).then((result) => {
         if (!result.isCancelled) {
           AccessToken.getCurrentAccessToken().then(
             (data) => {
