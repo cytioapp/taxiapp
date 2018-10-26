@@ -44,12 +44,14 @@ const styles = StyleSheet.create({
     margin: 40
   },
   loginFbWrapper: {
-    marginHorizontal: 80
+    marginHorizontal: 40
   },
   fbLoginButton: {
     backgroundColor: '#4267B2',
-    borderRadius: 5,
-    height: 35
+    borderRadius: 0,
+    width: '100%',
+    justifyContent: 'center',
+    marginBottom: 14
   },
   fbLoginButtonText: {
     color: 'white',
