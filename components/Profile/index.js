@@ -30,6 +30,10 @@ export default class Profile extends Component {
   };
 
   render() {
+
+    const { email } = this.state
+    const showEmail = !(/facebook/.test(email)) // Check if we should render the email
+
     return (
       <KeyboardAwareScrollView style={styles.keyboard}>
         <Header
@@ -67,22 +71,24 @@ export default class Profile extends Component {
           </View>
         </Header>
 
-        <View style={styles.container}>
-          <View style={styles.darkFieldWrapper}>
-            <Text style={styles.label}>Correo:</Text>
-            <View style={styles.rowWrapper}>
-              <Text style={styles.text}>{this.state.email}</Text>
-              <Button
-                transparent
-                onPress={() => {
-                  this.props.navigation.navigate('EditEmail');
-                }}
-              >
-                <Icon name="create" style={styles.menuIcon} />
-              </Button>
-            </View>
-          </View>
-        </View>
+        {
+          showEmail && (
+            <View style={styles.container}>
+              <View style={styles.darkFieldWrapper}>
+                <Text style={styles.label}>Correo:</Text>
+                <View style={styles.rowWrapper}>
+                  <Text style={styles.text}>{this.state.email}</Text>
+                  <Button
+                    transparent
+                    onPress={() => {
+                      this.props.navigation.navigate('EditEmail');
+                    }}>
+                      <Icon name="create" style={styles.menuIcon} />
+                  </Button>
+                </View>
+              </View>
+            </View>)
+        }
         <View style={styles.container}>
           <View style={styles.darkFieldWrapper}>
             <Text style={styles.label}>Teléfono:</Text>

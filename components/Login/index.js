@@ -92,8 +92,8 @@ export default class Login extends Component {
         }
       },
       function(error) {
-        console.log('Login fail with error: ');
-        console.log({ error })
+        console.log('Login fail with error:');
+        console.log({ error });
       }
     )
   }
@@ -112,8 +112,8 @@ export default class Login extends Component {
       },
       (err, res) => {
         if (!err) {
-          const email = res.email ? res.email : `${res.id}@facebook.com`
-          this.props.screenProps.session.login(email, res.id, res.name, 'facebook') // We use the facebook id of the user as the password.
+          const email = res.email ? res.email : `${res.id}@facebook.com`;
+          this.props.screenProps.session.login(email, res.id, res.name, 'facebook'); // We use the facebook id of the user as the password.
         }
     });
 
