@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TouchableOpacity, ScrollView, View, Alert, Image } from 'react-native';
+import { TouchableOpacity, ScrollView, View, Alert, Image, Share } from 'react-native';
 import {
   Body,
   Button,
@@ -33,6 +33,7 @@ export default class AddressInfo extends Component {
       user_id: '',
       trip_id: null,
       origin: '',
+      guid: null,
       status: '',
       created_at: null,
       driver_name: '',
@@ -146,6 +147,11 @@ export default class AddressInfo extends Component {
     );
   };
 
+  shareTrip = () => Share.share({
+    message: `Estoy viajando con Cytio, sigue mi viaje: http://cytio.com.mx/ubicame/${this.state.guid}`,
+    title: 'Localización de mi viaje'
+  })
+
   cancelTrip = (Route = 'Map') => {
     this.setState({ isWaiting: true }, () => {
         Api.put(`/users/cancel_trip`)
@@ -217,7 +223,17 @@ export default class AddressInfo extends Component {
           <Body style={styles.body}>
             <Title style={styles.title}>Información del viaje</Title>
           </Body>
-          <Right />
+          <Right>
+            <Icon
+              style={{
+                ...styles.menuIcon,
+                color: '#e3c463'
+              }}
+              onPress={this.shareTrip}
+              android="md-share"
+              ios="ios-share-alt"
+            />
+          </Right>
         </Header>
 
         <Content contentContainerStyle={{ flex: 1 }}>
