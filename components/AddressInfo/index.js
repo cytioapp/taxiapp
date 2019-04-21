@@ -53,6 +53,11 @@ export default class AddressInfo extends Component {
     };
   }
 
+  componentWillUpdate(nextProps, nextState) {
+    if (this.props.screenProps.trip.state.isOnTrip && nextState.status !== 'active') {
+      this.props.screenProps.trip.stopTrackingTrip()
+    }
+  }
   componentDidMount() {
     TimerMixin.setTimeout(() => {
       this.setState({
@@ -147,10 +152,15 @@ export default class AddressInfo extends Component {
     );
   };
 
-  shareTrip = () => Share.share({
-    message: `Estoy viajando con Cytio, sigue mi viaje: http://cytio.com.mx/ubicame/${this.state.guid}`,
-    title: 'Localización de mi viaje'
-  })
+  shareTrip = () => {
+    Share.share({
+      message: `Estoy viajando con Cytio, sigue mi viaje: http://cytio.com.mx/ubicame/${
+        this.state.guid
+      }`,
+      title: 'Localización de mi viaje'
+    });
+    this.props.screenProps.trip.startTrackingTrip(this.state.guid);
+  };
 
   cancelTrip = (Route = 'Map') => {
     this.setState({ isWaiting: true }, () => {
