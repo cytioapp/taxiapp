@@ -260,17 +260,17 @@ SPEC CHECKSUMS:
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
-  React: 1fe0eb13d90b625d94c3b117c274dcfd2e760e11
-  react-native-fbsdk: d5f98cc5abecbcc463e3c35c04743d716d002d37
-  react-native-geocoder: 33b16a5929aa868fef37acb4f7ee10a428cd5fff
-  react-native-google-maps: 2cfe3b01f8422c7dae51d8764139fd70f888cfce
-  react-native-maps: 066c2afcc89e18726377bcc685315f989ca22449
-  react-native-sensitive-info: f78f6471a8ee7de67e11ffccc7060eb93b969ef5
-  react-native-spinkit: c9f5826e1a0bf0da889b3795278eb96ae15c1350
-  RNSVG: 6252323c0312735f0af5f58b5adf2965b6a9ffbf
-  RNVectorIcons: c0dbfbf6068fefa240c37b0f71bd03b45dddac44
-  yoga: b1ce48b6cf950b98deae82838f5173ea7cf89e85
+  React: bdb39c05e2eed10a43056cff89a68bc9ebe7f232
+  react-native-fbsdk: 5c3ff4dda057e17d3b4b5491033fc653d423e71d
+  react-native-geocoder: 757427682892bb256f3b3745858cc90eba148a8e
+  react-native-google-maps: 68a831730110823d3dadfea0e133f0f4426cd213
+  react-native-maps: fb06a43ce6884256097eec1dd69d23957b71df88
+  react-native-sensitive-info: a006146a650e81d3074e0abf3a5cafb1fd0e9d7f
+  react-native-spinkit: 9a5d2f95aa975d5660fd3e76b7eac38e7329e46c
+  RNSVG: 5e59688752986880ace09daecb8d64bc7a910db8
+  RNVectorIcons: f066f73bf4f25564d7ee7b1bb150e3b431f3a194
+  yoga: 2418c171de153cbe3c94dc28c3bf691b1695ae17
 
 PODFILE CHECKSUM: fe24c1ddcfaf5e2b616d97b630a330d2a4bbb7e6
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.7.0.rc.2
