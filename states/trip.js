@@ -1,6 +1,6 @@
 import { Container } from 'unstated';
 import Geolocation from 'react-native-geolocation-service';
-import firebase from 'react-native-firebase';
+import Api from '../utils/api'
 import TimerMixin from 'react-timer-mixin';
 
 class TripState extends Container {
@@ -28,12 +28,9 @@ class TripState extends Container {
       try {
         Geolocation.getCurrentPosition(
           position => {
-            let { latitude: lat, longitude: lng } = position.coords;
-            firebase
-              .database()
-              .ref(`server/tracking/${guid}`)
-              .child('positions')
-              .push({ lat, lng });
+            const { latitude: lat, longitude: lng } = position.coords;
+            Api.get(`/trips/update_position/${guid}?lat=${lat}&lng=${lng}`)
+              .catch(error => console.log(error))
             TimerMixin.setTimeout(() => this.trackTrip(guid), 5000);
           },
           error => console.log(error),
