@@ -12,14 +12,15 @@ const getActiveTrip = () => {
 
       if (active_trip.data && active_trip.data.active) {
         let { trip } = active_trip.data;
-        let { id, address_origin, status, created_at, user_id } = trip;
+        let { id, address_origin, status, created_at, user_id, guid } = trip;
         if (address_origin) {
           response.user = {
             user_id,
             trip_id: id,
             origin: address_origin,
             status,
-            created_at
+            created_at,
+            guid
           };
         }
         if (trip.driver) {
